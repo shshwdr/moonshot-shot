@@ -6,10 +6,17 @@ var half_tile_size = Vector2(tile_length/2,tile_length/2)
 var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 var maingame
 
+var width_index = 10
+
 var DIR_UP = Vector2(0,1)
 
 func _ready():
 	rng.randomize()
+
+func on_border(index:Vector2):
+	if index.x == 0 or index.x == width_index-1:
+		return true
+	return false
 	
 func in_bound(index:Vector2, width,height):
 	return index.x>=0 and index.x<width and index.y>=0 and index.y<height	

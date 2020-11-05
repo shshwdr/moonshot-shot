@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var human_scene = preload("res://Scenes/Object/Human.tscn")
+onready var moon_scene = preload("res://Scenes/Object/Moon.tscn")
 onready var human = $human
 
 
@@ -21,6 +22,7 @@ func on_touched_tile(index):
 	human_instance.position = Utils.index_to_position(index)
 	human.add_child(human_instance)
 	#index_to_human_map[index] = human_instance
+	#human_to_index_map[human_instance] = index
 	#human_to_index_map[human_instance] = index
 #	if not index_to_tile_map.has(index):
 #		return
@@ -50,5 +52,7 @@ func _input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Utils.maingame = self
+	var moon_instance = moon_scene.instance()
+	add_child(moon_instance)
 
 
