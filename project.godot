@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Human",
+"language": "GDScript",
+"path": "res://Scenes/Object/Human.gd"
+}, {
+"base": "Node2D",
+"class": "MainGame",
+"language": "GDScript",
+"path": "res://Scenes/MainGame.gd"
+} ]
 _global_script_class_icons={
-
+"Human": "",
+"MainGame": ""
 }
 
 [application]

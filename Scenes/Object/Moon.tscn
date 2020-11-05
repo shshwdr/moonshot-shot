@@ -67,4 +67,3 @@ position = Vector2( -0.0208569, -14.3732 )
 
 [node name="hold_item_position_next" type="Position2D" parent="."]
 position = Vector2( 0.0039463, -16.8039 )
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
