@@ -2,22 +2,22 @@ extends Area2D
 
 onready var timer = $Timer
 onready var sprite = $Sprite
+onready var tween = $Tween
 var meteo_scene = preload("res://Scenes/Object/Meteo.tscn")
-
+var target_index_position
 var move_dir = Vector2.RIGHT
 func index_position():
 	return Utils.position_to_index(position)
 
 func move():
 	Utils.move_position_by(self,move_dir)
-	
 	timer.start()
 	yield(timer, "timeout")
 	pass
 
 func shoot():
 	var meteo_instance = meteo_scene.instance()
-	meteo_instance.position = position
+	meteo_instance.position = Utils.index_to_position( target_index_position)
 	Utils.maingame.bullets.add_child(meteo_instance)
 	timer.start()
 	yield(timer, "timeout")
@@ -38,8 +38,11 @@ func _ready():
 		
 		if Utils.on_border(index_position()):
 			move_dir = -move_dir
-#		while Utils.maingame.has_column_occupied(index_position()):
-#			yield(shoot(),"completed")
+		
+		target_index_position = index_position()#+Vector2(1,0)
+		var column_occupied = Utils.maingame.column_occupied_count(target_index_position)
+		for i in range(column_occupied):
+			yield(shoot(),"completed")
 	
 	pass # Replace with function body.
 

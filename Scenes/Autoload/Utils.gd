@@ -9,8 +9,11 @@ var moon
 
 var width_index = 10
 var height_index = 10
+var screen_height_index = 11
 
-var wait_time = 1
+var is_main_game_started = true
+
+var wait_time = 0.2
 
 var DIR_UP = Vector2(0,1)
 
@@ -28,6 +31,10 @@ func in_bound(index:Vector2, width,height):
 func in_screen(index:Vector2):
 	return in_bound(index, width_index,height_index)
 	
+func in_large_screen(index:Vector2):
+	return in_bound(index, width_index,screen_height_index)
+	
+	
 func in_bound_with_start_position(index:Vector2, start_position,width,height):
 	return index.x>=start_position.x and index.x<start_position.x+width and \
 	index.y>=start_position.y and index.y<height+start_position.y	
@@ -43,7 +50,20 @@ func position_to_index(position:Vector2):
 	return res
 	
 func move_position_by(character,index_position):
-	character.position = position_move_by(character.position,index_position)
+	var current_position  = character.position
+	var target_position =  position_move_by(character.position,index_position)
+	var tween = Tween.new()
+
+	add_child(tween)
+	tween.interpolate_property(
+				character, 
+				"position", 
+				current_position,target_position, wait_time,
+				Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	yield(tween,"tween_completed")
+	tween.queue_free()
+	#character.position = position_move_by(character.position,index_position)
 
 func position_move_to(character,index_position):
 	character.position = index_to_position(index_position)

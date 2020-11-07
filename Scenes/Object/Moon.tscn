@@ -5,7 +5,7 @@
 [ext_resource path="res://art/object/earth_tiny.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.51498, 5.66436 )
+extents = Vector2( 6.51498, 6.94107 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "hitted"
@@ -32,7 +32,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.180367, -6.67543 )
+position = Vector2( -0.105452, 0.0669527 )
 z_index = 10
 shape = SubResource( 1 )
 

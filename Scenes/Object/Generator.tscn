@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/Object/shot.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Object/Generator.gd" type="Script" id=1]
 [ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
-[ext_resource path="res://art/object/missile_tiny.png" type="Texture" id=3]
+[ext_resource path="res://art/object/spaceship.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.84671, 9.11361 )
+extents = Vector2( 6.51498, 5.66436 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "hitted"
@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Shot" type="Area2D" groups=[
+[node name="Generator" type="Area2D" groups=[
 "player",
 ]]
 scale = Vector2( 5, 5 )
@@ -32,7 +32,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.255282, -1.05678 )
+position = Vector2( -0.180367, -6.67543 )
 z_index = 10
 shape = SubResource( 1 )
 
@@ -41,12 +41,21 @@ shape = SubResource( 1 )
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 0, -8 )
 enabled = true
-cast_to = Vector2( 0, 5 )
+cast_to = Vector2( -16, 0 )
+collide_with_areas = true
+
+[node name="RayCastInternal" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( -4, 0 )
 collide_with_areas = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="GenerateTimer" type="Timer" parent="."]
+autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hitted = SubResource( 2 )
@@ -61,4 +70,5 @@ position = Vector2( -0.0208569, -14.3732 )
 
 [node name="hold_item_position_next" type="Position2D" parent="."]
 position = Vector2( 0.0039463, -16.8039 )
-[connection signal="area_entered" from="." to="." method="_on_Shot_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="GenerateTimer" to="." method="_on_GenerateTimer_timeout"]
