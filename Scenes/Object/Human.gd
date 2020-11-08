@@ -1,7 +1,6 @@
 
 extends Area2D
 
-class_name Human
 
 onready var sprite = $Sprite
 onready var timer = $Timer

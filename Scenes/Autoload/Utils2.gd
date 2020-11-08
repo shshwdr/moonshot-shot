@@ -6,16 +6,30 @@ var half_tile_size = Vector2(tile_length/2,tile_length/2)
 var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 var maingame
 var moon
+var width_offset = 2
 var height_offset = 3
-var screen_start_vector = Vector2(0,height_offset)
+
+
+
+var screen_start_vector = Vector2(width_offset,height_offset)
 var width_index = 10
 var height_index = 10
+
+var game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
+var game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
+
+var width_total = width_offset+width_index+width_offset
+var height_total = height_offset+height_index+height_offset
+var interact_key = "interact"
+var interact_key_2 = "interact2"
+var game_bottom_left = Vector2(0,height_offset+height_index-1)
+var game_bottom_right = Vector2(width_total-1,height_offset+height_index-1)
 
 var screen_height_index = 11
 
 var is_main_game_started = true
 
-var wait_time = 0.2
+var wait_time =0.2
 
 var DIR_UP = Vector2(0,1)
 
@@ -23,7 +37,7 @@ func _ready():
 	rng.randomize()
 
 func on_border(index:Vector2):
-	if index.x == 0 or index.x == width_index-1:
+	if index.x == width_offset or index.x == width_offset+width_index-1:
 		return true
 	return false
 	
@@ -31,7 +45,15 @@ func in_bound(index:Vector2, width,height):
 	return index.x>=0 and index.x<width and index.y>=0 and index.y<height	
 	
 func in_screen(index:Vector2):
+	return in_bound(index, width_total,height_total)
+
+func in_game_screen(index:Vector2):
 	return in_bound_with_start_position(index, screen_start_vector, width_index,height_index)
+	
+func can_occupy(index:Vector2):
+	print(Utils.in_game_screen(index)," ",not Utils.maingame.has_occupied(index))
+	return Utils.in_game_screen(index) and not Utils.maingame.has_occupied(index)
+	
 	
 func in_large_screen(index:Vector2):
 	return in_bound_with_start_position(index,screen_start_vector, width_index,screen_height_index)
@@ -51,7 +73,7 @@ func position_to_index(position:Vector2):
 	res = Vector2(round(res.x),round(res.y))
 	return res
 	
-func move_position_by(character,index_position):
+func move_position_by(character,index_position,move_time = wait_time):
 	var current_position  = character.position
 	var target_position =  position_move_by(character.position,index_position)
 	var tween = Tween.new()
@@ -60,10 +82,11 @@ func move_position_by(character,index_position):
 	tween.interpolate_property(
 				character, 
 				"position", 
-				current_position,target_position, wait_time,
+				current_position,target_position, move_time,
 				Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(tween,"tween_completed")
+	#print("tween end")
 	tween.queue_free()
 	#character.position = position_move_by(character.position,index_position)
 
@@ -78,3 +101,5 @@ func randomi_2d(width,height):
 	var w = rng.randi() % width
 	var h = rng.randi() % height
 	return Vector2(w,h)
+func randomi(i):
+	return rng.randi()%i

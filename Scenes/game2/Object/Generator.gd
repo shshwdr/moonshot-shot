@@ -4,6 +4,8 @@ onready var timer = $Timer
 onready var sprite = $Sprite
 onready var tween = $Tween
 onready var generateTimer = $GenerateTimer
+
+
 var human_scene = preload("res://Scenes/Object/Human.tscn")
 var can_input = true
 var inputs = {
@@ -37,6 +39,7 @@ func interact(dir):
 	yield(move(dir),"completed")
 
 func get_input():
+	pass
 	if Utils.is_main_game_started:
 		if can_input:
 			
@@ -52,6 +55,7 @@ func _on_Timer_timeout():
 
 
 func _on_GenerateTimer_timeout():
+
 	var human_instance = human_scene.instance()
 	human_instance.position = Utils.index_to_position(index_position()+Vector2(0,-1))
 	Utils.maingame.human.add_child(human_instance)

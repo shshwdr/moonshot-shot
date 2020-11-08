@@ -4,7 +4,7 @@ onready var timer = $Timer
 onready var sprite = $Sprite
 onready var tween = $Tween
 onready var faceResetTimer = $FaceResetTimer
-var meteo_scene = preload("res://Scenes/Object/Meteo.tscn")
+var meteo_scene = preload("res://Scenes/game2/Object/Meteo.tscn")
 var target_index_position
 var move_dir = Vector2.RIGHT
 
@@ -14,9 +14,7 @@ func index_position():
 	return Utils.position_to_index(position)
 
 func move():
-	Utils.move_position_by(self,move_dir)
-	timer.start()
-	yield(timer, "timeout")
+	yield(Utils.move_position_by(self,move_dir,0.2),"completed")
 	pass
 
 func shoot():
@@ -51,6 +49,7 @@ func _ready():
 		var column_occupied = Utils.maingame.column_occupied_count(target_index_position)
 		for i in range(column_occupied):
 			yield(shoot(),"completed")
+			break
 		#detect if more targets spawned
 	
 	pass # Replace with function body.

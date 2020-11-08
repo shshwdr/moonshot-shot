@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/Object/Moon.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/game2/Object/Moon.gd" type="Script" id=1]
 [ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
 [ext_resource path="res://art/moon-serious-Sheet.png" type="Texture" id=3]
 

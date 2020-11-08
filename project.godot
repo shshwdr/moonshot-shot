@@ -12,33 +12,28 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Human",
 "language": "GDScript",
-"path": "res://Scenes/Object/Human.gd"
-}, {
-"base": "Node2D",
-"class": "MainGame",
-"language": "GDScript",
-"path": "res://Scenes/MainGame.gd"
+"path": "res://Scenes/game2/Object/Human.gd"
 } ]
 _global_script_class_icons={
-"Human": "",
-"MainGame": ""
+"Human": ""
 }
 
 [application]
 
 config/name="moonshot shot"
-run/main_scene="res://Scenes/MainGame.tscn"
+run/main_scene="res://Scenes/game2/MainGame2.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Utils="*res://Scenes/Autoload/Utils.gd"
+Utils="*res://Scenes/Autoload/Utils2.gd"
+Events="*res://Scenes/Autoload/Events.gd"
 
 [display]
 
-window/size/width=400
+window/size/width=600
 window/size/height=800
-window/size/test_width=800
+window/size/test_width=1200
 window/size/test_height=1600
 window/dpi/allow_hidpi=true
 
@@ -93,6 +88,18 @@ ui_down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+interact2={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
