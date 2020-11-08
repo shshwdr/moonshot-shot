@@ -1,6 +1,7 @@
 extends Human
 
-
+onready var shot_sprite = $shotSprite
+onready var anim = $shotSprite/AnimationPlayer
 var shoter_health = 2
 var shot_scene = preload("res://Scenes/game2/Object/shot.tscn")
 
@@ -13,11 +14,15 @@ func _ready():
 
 func _process(delta):
 	._process(delta)
-	if is_stoping:
-		current_make_time+=delta
+	
 	if is_shot_ready():
-		print("ready to shot")
-		sprite.self_modulate = Color(0,1,0,1)
+		shot_sprite.rotation_degrees = 0
+		anim.play("ready")
+		return
+	if is_stoping:
+		if anim.current_animation != "loading":
+			anim.play("loading")
+		current_make_time+=delta
 
 func is_shot_ready():
 	return current_make_time >= make_shot_time
@@ -25,7 +30,6 @@ func is_shot_ready():
 func shot():
 	
 	current_make_time = 0
-	sprite.self_modulate = Color(0,0,0,1)
 	var shot_instance = shot_scene.instance()
 	shot_instance.position = Utils.index_to_position(index_position())
 	get_parent().add_child(shot_instance)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/game2/Object/shot.gd" type="Script" id=1]
 [ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
-[ext_resource path="res://art/object/missile_tiny.png" type="Texture" id=3]
+[ext_resource path="res://art/shot.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.84671, 9.11361 )

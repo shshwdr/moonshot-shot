@@ -9,6 +9,8 @@ var moon
 var width_offset = 2
 var height_offset = 3
 
+func get_level():
+	return 0
 
 
 var screen_start_vector = Vector2(width_offset,height_offset)
@@ -29,7 +31,7 @@ var screen_height_index = 11
 
 var is_main_game_started = true
 
-var wait_time =0.2
+var wait_time =0.3
 
 var DIR_UP = Vector2(0,1)
 
@@ -51,7 +53,7 @@ func in_game_screen(index:Vector2):
 	return in_bound_with_start_position(index, screen_start_vector, width_index,height_index)
 	
 func can_occupy(index:Vector2):
-	print(Utils.in_game_screen(index)," ",not Utils.maingame.has_occupied(index))
+	#print(Utils.in_game_screen(index)," ",not Utils.maingame.has_occupied(index))
 	return Utils.in_game_screen(index) and not Utils.maingame.has_occupied(index)
 	
 	
