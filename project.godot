@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="moonshot shot"
-run/main_scene="res://Scenes/game2/MainGame2.tscn"
+run/main_scene="res://Scenes/UI/GameRoot.tscn"
 config/icon="res://icon.png"
 
 [autoload]

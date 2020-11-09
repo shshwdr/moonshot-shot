@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/UI/savedLevel.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+use_mipmaps = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="savedLevel" type="Button"]
+margin_right = 1020.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 1020, 200 )
+theme = SubResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Day 1   health:100 coins:1000 reputation:1000
+saved at 2020 02 22 12:40:20"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="." to="." method="_on_savedLevel_pressed"]

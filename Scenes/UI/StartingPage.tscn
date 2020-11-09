@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/UI/StartingPage.gd" type="Script" id=1]
+[ext_resource path="res://fonts/info font_large.tres" type="DynamicFont" id=2]
+[ext_resource path="res://art/map/universe.png" type="Texture" id=3]
+[ext_resource path="res://art/object/dino-triceratops.png" type="Texture" id=5]
+[ext_resource path="res://art/object/human.png" type="Texture" id=6]
+[ext_resource path="res://art/object/dinosaur.png" type="Texture" id=7]
+[ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+Fonts/fonts/ = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+use_mipmaps = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="StartingPage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node" type="Node2D" parent="."]
+scale = Vector2( 8, 8 )
+
+[node name="universe" type="Sprite" parent="Node"]
+position = Vector2( 128, 75 )
+texture = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 8, 8 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 458760, 0, 0, 524296, 0, 0 )
+
+[node name="human" type="Sprite" parent="TileMap"]
+position = Vector2( 70.0192, 125.392 )
+texture = ExtResource( 6 )
+
+[node name="dino-triceratops" type="Sprite" parent="TileMap"]
+position = Vector2( 170.654, 122.808 )
+texture = ExtResource( 5 )
+
+[node name="dinosaur" type="Sprite" parent="TileMap"]
+position = Vector2( 206.561, 123.106 )
+texture = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 1071.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 500 )
+text = "Dinosaur planet"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 503.0
+margin_right = 2048.0
+margin_bottom = 603.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = SubResource( 2 )
+text = "A Different Planet Or The Same Planet"
+align = 1
+valign = 1
+
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+margin_top = 504.0
+margin_right = 1071.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 200 )
+custom_styles/normal = SubResource( 3 )
+text = "Start Game"
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+margin_top = 708.0
+margin_right = 1071.0
+margin_bottom = 908.0
+rect_min_size = Vector2( 0, 200 )
+custom_styles/normal = SubResource( 3 )
+text = "Continue Level"
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_Continue_pressed"]

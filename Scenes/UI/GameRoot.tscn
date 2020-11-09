@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/UI/GameRoot.gd" type="Script" id=1]
+[ext_resource path="res://fonts/info font_large.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/UI/StartingPage.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+Fonts/fonts/ = ExtResource( 2 )
+
+[node name="GameRoot" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartingPage" parent="Control" instance=ExtResource( 3 )]

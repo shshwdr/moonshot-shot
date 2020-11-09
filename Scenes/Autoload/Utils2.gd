@@ -6,6 +6,7 @@ var half_tile_size = Vector2(tile_length/2,tile_length/2)
 var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 var maingame
 var moon
+var game_root
 var generator
 var width_offset = 4
 var width_end_offset = 1
@@ -36,8 +37,17 @@ var wait_time =0.4
 
 var DIR_UP = Vector2(0,1)
 
+func reload_scene(scene):
+	var game_instance = scene.instance()
+	clear_all_children(game_root)
+	game_root.add_child(game_instance)
+
 func _ready():
 	rng.randomize()
+
+func clear_all_children(node):
+	for child in node.get_children():
+		child.queue_free()
 
 func on_border(index:Vector2):
 	if index.x == width_offset or index.x == width_offset+width_index-1:
