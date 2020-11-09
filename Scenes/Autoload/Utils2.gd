@@ -1,26 +1,27 @@
 extends Node
 
-var tile_length = 80
+var tile_length = 32
 
 var half_tile_size = Vector2(tile_length/2,tile_length/2)
 var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 var maingame
 var moon
-var width_offset = 2
+var generator
+var width_offset = 4
+var width_end_offset = 1
 var height_offset = 3
 
-func get_level():
-	return 0
+var camera
 
 
 var screen_start_vector = Vector2(width_offset,height_offset)
 var width_index = 10
-var height_index = 10
+var height_index = 2
 
 var game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
 var game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
 
-var width_total = width_offset+width_index+width_offset
+var width_total = width_offset+width_index+width_end_offset
 var height_total = height_offset+height_index+height_offset
 var interact_key = "interact"
 var interact_key_2 = "interact2"
@@ -31,7 +32,7 @@ var screen_height_index = 11
 
 var is_main_game_started = true
 
-var wait_time =0.3
+var wait_time =0.4
 
 var DIR_UP = Vector2(0,1)
 
@@ -75,7 +76,7 @@ func position_to_index(position:Vector2):
 	res = Vector2(round(res.x),round(res.y))
 	return res
 	
-func move_position_by(character,index_position,move_time = wait_time):
+func move_position_by(character,index_position,move_time = wait_time, tween_trans = Tween.TRANS_LINEAR, tween_ease = Tween.EASE_IN):
 	var current_position  = character.position
 	var target_position =  position_move_by(character.position,index_position)
 	var tween = Tween.new()
@@ -85,7 +86,7 @@ func move_position_by(character,index_position,move_time = wait_time):
 				character, 
 				"position", 
 				current_position,target_position, move_time,
-				Tween.TRANS_LINEAR, Tween.EASE_IN)
+				tween_trans, tween_ease)
 	tween.start()
 	yield(tween,"tween_completed")
 	#print("tween end")
@@ -105,3 +106,20 @@ func randomi_2d(width,height):
 	return Vector2(w,h)
 func randomi(i):
 	return rng.randi()%i
+
+func sum_array(array):
+	var sum = 0.0
+	for element in array:
+		 sum += element
+	return sum
+
+func random_distribution_array(array):
+	var total_count = sum_array(array)
+	var random_value = rng.randi_range(0,total_count)
+	var increading_count = 0
+	for i in array.size():
+		increading_count+=array[i]
+		if random_value<=increading_count:
+			return i
+	printerr("random array didn't return correctly")
+	return 0

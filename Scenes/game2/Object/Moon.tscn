@@ -11,7 +11,7 @@ extents = Vector2( 6.51498, 6.94107 )
 [sub_resource type="Animation" id=2]
 resource_name = "hitted"
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "beHit"
 length = 0.2
 tracks/0/type = "value"
@@ -43,8 +43,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "normal_blink"
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("face:frame")
@@ -65,7 +64,7 @@ resource_name = "normal_rotation"
 [node name="Moon" type="Area2D" groups=[
 "player",
 ]]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -105,9 +104,6 @@ position = Vector2( -0.0208569, -14.3732 )
 [node name="hold_item_position_next" type="Position2D" parent="."]
 position = Vector2( 0.0039463, -16.8039 )
 
-[node name="BlinkTimer" type="Timer" parent="."]
-autostart = true
-
 [node name="FaceResetTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -121,9 +117,9 @@ texture = ExtResource( 5 )
 hframes = 5
 
 [node name="faceAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/beHit = SubResource( 5 )
+anims/beHit = SubResource( 3 )
 anims/hit = SubResource( 4 )
-anims/normal_blink = SubResource( 3 )
+anims/normal_blink = SubResource( 5 )
 anims/normal_rotation = SubResource( 6 )
-[connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]
+[connection signal="area_entered" from="." to="." method="_on_Moon_area_entered"]
 [connection signal="timeout" from="FaceResetTimer" to="." method="_on_FaceResetTimer_timeout"]

@@ -6,6 +6,8 @@ class_name Human
 onready var sprite = $Sprite
 onready var timer = $Timer
 
+var start_go = false
+
 var move_dir = Vector2.RIGHT
 
 var is_moving = true
@@ -17,8 +19,8 @@ var health = max_health
 func damage(d):
 	health -=d
 	var ratio = (max_health - health) / float(max_health - 1)
-	sprite.self_modulate = Color(ratio,0,0,1)
-	
+	#sprite.self_modulate = Color(ratio,0,0,1)
+	sprite.material.set_shader_param("changeColorRatio",ratio)
 	if health == 0:
 		Utils.maingame.remove_occupy(index_position())
 		if not is_stoping:
@@ -31,11 +33,15 @@ func move_up():
 	yield(Utils.move_position_by(self,Vector2.UP),"completed")
 	pass
 
+func ready_to_start():
+	return index_position().y == Utils.game_screen_bottom_left.y-1
+
 func index_position():
 	return Utils.position_to_index(position)
 
 func init(_move_dir):
 	move_dir = _move_dir
+	start_go = true
 
 func _ready():
 	timer.wait_time = Utils.wait_time
@@ -53,6 +59,10 @@ func in_game_screen():
 	return Utils.in_game_screen(index)
 
 func _process(delta):
+	if not start_go:
+		return
+	if not Utils.is_main_game_started:
+		return 
 	if not is_moving and not is_stoping:
 		
 		var index = index_position()

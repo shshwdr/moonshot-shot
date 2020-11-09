@@ -37,15 +37,19 @@ func update_blush():
 	$blush.texture = blush_textures[min(drunk_level,blush_textures.size()-1)]
 
 func update_normal_face():
-	face_sprite.texture = level_to_face[Utils.get_level()]
+	face_sprite.texture = level_to_face[LevelManager.get_level()]
 	faceAnimationPlayer.play(face_to_normal_anim[face_sprite.texture])
 
 func index_position():
 	return Utils.position_to_index(position)
 
+var drunk_move_dir = Vector2.ZERO
+
 func move():
-	yield(Utils.move_position_by(self,move_dir,move_time),"completed")
+	yield(Utils.move_position_by(self,move_dir+drunk_move_dir,move_time),"completed")
+	drunk_move_dir = -drunk_move_dir
 	pass
+
 
 func shoot():
 	faceAnimationPlayer.play("hit")
@@ -79,7 +83,8 @@ func _ready():
 	position = Utils.index_to_position(index_position)
 	update_normal_face()
 	update_blush()
-	while true:
+	return
+	while Utils.is_main_game_started:
 		#print(position,index_position())
 		yield(move(),"completed")
 		
@@ -100,3 +105,14 @@ func _ready():
 
 func _on_FaceResetTimer_timeout():
 	update_normal_face()
+
+
+func _on_Moon_area_entered(area):
+	if Utils.is_main_game_started:
+		if area.is_in_group("human"):
+			#stop current game
+			Utils.is_main_game_started = false
+			#moon stop and move up
+			yield(Utils.move_position_by(self,Vector2.UP*2,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
+			LevelManager.level_up()
+			pass

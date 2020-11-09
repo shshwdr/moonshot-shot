@@ -4,12 +4,12 @@ extends Node2D
 var moon_scene = preload("res://Scenes/game2/Object/Moon.tscn")
 var generator_scene = preload("res://Scenes/game2/Object/Generator.tscn")
 
-var human_scene = preload("res://Scenes/game2/Object/Human.tscn")
-var human_shoter_scene = preload("res://Scenes/game2/Object/Human_shoter.tscn")
 onready var human = $human
 onready var bullets = $bullets
 onready var timer = $Timer
 onready var line = $Line2D
+
+var generator_instance
 var can_input = true
 var can_generate_player = true
 
@@ -17,6 +17,7 @@ var move_dir = Vector2.RIGHT
 
 var index_to_human_map ={}
 #var human_to_index_map ={}
+
 
 func has_column_occupied(index_position):
 	for i in range(Utils.height_offset,Utils.height_offset+Utils.height_index):
@@ -132,32 +133,33 @@ func _ready():
 	Utils.maingame = self
 	var moon_instance = moon_scene.instance()
 	add_child(moon_instance)
+	
 	Events.connect("player_stopped", self, "on_player_stopped")
 	line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
 	line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
-#	var generator_instance = generator_scene.instance()
-#	add_child(generator_instance)
+	generator_instance = generator_scene.instance()
+	add_child(generator_instance)
 	
 func on_player_stopped():
 	can_generate_player = true
 
 func _process(delta):
+	if not Utils.is_main_game_started:
+		return
 	if can_generate_player:
-		var t_rand = Utils.randomi(10)
-		var human_instance
-		if t_rand>7:
-			human_instance = human_shoter_scene.instance()
-		else:
-			human_instance = human_scene.instance()
+		#var t_rand = Utils.randomi(10)
+		var human_instance = generator_instance.pop_waiting_human()
+		if not human_instance:
+			return
 		human_instance.init(move_dir)
-		print(Utils.game_bottom_left)
-		if move_dir == Vector2.RIGHT:
-			human_instance.position = Utils.index_to_position(Utils.game_bottom_left) 
-		else:
-			human_instance.position = Utils.index_to_position(Utils.game_bottom_right) 
-		human.add_child(human_instance)
+#		print(Utils.game_bottom_left)
+#		if move_dir == Vector2.RIGHT:
+#			human_instance.position = Utils.index_to_position(Utils.game_bottom_left) 
+#		else:
+#			human_instance.position = Utils.index_to_position(Utils.game_bottom_right) 
+		#human.add_child(human_instance)
 		can_generate_player = false
-		move_dir = -move_dir
+		#move_dir = -move_dir
 
 
 func _on_Timer_timeout():

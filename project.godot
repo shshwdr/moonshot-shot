@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 Utils="*res://Scenes/Autoload/Utils2.gd"
 Events="*res://Scenes/Autoload/Events.gd"
+LevelManager="*res://Scenes/Autoload/LevelManager.gd"
 
 [display]
 
@@ -36,6 +37,8 @@ window/size/height=800
 window/size/test_width=1200
 window/size/test_height=1600
 window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
