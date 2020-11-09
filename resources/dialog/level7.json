@@ -1,0 +1,21 @@
+{
+        "first": {
+            "speaker":"Curator",
+            
+            "pivot":[-1,-1],
+            "content": "If you are still here",
+            "next": "12",
+        },
+        "12": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Thanks for being here",
+            "next": "13"
+        },
+        "13": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "it's a long journey, I know.",
+            "after_trigger":"finishLevelStart"
+        },
+    },

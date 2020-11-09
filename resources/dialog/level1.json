@@ -1,0 +1,41 @@
+{
+        "first": {
+            "speaker":"Curator",
+            
+            "pivot":[-1,-1],
+            "content": "Visitors will be happy if you can follow some special instructions to them.",
+            "next": "12",
+        },
+        "12": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Like [color=red]spin[/color].",
+            "next": "13"
+        },
+        "13": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "You can make a circle to show you are following their instruction.",
+            "next": "14"
+        },
+        "14": {
+            "trigger":"curator_spin",
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Like this.",
+            "next": "15"
+        },
+        "15": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Remeber you have to do that [color=red]close to the visitor.[/color]",
+            "next": "16"
+        },
+        "16": {
+            "trigger":"curator_spin",
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Learn how to be a good monkey, it's not easy to be an animal.",
+            "after_trigger":"finishLevelStart"
+        },
+    },

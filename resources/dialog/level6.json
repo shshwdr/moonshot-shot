@@ -1,0 +1,21 @@
+{
+        "first": {
+            "speaker":"Curator",
+            
+            "pivot":[-1,-1],
+            "content": "I'm surprise how much money you've earned for me",
+            "next": "12",
+        },
+        "12": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "I hope I can own you forever",
+            "next": "13"
+        },
+        "13": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "That sounds a little scary",
+            "after_trigger":"finishLevelStart"
+        },
+    },

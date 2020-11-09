@@ -1,0 +1,46 @@
+[
+    {
+        "first": {
+            "content": "Wow monkey! That's cool!",
+            "next": "0"
+        },
+        "0": {
+            "content": "I've never seen a monkey with that color before",
+        },
+    },
+    {
+        "first": {
+            "content": "Is that the new monkey they mentioned?",
+            "next": "0"
+        },
+        "0": {
+            "content": "Hmm.. Nothing special",
+        },
+    },
+    {
+        "first": {
+            "content": "Why would there be monkeys??!",
+            "next": "0"
+        },
+        "0": {
+            "content": "It's just a monkey! Monkeys are everywhere!",
+            "next": "1"
+        },
+        "1": {
+            "content": "Well this one do looks a little different..",
+            "next": "2"
+        },
+        "2": {
+            "content": "But again it's just a monkey!",
+        },
+    },
+    {
+        "first": {
+            "content": "I want to be a monkey",
+            "next": "0"
+        },
+        "0": {
+            "content": "He looks so.. happy",
+        },
+    },
+]

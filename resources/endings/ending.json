@@ -1,0 +1,35 @@
+{
+        "health_depleted": {
+            "name":"Work To Death",
+            "first": {
+                "content": "[center]You died.|@No specific reason, you are so tired.|@To earn money, to avoid being hurt, to calculte, to acumulate your earnings and lose them, to get popular but not too popular.|@Wait isn't that the same life you have in the earth before? Seems as long as you are on earth, nothing changed. Even if the earth is totally a different planet, nothing changed.|@You remember the planet you lived before, feels like a dream thousands years ago.|@May you have a rest.",
+                "after_trigger":"end"   
+            }
+        },
+        "did_nothing":{
+            "name":"We Would Never Be Slaves",
+            "first": {
+            "content": "You died.\n",
+            "after_trigger":"end"   
+            }
+        },
+        "throw_money":{
+            "name":"Money Gun",
+            "content": "You died.\n",
+        },
+        "throw_stone":{
+            "name":"KING KONG",
+            "content": "You died.\n",
+        },
+        "get_max_level":{
+            "name":"Guinea Pig",
+            "first": {
+            "content": "[center]You are more and more popular in this zoo.|@Scientists one day noticed you and bought you from the curator.|@They can even understand you with some fancy devices.|@You are earger to tell them why you are here and you are The Saviour of this planet and the kindom of dinosaurs.|@They laughed.|@'A monkey full of imagination, that's awesome.'|@They look at you lovingly.|@'Take care of him, don't let him die. Use him carefully, our paper and money are counting on him.'|@You started to remember what scientists would do to Guinea Pig in your planet. You try to talk about human rights, or Animal Protection Act.|@It is useless. You knew that.|@Any way it is the same planet, no matter how different it looks like. ",
+            "after_trigger":"end"   
+        }
+        },
+        "get_back_to_earth":{
+            "name":"Normal Life",
+            "content": "You get back to earth.\n ",
+        }
+    },

@@ -1,0 +1,73 @@
+{
+        "first": {
+            "speaker":"Spaceship",
+            "content": "This time travel is almost end..",
+            "next": "0",
+        },
+        "0": {
+            "speaker":"Spaceship",
+            "content": "Though it is fun, I actually expected something more special. Like..",
+            "next": "1",
+        },
+        "1": {
+            "trigger":"comet_appear",
+            "speaker":"Spaceship",
+            "content": "OMG A COMET IS ATTACKING A PLANET!!",
+            "next": "2"
+        },
+        "2": {
+            "speaker":"Spaceship",
+            "content": "I'll destroy this comet now!",
+            "next": "3",
+        },
+        "3": {
+            "trigger":"destroy_comet",
+            "speaker":"Spaceship",
+            "content": "YES! I SAVED a planet! That's what I want to do!",
+            "next": "4"
+        },
+        "4": {
+            "speaker":"Spaceship",
+            "content": "I'm a hero to this planet! I'll own this planet and everything on it! I'll be a billionare!",
+            "next": "4-1"
+        },
+        "4-1": {
+            "speaker":"Spaceship",
+            "content": "Spaceship, tell me the infomation about this planet!",
+            "next": "6"
+        },
+        "6": {
+            "speaker":"Spaceship",
+            "pivot":[-1,-1],
+            "content": "Spaceship:@'[i]It is the Earth in the Late Cretaceous.[/i]'",
+            "next": "6-1"
+        },
+        
+        "6-1": {
+            "speaker":"Spaceship",
+            "content": "Ear..| EARTH???!!!",
+            "next": "7"
+        },
+        "7": {
+            "speaker":"Spaceship",
+            "content": "Oh what did I do.. did I save..| DINOSAURS?",
+            "next": "8"
+        },
+        "8": {
+            "speaker":"Spaceship",
+            "pivot":[-1,-1],
+            "content": "Spaceship: @'[i]This is the end of your time travel.[/i]'",
+            "next": "9"
+        },
+        "9": {
+            "speaker":"Spaceship",
+            "pivot":[-1,-1],
+            "content": "Spaceship: @'[i]Sending you back...[color=red]Your bahavior would affect the world in your timeline[/color][/i]'",
+            "next": "10"
+        },
+        "10": {
+            "speaker":"Spaceship",
+            "content": "NOOOOOOO!!",
+            "after_trigger":"end"
+        },
+    },

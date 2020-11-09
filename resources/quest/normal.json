@@ -1,0 +1,448 @@
+[
+    {
+        "name":"come_close",
+        "reputation":2,
+        "first": {
+            "content": "Hey monkey, come here!",
+            "next": "0"
+        },
+        "0": {
+            "content": "Let me see you closely!",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "That's my boy",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Good Mikken!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Wow I can see its hair clearly from here",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Hey he really comes!",
+                    "next": "0"
+                },
+                "0": 
+                {
+                    "content": "Maybe I can ask him to do more..",
+                },
+            },
+
+        ],
+    },
+    {
+        "name":"spin",
+        "reputation":4,
+        "first": {
+            "content": "Hey monkey, spin!",
+            "next": "0"
+        },
+        "0": {
+            "content": "Just spin! Can you do that?",
+            "next": "1"
+        },
+        "1": {
+            "content": "Rotate! Make a circle? Do something!",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "That's my boy",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Good Mikken!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Wow he really did that!",
+                },
+            },
+
+        ]
+    },
+    {
+        "name":"plus_10",
+        "reputation":6,
+        "placeholder_value":"",
+        "value":10,
+        "waiting_time_scale":2,
+        "first": {
+            "content": "Do you know how much is %s",
+            "next": "0"
+        },
+        "0": {
+            "content": "Show me how much is %s",
+            "next": "1"
+        },
+        "1": {
+            "content": "Grab coins equal to %s and show me!",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "Oh my god! He can calculate!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "That's impossible!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "A monkey that can calcualte? Serious?",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Nah that's must just a coincident",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Haha the way he holds the coin is really cute.",
+                },
+            },
+
+        ]
+    },
+    {
+        "name":"plus_100",
+        "reputation":10,
+        "placeholder_value":"",
+        "value":10,
+        "waiting_time_scale":3,
+        "first": {
+            "content": "Do you know how much is %s",
+            "next": "0"
+        },
+        "0": {
+            "content": "%s equals? This might be hard..",
+            "next": "1"
+        },
+        "1": {
+            "content": "%s = ? ..Try it!",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "Oh my god! He can calculate in 100!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "That's REALLY impossible!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "This Monkey is smarter than dolphin!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "I doubt this can just be a coincident",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "I just recorded this and upload to Dinotube!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "OMG this is true he really CAN calculate!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "The way he holds the coin is really impressive.",
+                },
+            },
+
+        ]
+    },
+    {
+        "name":"plus_1000",
+        "reputation":16,
+        "placeholder_value":"",
+        "value":10,
+        "waiting_time_scale":4,
+        "first": {
+            "content": "Do you know how much is %s",
+            "next": "0"
+        },
+        "0": {
+            "content": "%s equals? This is really insane",
+            "next": "1"
+        },
+        "1": {
+            "content": "%s = ? I bet you can't get the answer.",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "Seriously? He can calculate in 100",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Just. Impossible.",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "This Monkey is smarter than my son..",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Can you calculate what's the odd that this is just coincident?",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "My record of this will get 10k+ in days!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Police! There is an alien here!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "He is a GIANT in my eyes",
+                },
+            },
+
+        ]
+    },
+    {
+        "name":"multi_100",
+        "reputation":10,
+        "placeholder_value":"",
+        "value":10,
+        "waiting_time_scale":4,
+        "first": {
+            "content": "Do you know how much is %s",
+            "next": "0"
+        },
+        "0": {
+            "content": "%s equals? I don't think he understand times",
+            "next": "1"
+        },
+        "1": {
+            "content": "%s = ? There is no way he can give the answer",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "Seriously? He can do multiply!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Just. Impossible.",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "This Monkey is smarter than my son..",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Can you calculate what's the odd that this is just coincident?",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "My record of this will get 10k+ in days!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Police! There is an alien here!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "He is a GIANT in my eyes",
+                },
+            },
+
+        ]
+    },
+    
+    {
+        "name":"plus_200",
+        "reputation":16,
+        "placeholder_value":"",
+        "value":10,
+        "waiting_time_scale":5,
+        "first": {
+            "content": "Do you know how much is %s",
+            "next": "0"
+        },
+        "0": {
+            "content": "%s equals? This is really insane",
+            "next": "1"
+        },
+        "1": {
+            "content": "%s = ? I bet you can't get the answer.",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "Seriously? He can calculate value bigger than 100!!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "..I don't know what to say",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "This Monkey is smarter than me..",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Can you calculate what's the odd that this is just coincident?",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "My record of this will get 10k+ in days!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Police! There is an alien here!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "He is a GIANT in my eyes",
+                },
+            },
+
+        ]
+    },
+    {
+        "name":"multi_1000",
+        "reputation":10,
+        "placeholder_value":"",
+        "value":10,
+        "waiting_time_scale":10,
+        "first": {
+            "content": "Do you know how much is %s",
+            "next": "0"
+        },
+        "0": {
+            "content": "%s equals? I don't think he understand times",
+            "next": "1"
+        },
+        "1": {
+            "content": "%s = ? There is no way he can give the answer",
+        },
+        "completed": [
+            {
+                "first": 
+                {
+                    "content": "Seriously? He can do multiply bigger than 100!?",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Just. Impossible.",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "This Monkey is smarter than my son..",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Can you calculate what's the odd that this is just coincident?",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "My record of this will get 10k+ in days!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "Police! There is an alien here!",
+                },
+            },
+            {
+                "first": 
+                {
+                    "content": "He is a GIANT in my eyes",
+                },
+            },
+
+        ]
+    },
+]

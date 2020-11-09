@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Human",
 "language": "GDScript",
 "path": "res://Scenes/game2/Object/Human.gd"
+}, {
+"base": "Resource",
+"class": "SavedGame",
+"language": "GDScript",
+"path": "res://Scenes/Autoload/SavedGame.gd"
 } ]
 _global_script_class_icons={
-"Human": ""
+"Human": "",
+"SavedGame": ""
 }
 
 [application]
@@ -29,6 +35,7 @@ config/icon="res://icon.png"
 Utils="*res://Scenes/Autoload/Utils2.gd"
 Events="*res://Scenes/Autoload/Events.gd"
 LevelManager="*res://Scenes/Autoload/LevelManager.gd"
+MusicManager="*res://Scenes/Autoload/MusicManager.tscn"
 
 [display]
 

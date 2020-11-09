@@ -1,0 +1,52 @@
+{
+        "first": {
+            "speaker":"Center",
+            
+            "pivot":[0,0],
+            "content": "You are sending back to your time on the earth, and because of you saved dinosaurs from the comet, they become the master of the earth.",
+            "next": "12",
+            
+        },
+        "12": {
+            "speaker":"Center",
+            "pivot":[0,0],
+            "content": "You are captured by them, luckily, they think you look special, so instead of eating you, they put you into a zoo.",
+            "next": "13"
+        },
+        "13": {
+            "speaker":"Center",
+            "pivot":[0,0],
+            "content": "Somehow you can understand them, but they can't understand you.",
+            "next": "14"
+        },
+        "14": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "My my. You are really a weird monkey.",
+            "next": "14-1"
+        },
+        "14-1": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "I'm the curator of this zoo, I bought you from PETA.",
+            "next": "15"
+        },
+        "15": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "I hope you to be popular. If you can't earn enough money for me, guess who will pay your food?",
+            "next": "16"
+        },
+        "16": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Nobody. But we don't want that happen right?",
+            "next": "17"
+        },
+        "17": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Be a good monkey and behave yourself, I'll feed you if you earn enough money.",
+            "after_trigger":"finishLevelStart"
+        },
+    },

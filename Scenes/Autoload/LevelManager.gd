@@ -24,6 +24,7 @@ func level_up():
 func start_level():
 	#load level data
 	#create base
+	pass
 
 func level_up_scene_change():
 	var move_up_dir = Vector2(0,-15)
@@ -39,3 +40,6 @@ func level_up_scene_change():
 	
 func get_level():
 	return 0
+	
+	
+

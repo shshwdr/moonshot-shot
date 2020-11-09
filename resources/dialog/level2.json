@@ -1,0 +1,45 @@
+{
+        "first": {
+            "speaker":"Curator",
+            
+            "pivot":[-1,-1],
+            "content": "Seems you earned lots of money.",
+            "next": "12",
+        },
+        "12": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Some visitors might want you to do something speical..",
+            "next": "13"
+        },
+        "13": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "like [color=red]calculation[/color]",
+            "next": "14"
+        },
+        "14": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Dont worry just adding some numbers",
+            "next": "15"
+        },
+        "15": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Dolphins can do that, I'm sure you can do that too.",
+            "next": "16"
+        },
+        "16": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "Just calculate the value they want and hold the coins with the same value to them.",
+            "next": "17"
+        },
+        "17": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "You can use [color=red]SPACE + move key[/color] to pick up or drop down coins",
+            "after_trigger":"finishLevelStart"
+        },
+    },

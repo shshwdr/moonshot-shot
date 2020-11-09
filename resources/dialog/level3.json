@@ -1,0 +1,21 @@
+{
+        "first": {
+            "speaker":"Curator",
+            
+            "pivot":[-1,-1],
+            "content": "I guess you noticed coins can combine to higher level ones",
+            "next": "12",
+        },
+        "12": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "10 bronze coins is 1 silver, 10 silver will be gold",
+            "next": "13"
+        },
+        "13": {
+            "speaker":"Curator",
+            "pivot":[-1,-1],
+            "content": "it will be useful if visitors want you to calculate.. larger numbers.",
+            "after_trigger":"finishLevelStart"
+        },
+    },
