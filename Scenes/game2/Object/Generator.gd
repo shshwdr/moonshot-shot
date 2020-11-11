@@ -40,9 +40,8 @@ func _process(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Utils.generator = self
-	
 	#position based on linedup count
-	var index_position = Utils.game_screen_bottom_left - Vector2(2,lined_up_count+1)
+	var index_position = Utils.game_screen_bottom_left - Vector2(2,lined_up_count+1) 
 	position = Utils.index_to_position(index_position)
 #	for i in range(lined_up_count):
 #		var human_type_id = Utils.random_distribution_array(human_ratio)
@@ -90,7 +89,7 @@ func move_all_down():
 
 func _on_GenerateTimer_timeout():
 	if waiting_human_instance.size()< lined_up_count:
-		var human_type_id = Utils.random_distribution_array(human_ratio)
+		var human_type_id = Utils.random_distribution_array(LevelManager.get_level_info().human_type)
 		var human_instance = human_type[human_type_id].instance()
 		human_instance.position = position
 		Utils.maingame.human.add_child(human_instance)

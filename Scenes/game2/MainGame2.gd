@@ -4,10 +4,16 @@ extends Node2D
 var moon_scene = preload("res://Scenes/game2/Object/Moon.tscn")
 var generator_scene = preload("res://Scenes/game2/Object/Generator.tscn")
 
+var Moon
+var Generator
 onready var human = $human
 onready var bullets = $bullets
 onready var timer = $Timer
 onready var line = $Line2D
+var dialog_folder = "res://resources/dialog"
+
+var dialog_instance 
+var dialog_state = -1 #-1 prolog, 0 pre level, 1 end level
 
 var generator_instance
 var can_input = true
@@ -18,6 +24,8 @@ var move_dir = Vector2.RIGHT
 var index_to_human_map ={}
 #var human_to_index_map ={}
 
+#dialog
+onready var Leader = $Leader
 
 func has_column_occupied(index_position):
 	for i in range(Utils.height_offset,Utils.height_offset+Utils.height_index):
@@ -108,40 +116,87 @@ func on_touched_shot(index):
 
 
 func _input(event):
+	if event is InputEventKey and event.pressed:
+		if dialog_instance:
+			dialog_instance.skip_dialog()
+		#if event.scancode != KEY_ENTER:
+			#Do what you gotta do.
 	if not can_input:
 		return
-	if event is InputEventMouseButton and event.pressed:
-#		if event.button_index == 1:
+#	if event is InputEventMouseButton and event.pressed:
+##		if event.button_index == 1:
+##			can_input = false
+##			timer.start()
+##			var touch = event.position
+##			var index = Utils.position_to_index(touch)
+##			on_touched_tile(index)
+##		el
+#		if event.button_index == 2:
 #			can_input = false
 #			timer.start()
 #			var touch = event.position
 #			var index = Utils.position_to_index(touch)
-#			on_touched_tile(index)
-#		el
-		if event.button_index == 2:
-			can_input = false
-			timer.start()
-			var touch = event.position
-			var index = Utils.position_to_index(touch)
-			on_touched_shot(index)
+#			on_touched_shot(index)
 		
-
+#todo remove timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	timer.wait_time = Utils.wait_time*4
+	#timer.wait_time = Utils.wait_time*4
 	Utils.maingame = self
-	var moon_instance = moon_scene.instance()
-	add_child(moon_instance)
+	
+	Utils.update_game_level()
+	
+	Moon = moon_scene.instance()
+	add_child(Moon)
+	
+	show_prolog()
 	
 	Events.connect("player_stopped", self, "on_player_stopped")
-	line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
-	line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
-	generator_instance = generator_scene.instance()
-	add_child(generator_instance)
+	#yield(show_level_dialog(),"completed")
+	
+#	Events.connect("player_stopped", self, "on_player_stopped")
+#	line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
+#	line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
+#	generator_instance = generator_scene.instance()
+#	add_child(generator_instance)
+#
+#	if LevelManager.current_level == -1:
+#		#prolog
+#		pass
+#	else:
+#		pass
 	
 func on_player_stopped():
 	can_generate_player = true
+
+func show_prolog():
+	var file_path = '%s/%s.json' % [dialog_folder, "prolog"]
+	var prolog = Utils.load_json(file_path)
+	dialog_instance = DialogManager.select_dialog_multiple(self,prolog)
+	yield(get_tree(), 'idle_frame')
+	add_child(dialog_instance)
+	dialog_state = -1
+	dialog_instance.start_dialog()
+
+func show_level_start_dialog():
+	var file_path = '%s/%s%d.json' % [dialog_folder, "level",LevelManager.current_level]
+	var prolog = Utils.load_json(file_path)
+	dialog_instance = DialogManager.select_dialog_multiple(self,prolog)
+	yield(get_tree(), 'idle_frame')
+	add_child(dialog_instance)
+	dialog_state = 0
+	dialog_instance.start_dialog()
+
+func show_level_end_dialog():
+	var file_path = '%s/%s%d%s.json' % [dialog_folder, "level",LevelManager.current_level,"_end"]
+	var prolog = Utils.load_json(file_path)
+	dialog_instance = DialogManager.select_dialog_multiple(self,prolog)
+	yield(get_tree(), 'idle_frame')
+	add_child(dialog_instance)
+	dialog_state = 1
+	dialog_instance.start_dialog()
+
 
 func _process(delta):
 	if not Utils.is_main_game_started:
@@ -162,5 +217,55 @@ func _process(delta):
 		#move_dir = -move_dir
 
 
+			
 func _on_Timer_timeout():
 	can_input = true
+	
+func end():
+	dialog_instance.queue_free()
+	#finish dialog
+	if dialog_state == -1:
+		#prolog
+		LevelManager.current_level = 1
+		Utils.update_game_level()
+		
+		
+		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
+		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
+		generator_instance = generator_scene.instance()
+		Generator = generator_instance
+		add_child(generator_instance)
+		
+		show_level_start_dialog()
+	elif dialog_state == 0:
+		#game start
+		Utils.main_game_start()
+		pass
+	elif dialog_state == 1:
+		Utils.main_game_stop()
+		LevelManager.next_level()
+		Utils.update_game_level()
+		yield(LevelManager.level_up_scene_change(),"completed")
+		
+		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
+		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
+		
+		show_level_start_dialog()
+		
+#	if LevelManager.current_level == -1:
+#		#prolog
+#		pass
+#	else:
+#		pass
+	
+	
+	
+func trigger(trigger_name):
+	match trigger_name:
+		"moon_shock":
+			Moon.play_face_anim()
+		"throw_meteor":
+			yield(Moon.throw_meteors(),"completed")
+		"end":
+			end()
+	yield(get_tree(), 'idle_frame')

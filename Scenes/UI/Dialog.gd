@@ -21,6 +21,8 @@ onready var timer = $Timer
 onready var progress_bar = $ColorRect/ColorRect/ProgressBar
 var click_to_continue = false
 var current_time = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	panel.visible = false
@@ -81,6 +83,7 @@ func start_dialog():
 func show_one_dialog():
 	
 	yield(check_trigger(),"completed")
+	yield(check_speaker_in(),"completed")
 	yield(show_one_dialog_with_type_writing(),"completed")
 #	label.bbcode_text = current_dialog.content
 #	timer.wait_time = dialog_wait_time
@@ -91,6 +94,7 @@ func show_one_dialog():
 		yield(self,"skip_dialog_signal")
 	
 	yield(check_after_trigger(),"completed")
+	yield(check_speaker_out(),"completed")
 	yield(next(),"completed")
 
 func next():
@@ -219,14 +223,16 @@ func check_newlines(string):
 			new_pause_array.append(pause_array[a]-current_line)
 				
 		pause_array = new_pause_array
-		
+func get_speaker():
+	var speaker_name = current_dialog['speaker']
+	var speaker = parent_node.get(current_dialog['speaker'])
+	return speaker
 func show_one_dialog_with_type_writing():
 	yield(get_tree(), 'idle_frame')
 	if parent_node and current_dialog.has("speaker"):
-		var speaker_name = current_dialog['speaker']
-		var speaker = parent_node.get(current_dialog['speaker'])
+		var speaker = get_speaker()
 		var g_position = speaker.get_global_position()
-		rect_position = parent_node.get(current_dialog['speaker']).get_global_position()
+		rect_position = speaker.get_global_position()
 		update_pivot()
 		#panel.rect_size = parent_node.get_dialog_size()
 	#hide_name(name_left)
@@ -246,10 +252,10 @@ func show_one_dialog_with_type_writing():
 			"boolean":
 				var variable = current_dialog["variable"]
 				var next
-				if DialogUtil.call(variable):
-					next = current_dialog["true"]
-				else:
-					next = current_dialog["false"]
+#				if DialogUtil.call(variable):
+#					next = current_dialog["true"]
+#				else:
+#					next = current_dialog["false"]
 				current_dialog = dialog[next]
 				yield(show_one_dialog(),"completed")
 	else:
@@ -257,8 +263,8 @@ func show_one_dialog_with_type_writing():
 		if current_dialog.has("placeholder_value"):
 			var placeholder_string_arr = current_dialog.placeholder_value
 			var placeholder_value  = []
-			for i in placeholder_string_arr:
-				placeholder_value.append(DialogUtil.call(i))
+#			for i in placeholder_string_arr:
+#				placeholder_value.append(DialogUtil.call(i))
 			text = text%placeholder_value
 		if dialog.has("placeholder_value"):
 			text = text%dialog.placeholder_value
@@ -317,7 +323,18 @@ func check_trigger_common(trigger_type):
 		yield(parent_node.trigger(trigger),"completed")
 		panel.visible = true
 	yield(get_tree(), 'idle_frame')
-
+	
+func check_speaker_in():
+	if current_dialog.has("speaker_in"):
+		var speaker = get_speaker()
+	yield(get_tree(), 'idle_frame')
+	
+func check_speaker_out():
+	if current_dialog.has("speaker_out"):
+		var speaker = get_speaker()
+		speaker.queue_free()
+	yield(get_tree(), 'idle_frame')
+	
 func check_trigger():
 	yield(check_trigger_common("trigger"),"completed")
 	

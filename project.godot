@@ -36,6 +36,8 @@ Utils="*res://Scenes/Autoload/Utils2.gd"
 Events="*res://Scenes/Autoload/Events.gd"
 LevelManager="*res://Scenes/Autoload/LevelManager.gd"
 MusicManager="*res://Scenes/Autoload/MusicManager.tscn"
+DialogManager="*res://Scenes/Autoload/DialogManager.gd"
+DebugSetting="*res://Scenes/Autoload/DebugSetting.gd"
 
 [display]
 

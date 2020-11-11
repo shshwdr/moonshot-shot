@@ -1,26 +1,26 @@
 {
         "first": {
-            "speaker":"Generator",
-            "speaker_in":"left",
+            "speaker":"Leader",
+            
             "pivot":[0,0],
             "content": "I've hired some people to make this ladder.",
             "next": "12",
             
         },
         "12": {
-            "speaker":"Generator",
+            "speaker":"Leader",
             "pivot":[0,0],
             "content": "It's simple, people will come from that spaceship and move to right.",
             "next": "13"
         },
         "13": {
-            "speaker":"Generator",
+            "speaker":"Leader",
             "pivot":[0,0],
             "content": "Just press [color=red]space[/color] when you want them to stop moving.",
             "next": "14"
         },
         "14": {
-            "speaker":"Generator",
+            "speaker":"Leader",
             "pivot":[0,0],
             "content": "Try to reach the moon!",
             

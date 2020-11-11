@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/game2/MainGame2.gd" type="Script" id=1]
 [ext_resource path="res://art/map/universe.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/game2/Camera.gd" type="Script" id=3]
+[ext_resource path="res://art/object/dinosaur.png" type="Texture" id=4]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,4 +27,8 @@ script = ExtResource( 3 )
 scale = Vector2( 2.34346, 5.4119 )
 z_index = -100
 texture = ExtResource( 2 )
+
+[node name="Leader" type="Sprite" parent="."]
+position = Vector2( 187.496, 212.144 )
+texture = ExtResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

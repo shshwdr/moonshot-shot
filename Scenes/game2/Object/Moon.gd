@@ -12,12 +12,12 @@ var drunk_upgrade_hit_count = 1
 
 
 
-var level_to_face = [
-	preload("res://art/moon/moon_serious.png"),
-]
+#var level_to_face = [
+#]
 
 var face_to_normal_anim = {
-	preload("res://art/moon/moon_serious.png"):"normal_blink",
+	"res://art/moon/moon_face_serious.png":"normal_blink",
+	"res://art/moon/moon_face_sleep.png":"normal_sleep",
 }
 
 onready var face_sprite = $face
@@ -37,8 +37,9 @@ func update_blush():
 	$blush.texture = blush_textures[min(drunk_level,blush_textures.size()-1)]
 
 func update_normal_face():
-	face_sprite.texture = level_to_face[LevelManager.get_level()]
-	faceAnimationPlayer.play(face_to_normal_anim[face_sprite.texture])
+	var moon_face_texture = LevelManager.get_level_info().moon_type
+	face_sprite.texture = load(moon_face_texture)
+	faceAnimationPlayer.play(face_to_normal_anim[moon_face_texture])
 
 func index_position():
 	return Utils.position_to_index(position)
@@ -61,6 +62,16 @@ func shoot():
 	timer.start()
 	yield(timer, "timeout")
 	pass
+	
+func throw_meteors():
+	var human_count = LevelManager.get_level_info().target_height - 1
+	for i in range(human_count*3):
+		
+		var meteo_instance = meteo_scene.instance()
+		meteo_instance.position = Utils.index_to_position(index_position())
+		Utils.maingame.bullets.add_child(meteo_instance)
+		timer.start()
+		yield(timer, "timeout")
 
 func get_shot():
 	
@@ -74,16 +85,20 @@ func get_shot():
 		drunk_level+=1
 		update_blush()
 	move_time*=2
+	
+func play_face_anim():
+	faceAnimationPlayer.play("beHit")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	
 	Utils.moon = self
 	timer.wait_time = Utils.wait_time
-	var index_position = Utils.screen_start_vector
+	var index_position = Utils.game_screen_top_center
 	position = Utils.index_to_position(index_position)
 	update_normal_face()
 	update_blush()
-	return
 	while Utils.is_main_game_started:
 		#print(position,index_position())
 		yield(move(),"completed")

@@ -12,6 +12,7 @@ var width_offset = 4
 var width_end_offset = 1
 var height_offset = 3
 
+
 var camera
 
 
@@ -19,6 +20,7 @@ var screen_start_vector = Vector2(width_offset,height_offset)
 var width_index = 10
 var height_index = 2
 
+var game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
 var game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
 var game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
 
@@ -31,11 +33,32 @@ var game_bottom_right = Vector2(width_total-1,height_offset+height_index-1)
 
 var screen_height_index = 11
 
-var is_main_game_started = true
+var is_main_game_started = false
 
 var wait_time =0.4
 
 var DIR_UP = Vector2(0,1)
+
+func main_game_start():
+	is_main_game_started = true
+func main_game_stop():
+	is_main_game_started = false
+
+func update_offset(diff):
+	height_offset -= diff
+	
+	screen_start_vector = Vector2(width_offset,height_offset)
+	update_game_level()
+
+func update_game_level():
+	height_index = LevelManager.get_level_info().target_height
+	game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
+	game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
+	height_total = height_offset+height_index+height_offset
+	game_bottom_left = Vector2(0,height_offset+height_index-1)
+	game_bottom_right = Vector2(width_total-1,height_offset+height_index-1)
+	
+	
 
 func reload_scene(scene):
 	var game_instance = scene.instance()
@@ -133,3 +156,17 @@ func random_distribution_array(array):
 			return i
 	printerr("random array didn't return correctly")
 	return 0
+
+func load_json(file_path):
+	var file = File.new()
+	var error = file.open(file_path, File.READ)
+	if error != OK:
+		printerr("Couldn't open file for read: %s, error code: %s." % [file_path, error])
+		return
+	var json = file.get_as_text()
+	var res = JSON.parse(json).result
+	error = JSON.parse(json).error
+	if error != OK:
+		print(JSON.parse(json).error_string)
+	file.close()
+	return res
