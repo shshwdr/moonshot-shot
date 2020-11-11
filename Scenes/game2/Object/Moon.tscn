@@ -6,7 +6,7 @@
 [ext_resource path="res://art/moon/moon_bg.png" type="Texture" id=4]
 [ext_resource path="res://art/moon/moon_blush.png" type="Texture" id=5]
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=1]
 radius = 15.2628
 
 [sub_resource type="Animation" id=2]
@@ -62,7 +62,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "normal_rotation"
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "normal_sleep"
 length = 2.0
 loop = true
@@ -90,17 +90,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 2, 2 ), Vector2( 2, 1.8 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("face:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("bg:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
+}
 
 [node name="Moon" type="Area2D" groups=[
 "player",
 ]]
-scale = Vector2( 2, 1.85443 )
+scale = Vector2( 2, 1.93955 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -0.105452, 0.0669527 )
 z_index = 10
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -138,12 +163,14 @@ position = Vector2( 0.0039463, -16.8039 )
 one_shot = true
 
 [node name="bg" type="Sprite" parent="."]
+position = Vector2( 0, 0.604493 )
 texture = ExtResource( 4 )
 
 [node name="blush" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 
 [node name="face" type="Sprite" parent="."]
+position = Vector2( 0, 0.604493 )
 texture = ExtResource( 3 )
 hframes = 5
 frame = 2
@@ -153,6 +180,6 @@ anims/beHit = SubResource( 3 )
 anims/hit = SubResource( 4 )
 anims/normal_blink = SubResource( 5 )
 anims/normal_rotation = SubResource( 6 )
-anims/normal_sleep = SubResource( 8 )
+anims/normal_sleep = SubResource( 7 )
 [connection signal="area_entered" from="." to="." method="_on_Moon_area_entered"]
 [connection signal="timeout" from="FaceResetTimer" to="." method="_on_FaceResetTimer_timeout"]

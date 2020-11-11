@@ -228,7 +228,7 @@ func end():
 		#prolog
 		LevelManager.current_level = 1
 		Utils.update_game_level()
-		
+		Moon.update_normal_face()
 		
 		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
 		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
@@ -245,6 +245,7 @@ func end():
 		Utils.main_game_stop()
 		LevelManager.next_level()
 		Utils.update_game_level()
+		Moon.update_normal_face()
 		yield(LevelManager.level_up_scene_change(),"completed")
 		
 		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 

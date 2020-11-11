@@ -52,6 +52,7 @@ func update_offset(diff):
 
 func update_game_level():
 	height_index = LevelManager.get_level_info().target_height
+	game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
 	game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
 	game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
 	height_total = height_offset+height_index+height_offset

@@ -86,7 +86,10 @@ func pop_waiting_human():
 func move_all_down():
 	for human in waiting_human_instance:
 		Utils.move_position_by(human,Vector2.DOWN)
-
+		
+func clean_current_human():
+	waiting_human_instance.clear()
+	
 func _on_GenerateTimer_timeout():
 	if waiting_human_instance.size()< lined_up_count:
 		var human_type_id = Utils.random_distribution_array(LevelManager.get_level_info().human_type)

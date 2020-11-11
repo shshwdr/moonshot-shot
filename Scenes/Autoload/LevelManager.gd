@@ -43,6 +43,7 @@ func level_up_scene_change():
 	Utils.move_position_by(Utils.generator,move_up_dir+ Vector2(0,1)*space_ship_diff,move_up_time*3,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	Utils.update_offset(15)
 	yield(get_tree().create_timer(3), "timeout")
+	Utils.generator.clean_current_human()
 	#move spaceship later
 	pass
 	

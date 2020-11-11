@@ -7,7 +7,7 @@
     {
         "human_type":[1],
         "target_height":3,
-        "moon_type":"res://art/moon/moon_face_serious.png",
+        "moon_type":"res://art/moon/moon_face_sleep.png",
     },
     {
         "human_type":[3,1],

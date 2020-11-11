@@ -68,6 +68,7 @@ func throw_meteors():
 	for i in range(human_count*3):
 		
 		var meteo_instance = meteo_scene.instance()
+		meteo_instance.scale = Vector2(1.5,1.5)
 		meteo_instance.position = Utils.index_to_position(index_position())
 		Utils.maingame.bullets.add_child(meteo_instance)
 		timer.start()
@@ -87,7 +88,8 @@ func get_shot():
 	move_time*=2
 	
 func play_face_anim():
-	faceAnimationPlayer.play("beHit")
+	face_sprite.frame = 4
+	#faceAnimationPlayer.play("beHit")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
