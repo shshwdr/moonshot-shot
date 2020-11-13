@@ -8,28 +8,36 @@ var maingame
 var moon
 var game_root
 var generator
-var width_offset = 4
-var width_end_offset = 1
-var height_offset = 3
-
-
 var camera
+var moon_jump_height = 2
 
-
-var screen_start_vector = Vector2(width_offset,height_offset)
-var width_index = 10
-var height_index = 2
-
-var game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
-var game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
-var game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
-
-var width_total = width_offset+width_index+width_end_offset
-var height_total = height_offset+height_index+height_offset
 var interact_key = "interact"
 var interact_key_2 = "interact2"
-var game_bottom_left = Vector2(0,height_offset+height_index-1)
-var game_bottom_right = Vector2(width_total-1,height_offset+height_index-1)
+
+#these value would never change.
+var width_offset = 4#left space for generator
+var width_end_offset = 1#right space for balance
+var width_index = 10
+var width_total = width_offset+width_index+width_end_offset
+var height_offset_static = 3#upper space, for moon jump up
+
+#these value would change
+var y_offset = 0 #screen y offset, when moon move up, this value will get small
+var height_offset = 3 
+#game screen is inside of screen
+var height_index = 1 #height would change based on level
+var screen_top_left = Vector2(0,y_offset)
+#used to check if item is inside of game screen
+var game_screen_top_left = Vector2(width_offset,height_offset) 
+#used to decide moon position
+var game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
+#used to decide where to generate base, generator, and if player is ready to start
+var game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
+#used to decide where to generate base
+var game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
+
+var height_total = height_offset_static+height_index+height_offset_static
+
 
 var screen_height_index = 11
 
@@ -45,9 +53,10 @@ func main_game_stop():
 	is_main_game_started = false
 
 func update_offset(diff):
+	y_offset -= diff
 	height_offset -= diff
-	
-	screen_start_vector = Vector2(width_offset,height_offset)
+	screen_top_left = Vector2(0,y_offset)
+	game_screen_top_left = Vector2(width_offset,height_offset)
 	update_game_level()
 
 func update_game_level():
@@ -55,9 +64,7 @@ func update_game_level():
 	game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
 	game_screen_bottom_left = Vector2(width_offset,height_offset+height_index)
 	game_screen_bottom_right = Vector2(width_offset+width_index,height_offset+height_index)
-	height_total = height_offset+height_index+height_offset
-	game_bottom_left = Vector2(0,height_offset+height_index-1)
-	game_bottom_right = Vector2(width_total-1,height_offset+height_index-1)
+	height_total = height_offset_static+height_index+height_offset_static
 	
 	
 
@@ -82,18 +89,16 @@ func in_bound(index:Vector2, width,height):
 	return index.x>=0 and index.x<width and index.y>=0 and index.y<height	
 	
 func in_screen(index:Vector2):
-	return in_bound(index, width_total,height_total)
+	return in_bound_with_start_position(index, screen_top_left, width_total,height_total)
 
 func in_game_screen(index:Vector2):
-	return in_bound_with_start_position(index, screen_start_vector, width_index,height_index)
+	return in_bound_with_start_position(index, game_screen_top_left, width_index,height_index)
 	
 func can_occupy(index:Vector2):
 	#print(Utils.in_game_screen(index)," ",not Utils.maingame.has_occupied(index))
 	return Utils.in_game_screen(index) and not Utils.maingame.has_occupied(index)
 	
 	
-func in_large_screen(index:Vector2):
-	return in_bound_with_start_position(index,screen_start_vector, width_index,screen_height_index)
 	
 	
 func in_bound_with_start_position(index:Vector2, start_position,width,height):

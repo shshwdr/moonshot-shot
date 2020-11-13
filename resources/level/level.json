@@ -1,7 +1,7 @@
 [
     {
         "human_type":[],
-        "target_height":2,
+        "target_height":1,
         "moon_type":"res://art/moon/moon_face_sleep.png",
     },
     {
@@ -11,7 +11,22 @@
     },
     {
         "human_type":[3,1],
-        "target_height":6,
+        "target_height":5,
+        "moon_type":"res://art/moon/moon_face_serious.png",
+    },
+    {
+        "human_type":[3,1],
+        "target_height":7,
+        "moon_type":"res://art/moon/moon_face_serious.png",
+    },
+    {
+        "human_type":[3,1],
+        "target_height":7,
+        "moon_type":"res://art/moon/moon_face_serious.png",
+    },
+    {
+        "human_type":[3,1],
+        "target_height":7,
         "moon_type":"res://art/moon/moon_face_serious.png",
     },
     

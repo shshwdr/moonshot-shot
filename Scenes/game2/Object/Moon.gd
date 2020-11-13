@@ -89,12 +89,11 @@ func get_shot():
 	
 func play_face_anim():
 	face_sprite.frame = 4
+	faceAnimationPlayer.stop()
 	#faceAnimationPlayer.play("beHit")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	
 	Utils.moon = self
 	timer.wait_time = Utils.wait_time
 	var index_position = Utils.game_screen_top_center
@@ -123,13 +122,20 @@ func _ready():
 func _on_FaceResetTimer_timeout():
 	update_normal_face()
 
+func _input(event):
+	if DebugSetting.can_jump_level and  event is InputEventKey and event.pressed:
+		if event.scancode == KEY_0:
+			finish_level()
+
+func finish_level():
+	Utils.is_main_game_started = false
+	#moon stop and move up
+	yield(Utils.move_position_by(self,Vector2.UP*Utils.moon_jump_height,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
+	LevelManager.level_up()
 
 func _on_Moon_area_entered(area):
 	if Utils.is_main_game_started:
 		if area.is_in_group("human"):
 			#stop current game
-			Utils.is_main_game_started = false
-			#moon stop and move up
-			yield(Utils.move_position_by(self,Vector2.UP*2,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
-			LevelManager.level_up()
+			finish_level()
 			pass

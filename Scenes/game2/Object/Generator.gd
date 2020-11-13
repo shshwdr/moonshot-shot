@@ -43,38 +43,7 @@ func _ready():
 	#position based on linedup count
 	var index_position = Utils.game_screen_bottom_left - Vector2(2,lined_up_count+1) 
 	position = Utils.index_to_position(index_position)
-#	for i in range(lined_up_count):
-#		var human_type_id = Utils.random_distribution_array(human_ratio)
-#		var human_instance = human_type[human_type_id].instance()
-#		human_instance.position = position
-#		Utils.maingame.human.add_child(human_instance)
-#		yield(Utils.move_position_by(human_instance,Vector2(0,1)),"completed")
-	
-	
-#	timer.wait_time = Utils.wait_time
-#	var index_position = Vector2(Utils.width_index/2,Utils.height_index+Utils.screen_start_vector.y)
-#	position = Utils.index_to_position(index_position)
 
-#func interact(dir):
-#
-#	yield(move(dir),"completed")
-#
-#func get_input():
-#	pass
-#	if Utils.is_main_game_started:
-#		if can_input:
-#
-#			for dir in inputs.keys():
-#				if Input.is_action_pressed(dir):
-#					move(inputs[dir])
-#
-#func _physics_process(delta):
-#	get_input()
-#
-#func _on_Timer_timeout():
-#	can_input = true
-#
-#
 
 func pop_waiting_human():
 	var human = waiting_human_instance.front()

@@ -1,7 +1,6 @@
 {
         "first": {
             "speaker":"Leader",
-            "pivot":[0,0],
             "content": "I want to launch a moonshot, what should I do?",
             "next": "0",
         },

@@ -1,17 +1,18 @@
 {
         "first": {
-            "speaker":"Moon",
+            "speaker":"Generator",
             
             "pivot":[0,0],
-            "content": "What is that [s]delicious[/s] suspicious drink you shot on me!",
+            "content": "Hired some new man",
             "next": "12",
             
         },
         "12": {
-            "speaker":"Moon",
+            "speaker":"Generator",
             "pivot":[0,0],
-            "content": "Don't do that! I don't like it!",
+            "content": "You will like them",
             "next": "13",
+            
             "after_trigger":"end"
         },
     },

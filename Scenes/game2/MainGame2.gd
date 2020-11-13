@@ -117,8 +117,9 @@ func on_touched_shot(index):
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		if dialog_instance:
-			dialog_instance.skip_dialog()
+		if event.scancode == KEY_SPACE or event.scancode == KEY_ENTER:
+			if dialog_instance:
+				dialog_instance.skip_dialog()
 		#if event.scancode != KEY_ENTER:
 			#Do what you gotta do.
 	if not can_input:
@@ -237,9 +238,11 @@ func end():
 		add_child(generator_instance)
 		
 		show_level_start_dialog()
+		
 	elif dialog_state == 0:
 		#game start
 		Utils.main_game_start()
+		can_generate_player = true
 		pass
 	elif dialog_state == 1:
 		Utils.main_game_stop()
@@ -247,7 +250,8 @@ func end():
 		Utils.update_game_level()
 		Moon.update_normal_face()
 		yield(LevelManager.level_up_scene_change(),"completed")
-		
+		Utils.clear_all_children(human)
+		Utils.generator.clean_current_human()
 		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
 		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
 		

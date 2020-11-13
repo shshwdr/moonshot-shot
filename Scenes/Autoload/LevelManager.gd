@@ -4,6 +4,8 @@ var level_infos
 var current_level = 0
 var level_folder = "res://resources/level"
 
+var level_jump_height = 15
+
 
 func is_prolog():
 	return current_level == 0
@@ -33,17 +35,16 @@ func start_level():
 	pass
 
 func level_up_scene_change():
-	var move_up_dir = Vector2(0,-15)
+	var move_up_dir = Vector2(0,-level_jump_height)
 	var move_up_time = 1
 	
-	var space_ship_diff = LevelManager.get_level_info().target_height-4
+	var space_ship_diff = LevelManager.get_level_info().target_height-5
 	#move camera up and moon up
 	Utils.move_position_by( Utils.camera,move_up_dir,move_up_time,Tween.TRANS_QUINT, Tween.EASE_OUT)
 	Utils.move_position_by(Utils.moon,move_up_dir,move_up_time,Tween.TRANS_BACK, Tween.EASE_OUT)
 	Utils.move_position_by(Utils.generator,move_up_dir+ Vector2(0,1)*space_ship_diff,move_up_time*3,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	Utils.update_offset(15)
+	Utils.update_offset(level_jump_height+Utils.moon_jump_height)
 	yield(get_tree().create_timer(3), "timeout")
-	Utils.generator.clean_current_human()
 	#move spaceship later
 	pass
 	

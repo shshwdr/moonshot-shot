@@ -93,8 +93,8 @@ func show_one_dialog():
 		
 		yield(self,"skip_dialog_signal")
 	
-	yield(check_after_trigger(),"completed")
 	yield(check_speaker_out(),"completed")
+	yield(check_after_trigger(),"completed")
 	yield(next(),"completed")
 
 func next():
