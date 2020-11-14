@@ -1,16 +1,16 @@
 [
     {
         "human_type":[],
-        "target_height":1,
+        "target_height":10,
         "moon_type":"res://art/moon/moon_face_sleep.png",
     },
     {
-        "human_type":[1],
-        "target_height":3,
+        "human_type":[1,1],
+        "target_height":10,
         "moon_type":"res://art/moon/moon_face_sleep.png",
     },
     {
-        "human_type":[3,1],
+        "human_type":[1,1],
         "target_height":5,
         "moon_type":"res://art/moon/moon_face_serious.png",
     },

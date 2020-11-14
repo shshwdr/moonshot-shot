@@ -36,14 +36,15 @@ func start_level():
 
 func level_up_scene_change():
 	var move_up_dir = Vector2(0,-level_jump_height)
+	var moon_move_up_dir = Vector2(0,-level_jump_height+Utils.moon_jump_height)
 	var move_up_time = 1
 	
-	var space_ship_diff = LevelManager.get_level_info().target_height-5
+	var space_ship_diff = LevelManager.get_level_info().target_height - LevelManager.get_last_level_info().target_height #-5
 	#move camera up and moon up
 	Utils.move_position_by( Utils.camera,move_up_dir,move_up_time,Tween.TRANS_QUINT, Tween.EASE_OUT)
-	Utils.move_position_by(Utils.moon,move_up_dir,move_up_time,Tween.TRANS_BACK, Tween.EASE_OUT)
+	Utils.move_position_by(Utils.moon,moon_move_up_dir,move_up_time,Tween.TRANS_BACK, Tween.EASE_OUT)
 	Utils.move_position_by(Utils.generator,move_up_dir+ Vector2(0,1)*space_ship_diff,move_up_time*3,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	Utils.update_offset(level_jump_height+Utils.moon_jump_height)
+	Utils.update_offset(level_jump_height)
 	yield(get_tree().create_timer(3), "timeout")
 	#move spaceship later
 	pass
@@ -51,7 +52,14 @@ func level_up_scene_change():
 func get_level():
 	return current_level
 
-
+func get_last_level_info():
+	var last_level = current_level-1
+	if last_level>= level_infos.size() or last_level<0:
+		printerr("level %d more than define"%current_level)
+	var res = level_infos[last_level].duplicate()
+#	if DebugSetting.skip_main_game > 0:
+#		res.level_length = DebugSetting.skip_main_game
+	return res
 	
 func get_level_info():
 	if current_level>= level_infos.size():

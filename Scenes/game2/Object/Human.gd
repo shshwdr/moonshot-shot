@@ -15,6 +15,7 @@ var is_stoping = false
 var stopped = false
 var max_health = 3
 var health = max_health
+var current_index_position
 	
 func damage(d):
 	health -=d
@@ -22,10 +23,13 @@ func damage(d):
 	#sprite.self_modulate = Color(ratio,0,0,1)
 	sprite.material.set_shader_param("changeColorRatio",ratio)
 	if health == 0:
-		Utils.maingame.remove_occupy(index_position())
-		if not is_stoping:
-			#if havent stopped, stop it.
-			stop()
+		die()
+
+func die():
+	if not is_stoping:
+		#if havent stopped, stop it.
+		stop()
+	Utils.maingame.remove_occupy(index_position())
 
 func move_up():
 #	timer.start()
@@ -68,35 +72,53 @@ func _process(delta):
 		var index = index_position()
 		
 		var possible_dirs = []
-		#if outside of game screen, move forward
+		#if out of screen, destroy
 		if not Utils.in_screen(index):
 			stop()
 			queue_free()
 			return
+		#if outside of game screen, move forward
 		if not Utils.in_game_screen(index+move_dir):
 			possible_dirs.push_back(move_dir)
 		else:
-			
+			#two options, move right, or move right above
 			var dir_next = move_dir
-			var dir_below = dir_next+Vector2.DOWN
-			#if can go down, go down
-			while Utils.can_occupy(index+dir_below):
-				dir_next = dir_below
-				dir_below = dir_below+Vector2.DOWN
+			if Utils.can_occupy(index+dir_next):
+				#right can be occupied, check down
+				var dir_below = dir_next+Vector2.DOWN
+				#if can go down, go down
+				while Utils.can_occupy(index+dir_below):
+					dir_next = dir_below
+					dir_below = dir_below+Vector2.DOWN
+					
+				possible_dirs.push_back(dir_next)
+			else:
+				#right cannot be occupied, check right up
+				var one_level_higher = dir_next+Vector2.UP
+				possible_dirs.push_back(one_level_higher)
 				
-			possible_dirs.push_back(dir_next)
-			var one_level_higher = dir_next+Vector2.UP
-			possible_dirs.push_back(one_level_higher)
+			
 		
-		
+		print("current position ",index," possible position ",possible_dirs)
 		var moved = false
 		#print("next position ",possible_positions)
 		for dir in possible_dirs:
 			var next_position = index+dir
 			if not Utils.maingame.has_occupied(next_position):#Utils.can_occupy(next_position):
+				#if next position can be pass through(like there is a ladder or rope, pass up
+				var origin_dir = dir
+				var origin_next_position = next_position
+				while Utils.maingame.can_passthrough(next_position):
+					dir+=Vector2.UP
+					next_position = index+dir
+				print("next_position after ladder ",next_position)
+				if Utils.maingame.has_occupied(next_position):
+					continue
+#					dir = origin_dir
+#					next_position = origin_next_position
 				is_moving = true
 				Utils.maingame.change_occupy(index,next_position,self)
-				
+				current_index_position = next_position
 				yield(Utils.move_position_by(self,dir),"completed")
 				is_moving = false
 				moved = true
@@ -119,6 +141,7 @@ func get_input():
 		if not is_stoping:
 			if Input.is_action_pressed(Utils.interact_key):
 				print("interact key pressed")
+				#move stop to when finish moving
 				stop()
 func _physics_process(delta):
 	get_input()

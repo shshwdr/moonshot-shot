@@ -17,7 +17,7 @@ var interact_key_2 = "interact2"
 #these value would never change.
 var width_offset = 4#left space for generator
 var width_end_offset = 1#right space for balance
-var width_index = 10
+var width_index = 12
 var width_total = width_offset+width_index+width_end_offset
 var height_offset_static = 3#upper space, for moon jump up
 
@@ -25,7 +25,7 @@ var height_offset_static = 3#upper space, for moon jump up
 var y_offset = 0 #screen y offset, when moon move up, this value will get small
 var height_offset = 3 
 #game screen is inside of screen
-var height_index = 1 #height would change based on level
+var height_index = 5 #height would change based on level
 var screen_top_left = Vector2(0,y_offset)
 #used to check if item is inside of game screen
 var game_screen_top_left = Vector2(width_offset,height_offset) 

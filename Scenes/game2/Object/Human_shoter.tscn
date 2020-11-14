@@ -1,11 +1,31 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Human.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/game2/Object/Human_shoter.gd" type="Script" id=2]
 [ext_resource path="res://art/shot.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "loading"
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float changeColorRatio;
+
+void fragment() {
+	if (UV.y<changeColorRatio){
+    	COLOR = texture(TEXTURE, UV);
+		//COLOR.r = 1.0;
+		COLOR.g = 0.0;
+		COLOR.b =0.0;
+	}else{
+		COLOR = texture(TEXTURE, UV);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/changeColorRatio = 0.0
+
+[sub_resource type="Animation" id=3]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -21,8 +41,7 @@ tracks/0/keys = {
 "values": [ 0.0, 180.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "ready"
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -38,21 +57,23 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 2 )
 
 [node name="shotSprite" type="Sprite" parent="." index="10"]
 position = Vector2( -6.088, -2.971 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="shotSprite" index="0"]
-anims/loading = SubResource( 1 )
-anims/ready = SubResource( 3 )
+anims/loading = SubResource( 3 )
+anims/ready = SubResource( 4 )
 
 [node name="shotSprite2" type="Sprite" parent="shotSprite" index="1"]
-material = SubResource( 2 )
-scale = Vector2( 1, 1 )
+material = SubResource( 5 )
 texture = ExtResource( 3 )

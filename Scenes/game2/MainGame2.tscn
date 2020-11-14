@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/game2/MainGame2.gd" type="Script" id=1]
 [ext_resource path="res://art/map/universe.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/game2/Camera.gd" type="Script" id=3]
 [ext_resource path="res://art/object/dinosaur.png" type="Texture" id=4]
+[ext_resource path="res://art/map/platformer.png" type="Texture" id=5]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,4 +32,14 @@ texture = ExtResource( 2 )
 [node name="Leader" type="Sprite" parent="."]
 position = Vector2( 187.496, 212.144 )
 texture = ExtResource( 4 )
+
+[node name="platformer" type="Sprite" parent="."]
+position = Vector2( 219.059, 214.54 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+
+[node name="platformer2" type="Sprite" parent="."]
+position = Vector2( 343.347, 214.215 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

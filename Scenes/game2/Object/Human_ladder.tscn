@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/game2/Object/Human.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/game2/Object/Human_ladder.gd" type="Script" id=2]
+[ext_resource path="res://art/map/handrail-top.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float changeColorRatio;
+
+void fragment() {
+	if (UV.y<changeColorRatio){
+    	COLOR = texture(TEXTURE, UV);
+		//COLOR.r = 1.0;
+		COLOR.g = 0.0;
+		COLOR.b =0.0;
+	}else{
+		COLOR = texture(TEXTURE, UV);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/changeColorRatio = 0.0
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 2 )
+frame = 1
+
+[node name="handrail-top" type="Sprite" parent="." index="10"]
+position = Vector2( 0.0223694, -23.8954 )
+texture = ExtResource( 3 )

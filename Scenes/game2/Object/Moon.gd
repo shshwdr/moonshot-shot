@@ -65,10 +65,11 @@ func shoot():
 	
 func throw_meteors():
 	var human_count = LevelManager.get_level_info().target_height - 1
+	human_count = 1
 	for i in range(human_count*3):
 		
 		var meteo_instance = meteo_scene.instance()
-		meteo_instance.scale = Vector2(1.5,1.5)
+		meteo_instance.scale = Vector2(2,2)
 		meteo_instance.position = Utils.index_to_position(index_position())
 		Utils.maingame.bullets.add_child(meteo_instance)
 		timer.start()

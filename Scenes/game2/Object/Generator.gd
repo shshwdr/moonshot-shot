@@ -6,8 +6,9 @@ onready var tween = $Tween
 onready var generateTimer = $GenerateTimer
 
 var human_type = [
+	preload("res://Scenes/game2/Object/Human_ladder.tscn"),
 	preload("res://Scenes/game2/Object/Human.tscn"),
-	preload("res://Scenes/game2/Object/Human_shoter.tscn")
+	preload("res://Scenes/game2/Object/Human_shoter.tscn"),
 ]
 
 var waiting_human_instance = []

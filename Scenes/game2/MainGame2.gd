@@ -22,6 +22,8 @@ var can_generate_player = true
 var move_dir = Vector2.RIGHT
 
 var index_to_human_map ={}
+
+var index_to_passthrough_map ={}
 #var human_to_index_map ={}
 
 #dialog
@@ -83,8 +85,20 @@ func remove_occupy(index_position):
 #		index_position = index_above
 #		index_above = index_above+Vector2.UP
 
+func add_passthrough(index_position):
+	print("add passthrough ",index_position)
+	index_to_passthrough_map[index_position] = true
+	
+func remove_passthrough(index_position):
+	index_to_passthrough_map.erase(index_position)
+
+func can_passthrough(index_position):
+	#print("can_passthrough ",index_position)
+	print("can_passthrough ",index_to_passthrough_map,index_position)
+	return index_to_passthrough_map.has(index_position) 
+
 func has_occupied(index_position):
-	#print(index_to_human_map,index_position)
+	print("has occupied ",index_to_human_map,index_position)
 	return index_to_human_map.has(index_position) 
 
 func get_above_human_if_existed(human):
@@ -252,6 +266,8 @@ func end():
 		yield(LevelManager.level_up_scene_change(),"completed")
 		Utils.clear_all_children(human)
 		Utils.generator.clean_current_human()
+		index_to_human_map.clear()
+		index_to_passthrough_map.clear()
 		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
 		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
 		
