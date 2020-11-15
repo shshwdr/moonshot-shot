@@ -6,6 +6,8 @@ var level_folder = "res://resources/level"
 
 var level_jump_height = 15
 
+var unlocked_level = 4
+
 
 func is_prolog():
 	return current_level == 0
@@ -52,6 +54,14 @@ func level_up_scene_change():
 func get_level():
 	return current_level
 
+func get_one_level_info(level):
+	if level>= level_infos.size() or level<0:
+		printerr("level %d more than define"%level)
+	var res = level_infos[level].duplicate()
+#	if DebugSetting.skip_main_game > 0:
+#		res.level_length = DebugSetting.skip_main_game
+	return res
+
 func get_last_level_info():
 	var last_level = current_level-1
 	if last_level>= level_infos.size() or last_level<0:
@@ -68,6 +78,9 @@ func get_level_info():
 #	if DebugSetting.skip_main_game > 0:
 #		res.level_length = DebugSetting.skip_main_game
 	return res
+	
+func load_level(level):
+	current_level = level
 	
 func next_level():
 	current_level+=1

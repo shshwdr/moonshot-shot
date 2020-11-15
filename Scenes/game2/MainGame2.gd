@@ -165,22 +165,16 @@ func _ready():
 	Moon = moon_scene.instance()
 	add_child(Moon)
 	
-	show_prolog()
-	
 	Events.connect("player_stopped", self, "on_player_stopped")
-	#yield(show_level_dialog(),"completed")
 	
-#	Events.connect("player_stopped", self, "on_player_stopped")
-#	line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
-#	line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
-#	generator_instance = generator_scene.instance()
-#	add_child(generator_instance)
-#
-#	if LevelManager.current_level == -1:
-#		#prolog
-#		pass
-#	else:
-#		pass
+	if LevelManager.is_prolog():
+		show_prolog()
+	else:
+		Utils.update_game_level()
+		init_generator_and_platformer()
+		show_level_start_dialog()
+	
+
 	
 func on_player_stopped():
 	can_generate_player = true
@@ -231,7 +225,14 @@ func _process(delta):
 		can_generate_player = false
 		#move_dir = -move_dir
 
-
+func init_generator_and_platformer():
+	Moon.update_normal_face()
+	
+	line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
+	line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
+	generator_instance = generator_scene.instance()
+	Generator = generator_instance
+	add_child(generator_instance)
 			
 func _on_Timer_timeout():
 	can_input = true
@@ -242,15 +243,9 @@ func end():
 	if dialog_state == -1:
 		#prolog
 		LevelManager.current_level = 1
+		
 		Utils.update_game_level()
-		Moon.update_normal_face()
-		
-		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
-		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
-		generator_instance = generator_scene.instance()
-		Generator = generator_instance
-		add_child(generator_instance)
-		
+		init_generator_and_platformer()
 		show_level_start_dialog()
 		
 	elif dialog_state == 0:

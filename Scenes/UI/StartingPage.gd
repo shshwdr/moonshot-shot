@@ -12,6 +12,8 @@ func _ready():
 
 
 func _on_StartGame_pressed():
+	
+	LevelManager.load_level(0)
 	Events.emit_signal("game_start")
 	
 func _on_Continue_pressed():

@@ -1,0 +1,23 @@
+{
+        "first": {
+            "speaker":"Moon",
+            
+            "pivot":[0,0],
+            "content": "I admitted I looked down on you.",
+            "next": "12",
+            
+        },
+        "12": {
+            "speaker":"Moon",
+            "pivot":[0,0],
+            "content": "Well.. technically I'm looking DOWN on you all the time..",
+            "next": "13",
+        },
+        "13": {
+            "speaker":"Moon",
+            "pivot":[0,0],
+            "content": "But that is not important..I'll be serious now!",
+            "next": "13",
+            "after_trigger":"end"
+        },
+    },

@@ -65,7 +65,7 @@ func shoot():
 	
 func throw_meteors():
 	var human_count = LevelManager.get_level_info().target_height - 1
-	human_count = 1
+	human_count = 0
 	for i in range(human_count*3):
 		
 		var meteo_instance = meteo_scene.instance()
