@@ -98,7 +98,7 @@ func can_passthrough(index_position):
 	return index_to_passthrough_map.has(index_position) 
 
 func has_occupied(index_position):
-	print("has occupied ",index_to_human_map,index_position)
+	#print("has occupied ",index_to_human_map,index_position)
 	return index_to_human_map.has(index_position) 
 
 func get_above_human_if_existed(human):

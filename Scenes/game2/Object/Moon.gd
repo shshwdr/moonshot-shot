@@ -93,6 +93,23 @@ func play_face_anim():
 	faceAnimationPlayer.stop()
 	#faceAnimationPlayer.play("beHit")
 
+func moon_behavior():
+	match LevelManager.get_level_info().moon_behavior:
+		"sleep":
+			yield(get_tree(), 'idle_frame')
+		"normal":
+			yield(move(),"completed")
+			
+			if Utils.on_border(index_position()):
+				move_dir = -move_dir
+			
+			target_index_position = index_position()#+Vector2(1,0)
+			var column_occupied = Utils.maingame.column_occupied_count(target_index_position)
+			for i in range(column_occupied):
+				yield(shoot(),"completed")
+				break
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Utils.moon = self
@@ -101,18 +118,12 @@ func _ready():
 	position = Utils.index_to_position(index_position)
 	update_normal_face()
 	update_blush()
-	while Utils.is_main_game_started:
+	while true:
+		if Utils.is_main_game_started:
+			yield(moon_behavior(),"completed")
 		#print(position,index_position())
-		yield(move(),"completed")
-		
-		if Utils.on_border(index_position()):
-			move_dir = -move_dir
-		
-		target_index_position = index_position()#+Vector2(1,0)
-		var column_occupied = Utils.maingame.column_occupied_count(target_index_position)
-		for i in range(column_occupied):
-			yield(shoot(),"completed")
-			break
+			
+		yield(get_tree(), 'idle_frame')
 		#detect if more targets spawned
 	
 	pass # Replace with function body.
