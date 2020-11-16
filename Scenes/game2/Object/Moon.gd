@@ -74,6 +74,7 @@ func throw_meteors():
 		Utils.maingame.bullets.add_child(meteo_instance)
 		timer.start()
 		yield(timer, "timeout")
+	yield(get_tree(), 'idle_frame')
 
 func get_shot():
 	

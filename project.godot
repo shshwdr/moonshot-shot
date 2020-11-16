@@ -38,6 +38,7 @@ LevelManager="*res://Scenes/Autoload/LevelManager.gd"
 MusicManager="*res://Scenes/Autoload/MusicManager.tscn"
 DialogManager="*res://Scenes/Autoload/DialogManager.gd"
 DebugSetting="*res://Scenes/Autoload/DebugSetting.gd"
+GameSaver="*res://Scenes/Autoload/GameSaver.gd"
 
 [display]
 

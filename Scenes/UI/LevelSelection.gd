@@ -8,7 +8,7 @@ var one_level_button = preload("res://Scenes/UI/savedLevel.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for level in range(1,LevelManager.unlocked_level):
+	for level in range(1,LevelManager.unlocked_level+1):
 		var one_level_button_instance = one_level_button.instance()
 		one_level_button_instance.init(level)
 		$GridContainer.add_child(one_level_button_instance)

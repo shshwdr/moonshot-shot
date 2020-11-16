@@ -17,35 +17,35 @@ func save_globally():
 	pass
 	# Passes a SaveGame resource to all nodes to save data from
 	# and writes it to the disk
-#	var save_game := SaveGame.new()
-#	#save_game.game_version = ProjectSettings.get_setting("application/config/version")
+	var save_game := SaveGame.new()
+	#save_game.game_version = ProjectSettings.get_setting("application/config/version")
+	
 #
-#	LevelManager.save(save_game)
-#	var directory: Directory = Directory.new()
-#	if not directory.dir_exists(SAVE_FOLDER):
-#		directory.make_dir_recursive(SAVE_FOLDER)
-#
-#	var save_path = SAVE_FOLDER.plus_file(SAVE_NAME_TEMPLATE_GLOBAL)
-#	var error: int = ResourceSaver.save(save_path, save_game)
-#	if error != OK:
-#		print('There was an issue writing the save %s to %s' % [SAVE_NAME_TEMPLATE_GLOBAL, save_path])
+	LevelManager.save(save_game)
+	var directory: Directory = Directory.new()
+	if not directory.dir_exists(SAVE_FOLDER):
+		directory.make_dir_recursive(SAVE_FOLDER)
+
+	var save_path = SAVE_FOLDER.plus_file(SAVE_NAME_TEMPLATE_GLOBAL)
+	var error: int = ResourceSaver.save(save_path, save_game)
+	if error != OK:
+		print('There was an issue writing the save %s to %s' % [SAVE_NAME_TEMPLATE_GLOBAL, save_path])
 
 
 func load_globally():
-	pass
 	# Reads a saved game from the disk and delegates loading
 	# to the individual nodes to load
-#	var save_file_path: String = SAVE_FOLDER.plus_file(SAVE_NAME_TEMPLATE_GLOBAL)
-#	var file: File = File.new()
+	var save_file_path: String = SAVE_FOLDER.plus_file(SAVE_NAME_TEMPLATE_GLOBAL)
+	var file: File = File.new()
 #	print("before check exist")
 #	print(file.file_exists(save_file_path))
 #	print("what")
-#	if not file.file_exists(save_file_path):
-#		print("Save file %s doesn't exist" % save_file_path)
-#		return
+	if not file.file_exists(save_file_path):
+		print("Save file %s doesn't exist" % save_file_path)
+		return
 #	print("after check exist")
-#	var save_game: Resource = load(save_file_path)
-#	LevelManager.load(save_game)
+	var save_game: Resource = load(save_file_path)
+	LevelManager.load(save_game)
 
 #func save(id: int):
 #	# Passes a SaveGame resource to all nodes to save data from

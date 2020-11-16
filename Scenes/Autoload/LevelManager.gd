@@ -6,7 +6,9 @@ var level_folder = "res://resources/level"
 
 var level_jump_height = 15
 
-var unlocked_level = 4
+var unlocked_level = 0
+
+var LEVEL_SAVE_KEY = "levels"
 
 
 func is_prolog():
@@ -87,5 +89,12 @@ func next_level():
 	if current_level >=level_infos.size():
 		Events.emit_signal("get_max_level")
 	
+func save(saved_game: Resource):
+	saved_game.data[LEVEL_SAVE_KEY] = max(unlocked_level,current_level)
 	
+func load(saved_game: Resource):
+	if not saved_game.data.has(LEVEL_SAVE_KEY):
+		unlocked_level = 0
+	else:
+		unlocked_level = saved_game.data[LEVEL_SAVE_KEY]
 

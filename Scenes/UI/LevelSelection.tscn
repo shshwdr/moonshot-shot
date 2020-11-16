@@ -23,6 +23,9 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 100, 50 )
 custom_fonts/font = ExtResource( 2 )
 text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0

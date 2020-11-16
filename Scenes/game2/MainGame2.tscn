@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/game2/MainGame2.gd" type="Script" id=1]
 [ext_resource path="res://art/map/universe.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/game2/Camera.gd" type="Script" id=3]
 [ext_resource path="res://art/object/dinosaur.png" type="Texture" id=4]
 [ext_resource path="res://art/map/platformer.png" type="Texture" id=5]
+[ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+use_mipmaps = true
+font_data = ExtResource( 6 )
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -42,4 +48,17 @@ texture = ExtResource( 5 )
 position = Vector2( 343.347, 214.215 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
+
+[node name="level_name" type="Label" parent="."]
+margin_left = 11.0
+margin_top = 97.0
+margin_right = 357.0
+margin_bottom = 265.0
+custom_fonts/font = SubResource( 1 )
+text = "test"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

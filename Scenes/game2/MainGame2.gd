@@ -24,6 +24,8 @@ var move_dir = Vector2.RIGHT
 var index_to_human_map ={}
 
 var index_to_passthrough_map ={}
+
+onready var level_name = $level_name
 #var human_to_index_map ={}
 
 #dialog
@@ -138,25 +140,11 @@ func _input(event):
 			#Do what you gotta do.
 	if not can_input:
 		return
-#	if event is InputEventMouseButton and event.pressed:
-##		if event.button_index == 1:
-##			can_input = false
-##			timer.start()
-##			var touch = event.position
-##			var index = Utils.position_to_index(touch)
-##			on_touched_tile(index)
-##		el
-#		if event.button_index == 2:
-#			can_input = false
-#			timer.start()
-#			var touch = event.position
-#			var index = Utils.position_to_index(touch)
-#			on_touched_shot(index)
 		
-#todo remove timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	level_name.text = ""
 	#timer.wait_time = Utils.wait_time*4
 	Utils.maingame = self
 	
@@ -189,6 +177,7 @@ func show_prolog():
 	dialog_instance.start_dialog()
 
 func show_level_start_dialog():
+	show_level_name()
 	var file_path = '%s/%s%d.json' % [dialog_folder, "level",LevelManager.current_level]
 	var prolog = Utils.load_json(file_path)
 	dialog_instance = DialogManager.select_dialog_multiple(self,prolog)
@@ -206,6 +195,12 @@ func show_level_end_dialog():
 	dialog_state = 1
 	dialog_instance.start_dialog()
 
+func show_level_name():
+	level_name.text = LevelManager.get_level_info().name
+	yield(get_tree().create_timer(1), "timeout")
+	level_name.text = ""
+	GameSaver.save_globally()
+	pass
 
 func _process(delta):
 	if not Utils.is_main_game_started:
