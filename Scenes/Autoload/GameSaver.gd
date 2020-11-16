@@ -14,7 +14,6 @@ func _ready():
 	Events.connect("save_globally" ,self, "save_globally")
 
 func save_globally():
-	pass
 	# Passes a SaveGame resource to all nodes to save data from
 	# and writes it to the disk
 	var save_game := SaveGame.new()

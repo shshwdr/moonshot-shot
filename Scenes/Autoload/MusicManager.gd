@@ -4,7 +4,7 @@ onready var player = $AudioStreamPlayer
 
 var music_dict = {
 	"level_game" : preload("res://sound/bg/bensound-funnysong.ogg"),
-	"ending" : preload("res://sound/bg/bensound-tomorrow.ogg"),
+	"ending" : preload("res://sound/bg/bensound-slowmotion.ogg"),
 	"start": preload("res://sound/bg/bensound-goinghigher.ogg"),
 }
 
@@ -18,8 +18,9 @@ func _ready():
 	pass
 
 func play_music(music_name):
-	player.stream = music_dict[music_name]
-	player.playing = true
+	if player.stream != music_dict[music_name]:
+		player.stream = music_dict[music_name]
+		player.playing = true
 	
 func get_sfx(sfx_name):
 	return sfx_dict[sfx_name]

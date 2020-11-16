@@ -20,4 +20,5 @@ func on_game_start():
 	reload_scene(game_scene)
 	
 func on_game_end():
+	MusicManager.play_music("start")
 	reload_scene(starting_scene)

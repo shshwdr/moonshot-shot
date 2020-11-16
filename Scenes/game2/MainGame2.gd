@@ -246,6 +246,7 @@ func end():
 	elif dialog_state == 0:
 		#game start
 		Utils.main_game_start()
+		MusicManager.play_music("level_game")
 		can_generate_player = true
 		pass
 	elif dialog_state == 1:
@@ -280,3 +281,8 @@ func trigger(trigger_name):
 		"end":
 			end()
 	yield(get_tree(), 'idle_frame')
+
+
+func _on_Button_pressed():
+	Events.emit_signal("game_end")
+	pass # Replace with function body.

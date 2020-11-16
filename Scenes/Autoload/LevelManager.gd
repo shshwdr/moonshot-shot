@@ -90,7 +90,8 @@ func next_level():
 		Events.emit_signal("get_max_level")
 	
 func save(saved_game: Resource):
-	saved_game.data[LEVEL_SAVE_KEY] = max(unlocked_level,current_level)
+	unlocked_level = max(unlocked_level,current_level)
+	saved_game.data[LEVEL_SAVE_KEY] = unlocked_level
 	
 func load(saved_game: Resource):
 	if not saved_game.data.has(LEVEL_SAVE_KEY):
