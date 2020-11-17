@@ -29,6 +29,7 @@ var height_index = 5 #height would change based on level
 var screen_top_left = Vector2(0,y_offset)
 #used to check if item is inside of game screen
 var game_screen_top_left = Vector2(width_offset,height_offset) 
+var game_screen_top_right = Vector2(width_offset+width_index,height_offset) 
 #used to decide moon position
 var game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
 #used to decide where to generate base, generator, and if player is ready to start
@@ -138,7 +139,10 @@ func position_move_to(character,index_position):
 func position_move_by(position,index_position):
 	var to_move_index_position = position_to_index(position)
 	return index_to_position(to_move_index_position+index_position)
-	
+
+func randomi_vector2(vec1,vec2):
+	return Vector2(rng.randi_range(vec1.x,vec2.x), rng.randi_range(vec1.y,vec2.y))
+
 func randomi_2d(width,height):
 	var w = rng.randi() % width
 	var h = rng.randi() % height
@@ -159,7 +163,7 @@ func random_distribution_array(array):
 	for i in array.size():
 		increading_count+=array[i]
 		if random_value<=increading_count:
-			return i
+			return array[i]
 	printerr("random array didn't return correctly")
 	return 0
 

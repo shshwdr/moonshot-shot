@@ -31,6 +31,9 @@ func die():
 		stop()
 	Utils.maingame.remove_occupy(index_position())
 
+func can_block_thunder():
+	return false
+
 func move_up():
 #	timer.start()
 #	yield(timer, "timeout")

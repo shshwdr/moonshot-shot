@@ -6,9 +6,11 @@ onready var tween = $Tween
 onready var generateTimer = $GenerateTimer
 
 var human_type = [
-	preload("res://Scenes/game2/Object/Human_ladder.tscn"),
 	preload("res://Scenes/game2/Object/Human.tscn"),
 	preload("res://Scenes/game2/Object/Human_shoter.tscn"),
+	preload("res://Scenes/game2/Object/Human_ladder.tscn"),
+	preload("res://Scenes/game2/Object/Human_Strong.tscn"),
+	preload("res://Scenes/game2/Object/Human_magic.tscn"),
 ]
 
 var waiting_human_instance = []
@@ -62,7 +64,8 @@ func clean_current_human():
 	
 func _on_GenerateTimer_timeout():
 	if waiting_human_instance.size()< lined_up_count:
-		var human_type_id = Utils.random_distribution_array(LevelManager.get_level_info().human_type)
+		var level_human_type = LevelManager.get_level_info().human_type
+		var human_type_id = Utils.random_distribution_array(level_human_type)
 		var human_instance = human_type[human_type_id].instance()
 		human_instance.position = position
 		Utils.maingame.human.add_child(human_instance)

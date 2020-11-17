@@ -31,6 +31,23 @@ onready var level_name = $level_name
 #dialog
 onready var Leader = $Leader
 
+
+func thunder_on_column(index_position):
+	for i in range(Utils.height_offset,Utils.height_offset+Utils.height_index):
+		var check_position = Vector2(index_position.x,i)
+		if has_occupied(check_position):
+			var human = index_to_human_map.get(check_position)
+			if human.can_block_thunder() and human.is_stoping:
+				human.block_thunder()
+				return
+			else:
+				remove_occupy(check_position)
+	
+	
+	
+func find_blocker_on_thunder(index_position):
+	pass
+
 func has_column_occupied(index_position):
 	for i in range(Utils.height_offset,Utils.height_offset+Utils.height_index):
 		if has_occupied(Vector2(index_position.x,i)):
