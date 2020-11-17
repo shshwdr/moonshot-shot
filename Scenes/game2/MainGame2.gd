@@ -41,7 +41,7 @@ func thunder_on_column(index_position):
 				human.block_thunder()
 				return
 			else:
-				remove_occupy(check_position)
+				human.die()
 	
 	
 	
