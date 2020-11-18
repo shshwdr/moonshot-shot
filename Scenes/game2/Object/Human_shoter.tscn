@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Human.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/game2/Object/Human_shoter.gd" type="Script" id=2]
 [ext_resource path="res://art/shot.png" type="Texture" id=3]
+[ext_resource path="res://art/object/human_gang.png" type="Texture" id=4]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -65,6 +66,8 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )
+texture = ExtResource( 4 )
+hframes = 1
 
 [node name="shotSprite" type="Sprite" parent="." index="10"]
 position = Vector2( -6.088, -2.971 )
