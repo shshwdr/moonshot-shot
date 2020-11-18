@@ -66,7 +66,7 @@ texture = SubResource( 3 )
 [node name="tween_camera_shake" type="Tween" parent="Camera2D"]
 
 [node name="Leader" type="Sprite" parent="."]
-position = Vector2( 187.496, 212.144 )
+position = Vector2( 260.328, 511.25 )
 texture = ExtResource( 4 )
 
 [node name="level_name" type="Label" parent="."]
@@ -79,6 +79,7 @@ text = "test"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

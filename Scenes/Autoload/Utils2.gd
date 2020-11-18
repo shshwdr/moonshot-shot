@@ -158,11 +158,11 @@ func sum_array(array):
 
 func random_distribution_array(array):
 	var total_count = sum_array(array)
-	var random_value = rng.randi_range(0,total_count)
-	var increading_count = 0
+	var random_value = rng.randi_range(1,total_count)
+	var increasing_count = 0
 	for i in array.size():
-		increading_count+=array[i]
-		if random_value<=increading_count:
+		increasing_count+=array[i]
+		if random_value<=increasing_count:
 			return i
 	printerr("random array didn't return correctly")
 	return 0

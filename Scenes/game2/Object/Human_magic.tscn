@@ -9,14 +9,9 @@
 code = "shader_type canvas_item;
 
 uniform float changeColorRatio;
-uniform bool upsideDown;
-uniform float colorTense;
 
 void fragment() {
 	bool condition = UV.y<changeColorRatio;
-	if (!upsideDown){
-		condition = UV.y>changeColorRatio;
-	}
 	if (condition){
     	COLOR = texture(TEXTURE, UV);
 		//COLOR.r = 1.0;
@@ -31,8 +26,6 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/changeColorRatio = 0.0
-shader_param/upsideDown = null
-shader_param/colorTense = null
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )

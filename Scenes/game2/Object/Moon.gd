@@ -13,7 +13,7 @@ var thunder_scene = preload("res://Scenes/game2/Object/Thunder.tscn")
 var target_index_position
 var move_dir = Vector2.RIGHT
 var current_drunk_hit_count = 0
-var drunk_upgrade_hit_count = [1,2,2]
+var drunk_upgrade_hit_count = [1,1,1]
 var sober_time = [0,50,10,10]
 var current_sober_time = 0
 var drunk_level = 0
