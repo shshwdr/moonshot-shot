@@ -3,13 +3,13 @@ extends Node2D
 
 var moon_scene = preload("res://Scenes/game2/Object/Moon.tscn")
 var generator_scene = preload("res://Scenes/game2/Object/Generator.tscn")
+var platformer_scene = preload("res://Scenes/game2/Object/platformer.tscn")
 
 var Moon
 var Generator
 onready var human = $human
 onready var bullets = $bullets
 onready var timer = $Timer
-onready var line = $Line2D
 var dialog_folder = "res://resources/dialog"
 
 var dialog_instance 
@@ -237,11 +237,16 @@ func _process(delta):
 		can_generate_player = false
 		#move_dir = -move_dir
 
+func init_platformer():
+	for i in range(3):
+		var platformer_instance = platformer_scene.instance()
+		add_child(platformer_instance)
+		platformer_instance.position = Utils.index_to_position(Utils.game_screen_bottom_left+Vector2(i*4,0))
+
 func init_generator_and_platformer():
 	Moon.update_normal_face()
+	init_platformer()	
 	
-	line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
-	line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
 	generator_instance = generator_scene.instance()
 	Generator = generator_instance
 	add_child(generator_instance)
@@ -276,8 +281,8 @@ func end():
 		Utils.generator.clean_current_human()
 		index_to_human_map.clear()
 		index_to_passthrough_map.clear()
-		line.points[0] = Utils.index_to_position(Utils.game_screen_bottom_left) 
-		line.points[1] =Utils.index_to_position( Utils.game_screen_bottom_right) 
+		
+		init_platformer()
 		
 		show_level_start_dialog()
 		

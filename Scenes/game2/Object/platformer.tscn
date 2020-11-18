@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://art/map/platformer.png" type="Texture" id=1]
+
+[node name="platformer" type="Node2D"]
+position = Vector2( 219.059, 214.54 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 30, 0 )
