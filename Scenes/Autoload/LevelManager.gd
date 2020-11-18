@@ -18,6 +18,7 @@ func _ready():
 	load_levels_info()
 	
 func load_levels_info():
+	
 	var file_path = '%s/%s.json' % [level_folder, "level"]
 	level_infos = Utils.load_json(file_path)
 

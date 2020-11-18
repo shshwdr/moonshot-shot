@@ -1,6 +1,6 @@
 extends Node
 
-
+var moon_dont_attack = true
 var skip_dialog = true
 var skip_main_game = -1
 var walking_time = 1

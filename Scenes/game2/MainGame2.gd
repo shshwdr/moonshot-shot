@@ -42,6 +42,8 @@ func thunder_on_column(index_position):
 				return
 			else:
 				human.die()
+		if can_passthrough(check_position):
+			remove_passthrough(check_position)
 	
 	
 	

@@ -163,7 +163,7 @@ func random_distribution_array(array):
 	for i in array.size():
 		increading_count+=array[i]
 		if random_value<=increading_count:
-			return array[i]
+			return i
 	printerr("random array didn't return correctly")
 	return 0
 

@@ -2,7 +2,6 @@
     {
         "first_get_shot": {
             "speaker":"Moon",
-            
             "pivot":[0,0],
             "content": "Oh What's this???",
             
@@ -11,43 +10,37 @@
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "It taste a little funny..",
-            "next": "13",
         },],
-        "get_drunk": [
+        "get_drunk": [[],[],
             [{
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "I'm excited!! I'm the FLASH!",
-            "next": "13",
-            "after_trigger":"end"
+            "behavior":{"speed":2},
         },
         {
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "More meteors comeeeeee!!",
-            "next": "13",
-            "after_trigger":"end"
+            "behavior":{"speed":2},
         },],
         [{
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "I'm exhausted!!....",
-            "next": "13",
-            "after_trigger":"end"
+            "behavior":{"speed":0.5},
         },
         {
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "WHeRe aM i? HeLLo LiTTLe aNTS i LoVe You~~",
-            "next": "13",
-            "after_trigger":"end"
+            "behavior":{"speed":0.5},
         },
         {
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "I'll destroy all of you! Sun! Don't run, fight with me!!",
-            "next": "13",
-            "after_trigger":"end"
+            "behavior":{"speed":0.5},
         },],
     ],
     },

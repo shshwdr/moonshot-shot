@@ -102,7 +102,7 @@ func _process(delta):
 				
 			
 		
-		print("current position ",index," possible position ",possible_dirs)
+		#print("current position ",index," possible position ",possible_dirs)
 		var moved = false
 		#print("next position ",possible_positions)
 		for dir in possible_dirs:
@@ -114,7 +114,7 @@ func _process(delta):
 				while Utils.maingame.can_passthrough(next_position):
 					dir+=Vector2.UP
 					next_position = index+dir
-				print("next_position after ladder ",next_position)
+				#print("next_position after ladder ",next_position)
 				if Utils.maingame.has_occupied(next_position):
 					continue
 #					dir = origin_dir
@@ -132,7 +132,7 @@ func _process(delta):
 				stop()
 			
 func stop():
-	print("stop")
+	#print("stop")
 	is_stoping = true
 	
 	Events.emit_signal("player_stopped")
@@ -143,7 +143,7 @@ func get_input():
 			return
 		if not is_stoping:
 			if Input.is_action_pressed(Utils.interact_key):
-				print("interact key pressed")
+				#print("interact key pressed")
 				#move stop to when finish moving
 				stop()
 func _physics_process(delta):
