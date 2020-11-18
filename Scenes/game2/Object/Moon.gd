@@ -4,14 +4,17 @@ onready var timer = $Timer
 onready var tween = $Tween
 onready var faceResetTimer = $FaceResetTimer
 onready var faceAnimationPlayer  = $faceAnimationPlayer
+
 var meteo_scene = preload("res://Scenes/game2/Object/Meteo.tscn")
 var thunder_scene = preload("res://Scenes/game2/Object/Thunder.tscn")
 var target_index_position
 var move_dir = Vector2.RIGHT
 var current_drunk_hit_count = 0
-var drunk_upgrade_hit_count = 1
-
-
+var drunk_upgrade_hit_count = [1,2,2]
+var sober_time = [0,50,10,20]
+var current_sober_time = 0
+var drunk_level = 0
+var is_shotable = true
 
 #var level_to_face = [
 #]
@@ -23,9 +26,10 @@ var face_to_normal_anim = {
 
 onready var face_sprite = $face
 
+
+
 var move_time = 0.4
 
-var drunk_level = 0
 
 var blush_textures = [
 	null,
@@ -94,11 +98,17 @@ func get_shot():
 	faceResetTimer.start()
 	
 	current_drunk_hit_count+=1
-	if current_drunk_hit_count>=drunk_upgrade_hit_count:
+	if drunk_level >= drunk_upgrade_hit_count.size():
+		current_drunk_hit_count = 0
+		current_sober_time = 0
+	elif current_drunk_hit_count>=drunk_upgrade_hit_count[drunk_level]:
 		current_drunk_hit_count = 0
 		drunk_level+=1
+		current_sober_time = 0
 		update_blush()
-	move_time*=2
+	is_shotable = false
+	yield(get_tree().create_timer(1), "timeout")
+	is_shotable = true
 	
 func play_face_anim():
 	face_sprite.frame = 4
@@ -150,6 +160,22 @@ func _input(event):
 	if DebugSetting.can_jump_level and  event is InputEventKey and event.pressed:
 		if event.scancode == KEY_0:
 			finish_level()
+
+
+
+func _process(delta):
+	if drunk_level>0:
+		current_sober_time+=delta
+		moon_sober_up_visually(current_sober_time/float(sober_time[drunk_level]))
+		if current_sober_time>sober_time[drunk_level]:
+			current_sober_time = 0
+			moon_sober_up_visually(1)
+			drunk_level-=1
+			
+			update_blush()
+
+func moon_sober_up_visually(ratio):
+	$bg.material.set_shader_param("changeColorRatio",ratio)
 
 func finish_level():
 	Utils.is_main_game_started = false

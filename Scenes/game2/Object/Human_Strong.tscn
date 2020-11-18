@@ -8,9 +8,15 @@
 code = "shader_type canvas_item;
 
 uniform float changeColorRatio;
+uniform bool upsideDown;
+uniform float colorTense;
 
 void fragment() {
-	if (UV.y<changeColorRatio){
+	bool condition = UV.y<changeColorRatio;
+	if (!upsideDown){
+		condition = UV.y>changeColorRatio;
+	}
+	if (condition){
     	COLOR = texture(TEXTURE, UV);
 		//COLOR.r = 1.0;
 		COLOR.g = 0.0;
@@ -24,6 +30,8 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/changeColorRatio = 0.0
+shader_param/upsideDown = null
+shader_param/colorTense = null
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

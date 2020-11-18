@@ -7,11 +7,10 @@
     },
     {
         "name":"The Simplest Task",
-        "human_type":[4],
+        "human_type":[1],
         "target_height":5,
         "moon_type":"res://art/moon/moon_face_sleep.png",
-        "moon_behavior":"normal",
-        "is_powerful":true,
+        "moon_behavior":"sleep",
     },
     {
         "name":"Shot for Moonshot",
