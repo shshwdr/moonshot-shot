@@ -38,6 +38,9 @@ func timeout_wait_times():
 func _ready():
 	Utils.camera = self
 	
+	timer_wait_times.connect("timeout",self,"timeout_wait_times")
+	timer_shake_length.connect("timeout",self,"timeout_shake_length")
+	
 func start_shake(time_of_shake,speed_of_shake,strength_of_shake):
 	doing_shake = true
 	strength = strength_of_shake

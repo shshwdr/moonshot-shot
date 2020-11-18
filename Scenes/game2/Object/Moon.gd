@@ -116,7 +116,7 @@ func get_shot():
 	if not is_shotable:
 		return
 	is_shotable = false
-	Utils.camera.start_shake(1,0.02,3)
+	Utils.camera.start_shake(0.3,0.02,2)
 	faceAnimationPlayer.play("beHit")
 	faceResetTimer.wait_time = 0.2
 	faceResetTimer.start()
@@ -131,7 +131,7 @@ func get_shot():
 		update_drunk_behavior()
 		current_sober_time = 0
 		update_blush()
-	yield(get_tree().create_timer(0.4), "timeout")
+	yield(get_tree().create_timer(0.6), "timeout")
 	is_shotable = true
 	
 func play_face_anim():
