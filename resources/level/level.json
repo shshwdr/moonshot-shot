@@ -1,21 +1,22 @@
 [
     {
         "human_type":[],
-        "target_height":10,
+        "target_height":5,
         "moon_type":"res://art/moon/moon_face_sleep.png",
         "moon_behavior":"sleep",
     },
     {
         "name":"The Simplest Task",
         "human_type":[4],
-        "target_height":10,
+        "target_height":5,
         "moon_type":"res://art/moon/moon_face_sleep.png",
-        "moon_behavior":"sleep",
+        "moon_behavior":"normal",
+        "is_powerful":true,
     },
     {
         "name":"Shot for Moonshot",
         "human_type":[4],
-        "target_height":5,
+        "target_height":6,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
     },
@@ -32,6 +33,7 @@
         "target_height":7,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
+        "is_powerful":true,
     },
     {
         "name":"Thunder under Thunder Moon",
@@ -39,6 +41,8 @@
         "target_height":7,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
+        "is_powerful":true,
+        "has_thunder":true,
     },
     {
         "name":"You are not Helping Hati!",
@@ -46,6 +50,8 @@
         "target_height":7,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
+        "is_powerful":true,
+        "has_thunder":true,
     },
     
 ]

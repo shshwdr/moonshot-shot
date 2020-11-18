@@ -59,6 +59,8 @@ func shoot():
 	faceResetTimer.start()
 	var meteo_instance = meteo_scene.instance()
 	meteo_instance.position = Utils.index_to_position( target_index_position)
+	if LevelManager.get_level_info().get("is_powerful",false):
+		meteo_instance.scale = Vector2(4,4)
 	Utils.maingame.bullets.add_child(meteo_instance)
 	timer.start()
 	yield(timer, "timeout")
@@ -72,11 +74,11 @@ func generate_thunder():
 	
 func throw_meteors():
 	var human_count = LevelManager.get_level_info().target_height - 1
-	human_count = 0
+	human_count = 1
 	for i in range(human_count*3):
 		
 		var meteo_instance = meteo_scene.instance()
-		meteo_instance.scale = Vector2(2,2)
+		meteo_instance.scale = Vector2(4,4)
 		meteo_instance.position = Utils.index_to_position(index_position())
 		Utils.maingame.bullets.add_child(meteo_instance)
 		timer.start()
@@ -164,5 +166,5 @@ func _on_Moon_area_entered(area):
 
 
 func _on_ThunderTimer_timeout():
-	
-	generate_thunder()
+	if LevelManager.get_level_info().get("has_thunder",false):
+		generate_thunder()

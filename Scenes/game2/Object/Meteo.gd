@@ -4,6 +4,8 @@ extends Area2D
 onready var timer = $Timer
 var move_dir = Vector2.DOWN
 var is_shot = false
+var damaged_human = {}
+var is_destroying = false
 func index_position():
 	return Utils.position_to_index(position)
 
@@ -31,8 +33,13 @@ func _ready():
 
 func _on_Moon_area_entered(area):
 	#print(area, " ", area.is_in_group("human"))
-	if not is_shot and area.is_in_group("human"):
+	if  area.is_in_group("human"):
 		is_shot = true
 		area = Utils.maingame.get_above_human_if_existed(area)
 		area.damage(1)
+		is_destroying = true
+		
+		#queue_free()
+func _process(delta):
+	if is_shot:
 		queue_free()
