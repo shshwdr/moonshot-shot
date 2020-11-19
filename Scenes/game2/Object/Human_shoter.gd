@@ -5,7 +5,7 @@ onready var anim = $shotSprite/AnimationPlayer
 var shoter_health = 2
 var shot_scene = preload("res://Scenes/game2/Object/shot.tscn")
 
-var make_shot_time = 3
+var make_shot_time = 0.1
 var current_make_time = 0
 
 func _ready():

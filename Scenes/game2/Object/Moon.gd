@@ -15,7 +15,7 @@ var target_index_position
 var move_dir = Vector2.RIGHT
 var current_drunk_hit_count = 0
 var drunk_upgrade_hit_count = [1,1,1]
-var sober_time = [0,50,10,10]
+var sober_time = [0,30,10,7]
 var current_sober_time = 0
 var drunk_level = 0
 var is_shotable = true
@@ -38,7 +38,7 @@ onready var face_sprite = $face
 
 
 
-var move_time = 0.2
+var move_time = 0.3
 
 
 var blush_textures = [
@@ -239,7 +239,10 @@ func moon_sober_up_visually(ratio):
 func finish_level():
 	Utils.is_main_game_started = false
 	#moon stop and move up
+	moon_state = moon_state_enum.none
+	update_normal_face()
 	yield(Utils.move_position_by(self,Vector2.UP*Utils.moon_jump_height,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
+	LevelManager.level_up()
 	
 func reset_moon():
 	moon_state = moon_state_enum.none

@@ -8,7 +8,7 @@
                 "speaker":"Moon",
                 "pivot":[0,0],
                 "content": "What is this?",
-                "behavior":{"get_sleep":true},
+                "behavior":{"speed":0.8,},
             }
         ],
             [
