@@ -7,14 +7,14 @@
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://fonts/info font.tres" type="DynamicFont" id=7]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
 colors = PoolColorArray( 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 use_mipmaps = true
 font_data = ExtResource( 6 )
@@ -57,7 +57,7 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, 0.147285 )
 scale = Vector2( 1, 823.295 )
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
 
@@ -65,16 +65,12 @@ texture = SubResource( 3 )
 
 [node name="tween_camera_shake" type="Tween" parent="Camera2D"]
 
-[node name="Leader" type="Sprite" parent="."]
-position = Vector2( 260.328, 511.25 )
-texture = ExtResource( 4 )
-
-[node name="level_name" type="Label" parent="."]
-margin_left = 11.0
-margin_top = 97.0
-margin_right = 357.0
-margin_bottom = 265.0
-custom_fonts/font = SubResource( 1 )
+[node name="level_name" type="Label" parent="Camera2D"]
+margin_left = -289.0
+margin_top = -303.0
+margin_right = 57.0
+margin_bottom = -135.0
+custom_fonts/font = SubResource( 3 )
 text = "test"
 align = 1
 valign = 1
@@ -82,5 +78,9 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Leader" type="Sprite" parent="."]
+position = Vector2( 260.328, 511.25 )
+texture = ExtResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="Camera2D/Button" to="." method="_on_Button_pressed"]

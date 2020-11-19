@@ -4,7 +4,7 @@ var level_infos
 var current_level = 0
 var level_folder = "res://resources/level"
 
-var level_jump_height = 15
+var level_jump_height = 20
 
 var unlocked_level = 0
 
@@ -50,6 +50,7 @@ func level_up_scene_change():
 	Utils.move_position_by(Utils.moon,moon_move_up_dir,move_up_time,Tween.TRANS_BACK, Tween.EASE_OUT)
 	Utils.move_position_by(Utils.generator,move_up_dir+ Vector2(0,1)*space_ship_diff,move_up_time*3,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	Utils.update_offset(level_jump_height)
+	Utils.moon.reset_moon()
 	yield(get_tree().create_timer(3), "timeout")
 	#move spaceship later
 	pass

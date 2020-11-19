@@ -10,6 +10,7 @@ var current_make_time = 0
 
 func _ready():
 	._ready()
+	max_health = shoter_health
 	health = shoter_health
 
 func _process(delta):

@@ -25,7 +25,7 @@ var index_to_human_map ={}
 
 var index_to_passthrough_map ={}
 
-onready var level_name = $level_name
+onready var level_name = $Camera2D/level_name
 #var human_to_index_map ={}
 
 #dialog
@@ -62,6 +62,13 @@ func column_occupied_count(index_position):
 		if has_occupied(Vector2(index_position.x,i)):
 			res+=1
 	return res
+	
+func kick_highest(index_position):
+	var highest = get_highest_in_column(index_position)
+	if highest:
+		var human = index_to_human_map.get(highest)
+		if human:
+			human.die()
 	
 func get_highest_in_column(index_position):
 	for i in range(Utils.height_offset,Utils.height_offset+Utils.height_index):
@@ -150,6 +157,7 @@ func on_touched_shot(index):
 #		human.add_child(human_instance)
 
 
+
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_SPACE or event.scancode == KEY_ENTER:
@@ -157,6 +165,9 @@ func _input(event):
 				dialog_instance.skip_dialog()
 		#if event.scancode != KEY_ENTER:
 			#Do what you gotta do.
+	if event is InputEventMouseButton and event.is_pressed():
+		#print("Mouse Click/Unclick at: ", event.position)
+		kick_highest(Utils.position_to_index(event.position))
 	if not can_input:
 		return
 		

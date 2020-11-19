@@ -58,6 +58,8 @@ func update_offset(diff):
 	height_offset -= diff
 	screen_top_left = Vector2(0,y_offset)
 	game_screen_top_left = Vector2(width_offset,height_offset)
+	game_screen_top_right = Vector2(width_offset+width_index,height_offset) 
+	game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
 	update_game_level()
 
 func update_game_level():

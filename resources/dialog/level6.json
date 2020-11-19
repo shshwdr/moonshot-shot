@@ -1,0 +1,18 @@
+{
+        "first": {
+            "speaker":"Generator",
+            
+            "pivot":[0,0],
+            "content": "Hired some new man",
+            "next": "12",
+            
+        },
+        "12": {
+            "speaker":"Generator",
+            "pivot":[0,0],
+            "content": "You will like them",
+            "next": "13",
+            
+            "after_trigger":"end"
+        },
+    },

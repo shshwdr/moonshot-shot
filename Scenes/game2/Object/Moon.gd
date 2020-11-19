@@ -4,6 +4,7 @@ onready var timer = $Timer
 onready var tween = $Tween
 onready var faceResetTimer = $FaceResetTimer
 onready var faceAnimationPlayer  = $faceAnimationPlayer
+onready var thunderTimer = $ThunderTimer
 
 
 var drunk_behavior_info
@@ -19,6 +20,10 @@ var current_sober_time = 0
 var drunk_level = 0
 var is_shotable = true
 
+enum moon_state_enum{none,sleep}
+
+var moon_state = moon_state_enum.none
+
 var drunk_behavior_speed = 1
 
 #var level_to_face = [
@@ -33,7 +38,7 @@ onready var face_sprite = $face
 
 
 
-var move_time = 0.4
+var move_time = 0.2
 
 
 var blush_textures = [
@@ -48,6 +53,8 @@ func update_blush():
 
 func update_normal_face():
 	var moon_face_texture = LevelManager.get_level_info().moon_type
+	if moon_state == moon_state_enum.sleep:
+		moon_face_texture = "res://art/moon/moon_face_sleep.png"
 	face_sprite.texture = load(moon_face_texture)
 	faceAnimationPlayer.play(face_to_normal_anim[moon_face_texture])
 
@@ -95,7 +102,7 @@ func throw_meteors():
 	yield(get_tree(), 'idle_frame')
 	
 func update_drunk_behavior():
-	var level_drunk_behavior_info =  drunk_behavior_info[0]
+	var level_drunk_behavior_info =  drunk_behavior_info[LevelManager.current_level]
 	var current_drunk_behavior_info = level_drunk_behavior_info.get_drunk[drunk_level]
 	print(drunk_level, " ",current_drunk_behavior_info)
 	if current_drunk_behavior_info.size()==0:
@@ -109,6 +116,15 @@ func update_drunk_behavior():
 		match key:
 			"speed":
 				drunk_behavior_speed = picked_drunk_behavior[key]
+			"get_sleep":
+				
+				moon_state = moon_state_enum.sleep
+			"ammo_speed":
+				pass
+			"move_randomly":
+				pass
+			"shoot_randomly":
+				pass
 	
 	pass
 
@@ -144,6 +160,11 @@ func moon_behavior():
 		"sleep":
 			yield(get_tree(), 'idle_frame')
 		"normal":
+			
+			if moon_state == moon_state_enum.sleep:
+				yield(get_tree(), 'idle_frame')
+				return
+			
 			yield(move(),"completed")
 			
 			if Utils.on_border(index_position()):
@@ -172,9 +193,13 @@ func _ready():
 	update_blush()
 	while true:
 		if Utils.is_main_game_started:
+			if thunderTimer.time_left==0:
+				thunderTimer.start()
 			yield(moon_behavior(),"completed")
 		#print(position,index_position())
-			
+		else:
+			if thunderTimer.time_left>0:
+				thunderTimer.stop()
 		yield(get_tree(), 'idle_frame')
 		#detect if more targets spawned
 	
@@ -215,7 +240,12 @@ func finish_level():
 	Utils.is_main_game_started = false
 	#moon stop and move up
 	yield(Utils.move_position_by(self,Vector2.UP*Utils.moon_jump_height,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
-	LevelManager.level_up()
+	
+func reset_moon():
+	moon_state = moon_state_enum.none
+	drunk_level = min(drunk_level,1)
+	current_drunk_hit_count = 0
+	current_sober_time = 0
 
 func _on_Moon_area_entered(area):
 	if Utils.is_main_game_started:

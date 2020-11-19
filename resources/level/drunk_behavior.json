@@ -1,16 +1,32 @@
 [
+    
+    {},
+    {},
     {
-        "first_get_shot": {
+        "get_drunk": [[],[
+            {
+                "speaker":"Moon",
+                "pivot":[0,0],
+                "content": "What is this?",
+                "behavior":{"get_sleep":true},
+            }
+        ],
+            [
+        {
             "speaker":"Moon",
             "pivot":[0,0],
-            "content": "Oh What's this???",
-            
-        },
-        "get_shot": [{
-            "speaker":"Moon",
-            "pivot":[0,0],
-            "content": "It taste a little funny..",
+            "content": "It makes me feel.. sleepy...",
+            "behavior":{"speed":0.5},
         },],
+        [{
+            "speaker":"Moon",
+            "pivot":[0,0],
+            "content": "zzZZ",
+            "behavior":{"get_sleep":true},
+        }],
+    ],
+    },
+    {
         "get_drunk": [[],[],
             [{
             "speaker":"Moon",

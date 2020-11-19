@@ -14,7 +14,7 @@
     },
     {
         "name":"Shot for Moonshot",
-        "human_type":[3,1],
+        "human_type":[0,1],
         "target_height":6,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
