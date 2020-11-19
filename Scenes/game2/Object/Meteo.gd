@@ -8,6 +8,18 @@ var damaged_human = {}
 var is_destroying = false
 func index_position():
 	return Utils.position_to_index(position)
+	
+func init(dir):
+	move_dir = dir
+	match dir:
+		Vector2.DOWN:
+			pass
+		Vector2.UP:
+			rotation_degrees = 180
+		Vector2.RIGHT:
+			rotation_degrees = -90
+		Vector2.LEFT:
+			rotation_degrees = 90
 
 func move():
 #	timer.start()

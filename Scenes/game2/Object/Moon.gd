@@ -20,11 +20,14 @@ var current_sober_time = 0
 var drunk_level = 0
 var is_shotable = true
 
-enum moon_state_enum{none,sleep}
+enum moon_state_enum{none,sleep, move_drunk, shoot_drunk}
 
 var moon_state = moon_state_enum.none
 
 var drunk_behavior_speed = 1
+var drunk_behavior_ammo_speed = 1
+var drunk_shoot_dirs = [Vector2.DOWN,Vector2.RIGHT,Vector2.UP,Vector2.LEFT]
+var drunk_shoot_current = 0
 
 #var level_to_face = [
 #]
@@ -61,10 +64,15 @@ func update_normal_face():
 func index_position():
 	return Utils.position_to_index(position)
 
-var drunk_move_dir = Vector2.ZERO
+var drunk_move_dir =Vector2.DOWN
 
 func move():
-	yield(Utils.move_position_by(self,move_dir+drunk_move_dir,move_time / float(drunk_behavior_speed)),"completed")
+	var current_drunk_move_dir  = Vector2.ZERO
+	var current_move_time = move_time / float(drunk_behavior_speed)
+	if moon_state == moon_state_enum.move_drunk:
+		current_drunk_move_dir = drunk_move_dir
+		current_move_time*=1.5
+	yield(Utils.move_position_by(self,move_dir+current_drunk_move_dir,current_move_time),"completed")
 	drunk_move_dir = -drunk_move_dir
 	pass
 
@@ -73,13 +81,22 @@ func shoot():
 	faceAnimationPlayer.play("hit")
 	faceResetTimer.wait_time = 0.2
 	faceResetTimer.start()
-	var meteo_instance = meteo_scene.instance()
-	meteo_instance.position = Utils.index_to_position( target_index_position)
-	if LevelManager.get_level_info().get("is_powerful",false):
-		meteo_instance.scale = Vector2(4,4)
-	Utils.maingame.bullets.add_child(meteo_instance)
-	timer.start()
-	yield(timer, "timeout")
+	
+	timer.wait_time = Utils.wait_time / float(drunk_behavior_ammo_speed)
+	for i in range(drunk_behavior_ammo_speed):
+		
+		var meteo_instance = meteo_scene.instance()
+		var current_meteo_dir = drunk_shoot_dirs[drunk_shoot_current%drunk_shoot_dirs.size()]
+		if moon_state == moon_state_enum.shoot_drunk:
+			meteo_instance.init(current_meteo_dir)
+			drunk_shoot_current+=1
+		
+		meteo_instance.position = Utils.index_to_position( target_index_position+current_meteo_dir)
+		if LevelManager.get_level_info().get("is_powerful",false):
+			meteo_instance.scale = Vector2(4,4)
+		Utils.maingame.bullets.add_child(meteo_instance)
+		timer.start()
+		yield(timer, "timeout")
 	pass
 	
 func generate_thunder():
@@ -102,12 +119,14 @@ func throw_meteors():
 	yield(get_tree(), 'idle_frame')
 	
 func update_drunk_behavior():
-	var level_drunk_behavior_info =  drunk_behavior_info[LevelManager.current_level]
+	var level_drunk_behavior_info =  drunk_behavior_info[min(drunk_behavior_info.size()-1,LevelManager.current_level)]
 	var current_drunk_behavior_info = level_drunk_behavior_info.get_drunk[drunk_level]
 	print(drunk_level, " ",current_drunk_behavior_info)
 	if current_drunk_behavior_info.size()==0:
 		#reset states
 		drunk_behavior_speed = 1
+		drunk_behavior_ammo_speed = 1
+		moon_state = moon_state_enum.none
 		return
 	#random pick
 	var picked_drunk_behavior = current_drunk_behavior_info[0].behavior
@@ -117,14 +136,14 @@ func update_drunk_behavior():
 			"speed":
 				drunk_behavior_speed = picked_drunk_behavior[key]
 			"get_sleep":
-				
 				moon_state = moon_state_enum.sleep
 			"ammo_speed":
-				pass
-			"move_randomly":
-				pass
+				drunk_behavior_ammo_speed = picked_drunk_behavior[key]
+			"move_drunk":
+				moon_state = moon_state_enum.move_drunk
 			"shoot_randomly":
-				pass
+				moon_state = moon_state_enum.shoot_drunk
+				drunk_shoot_current = 0
 	
 	pass
 
@@ -245,6 +264,8 @@ func finish_level():
 	LevelManager.level_up()
 	
 func reset_moon():
+	drunk_behavior_ammo_speed = 1
+	drunk_behavior_speed = 1
 	moon_state = moon_state_enum.none
 	drunk_level = min(drunk_level,1)
 	current_drunk_hit_count = 0

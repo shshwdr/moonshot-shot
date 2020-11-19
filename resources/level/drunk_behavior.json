@@ -2,6 +2,7 @@
     
     {},
     {},
+    
     {
         "get_drunk": [[],[
             {
@@ -37,8 +38,8 @@
         {
             "speaker":"Moon",
             "pivot":[0,0],
-            "content": "More meteors comeeeeee!!",
-            "behavior":{"speed":2},
+            "content": "More meteors coming!!",
+            "behavior":{"ammo_speed":2},
         },],
         [{
             "speaker":"Moon",
@@ -50,13 +51,13 @@
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "WHeRe aM i? HeLLo LiTTLe aNTS i LoVe You~~",
-            "behavior":{"speed":0.5},
+            "behavior":{"move_drunk":0.5},
         },
         {
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "I'll destroy all of you! Sun! Don't run, fight with me!!",
-            "behavior":{"speed":0.5},
+            "behavior":{"shoot_randomly":0.5},
         },],
     ],
     },

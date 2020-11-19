@@ -22,7 +22,7 @@ func damage(d):
 	var ratio = (max_health - health) / float(max_health - 1)
 	#sprite.self_modulate = Color(ratio,0,0,1)
 	sprite.material.set_shader_param("changeColorRatio",ratio)
-	if health == 0:
+	if health <= 0:
 		die()
 
 func die():
