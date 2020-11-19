@@ -7,7 +7,7 @@ onready var warning = $warning
 
 var blocker = null
 
-onready var wait_time = 2
+onready var wait_time = 10
 var thunder_height = 320
 
 func start_thunder(height):

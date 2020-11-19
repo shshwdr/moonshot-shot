@@ -5,7 +5,7 @@ onready var tween = $Tween
 onready var faceResetTimer = $FaceResetTimer
 onready var faceAnimationPlayer  = $faceAnimationPlayer
 onready var thunderTimer = $ThunderTimer
-
+onready var face_bg = $bg
 
 var drunk_behavior_info
 
@@ -60,6 +60,10 @@ func update_normal_face():
 		moon_face_texture = "res://art/moon/moon_face_sleep.png"
 	face_sprite.texture = load(moon_face_texture)
 	faceAnimationPlayer.play(face_to_normal_anim[moon_face_texture])
+	if LevelManager.get_level_info().get("hide",false):
+		face_bg.visible = false
+	else:
+		face_bg.visible = true
 
 func index_position():
 	return Utils.position_to_index(position)

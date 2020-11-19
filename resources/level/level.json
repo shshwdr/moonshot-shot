@@ -45,12 +45,13 @@
     },
     {
         "name":"You are not Helping Hati!",
-        "human_type":[2,1,1,1,1],
+        "human_type":[2,2,1,1,1],
         "target_height":9,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
         "is_powerful":true,
         "has_thunder":true,
+        "hide":true,
     },
     
 ]

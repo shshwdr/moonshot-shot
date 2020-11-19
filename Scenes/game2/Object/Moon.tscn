@@ -187,7 +187,7 @@ anims/normal_rotation = SubResource( 7 )
 anims/normal_sleep = SubResource( 8 )
 
 [node name="ThunderTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 15.0
 [connection signal="area_entered" from="." to="." method="_on_Moon_area_entered"]
 [connection signal="timeout" from="FaceResetTimer" to="." method="_on_FaceResetTimer_timeout"]
 [connection signal="timeout" from="ThunderTimer" to="." method="_on_ThunderTimer_timeout"]
