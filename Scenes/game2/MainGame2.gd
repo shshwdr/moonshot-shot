@@ -25,7 +25,7 @@ var index_to_human_map ={}
 
 var index_to_passthrough_map ={}
 
-onready var level_name = $Camera2D/level_name
+onready var level_name = $Camera2D/Node2D/Control/level_name
 #var human_to_index_map ={}
 
 #dialog
