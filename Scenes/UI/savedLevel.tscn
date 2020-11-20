@@ -4,7 +4,7 @@
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 40
+size = 26
 use_mipmaps = true
 font_data = ExtResource( 2 )
 
@@ -12,9 +12,9 @@ font_data = ExtResource( 2 )
 default_font = SubResource( 1 )
 
 [node name="savedLevel" type="Button"]
-margin_right = 1020.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 400, 100 )
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 60 )
 theme = SubResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -24,9 +24,10 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Day 1   health:100 coins:1000 reputation:1000
-saved at 2020 02 22 12:40:20"
-align = 1
+margin_top = -0.8909
+margin_right = 1.0
+margin_bottom = -0.8909
+text = "Day 1   test"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

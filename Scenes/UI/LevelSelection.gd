@@ -11,7 +11,7 @@ func _ready():
 	for level in range(1,LevelManager.unlocked_level+1):
 		var one_level_button_instance = one_level_button.instance()
 		one_level_button_instance.init(level)
-		$GridContainer.add_child(one_level_button_instance)
+		$VBoxContainer.add_child(one_level_button_instance)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

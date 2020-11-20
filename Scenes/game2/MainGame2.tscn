@@ -37,7 +37,19 @@ position = Vector2( 300, 400 )
 current = true
 script = ExtResource( 3 )
 
+[node name="Node" type="Node2D" parent="Camera2D"]
+position = Vector2( -300, -400 )
+scale = Vector2( 8, 8 )
+z_index = -100
+
+[node name="universe" type="Sprite" parent="Camera2D/Node"]
+position = Vector2( 52.9742, 30.9216 )
+scale = Vector2( 0.413861, 0.413861 )
+z_index = -100
+texture = ExtResource( 2 )
+
 [node name="Sprite" type="Sprite" parent="Camera2D"]
+visible = false
 scale = Vector2( 2.34346, 5.4119 )
 z_index = -100
 texture = ExtResource( 2 )

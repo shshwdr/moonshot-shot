@@ -12,7 +12,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Node" type="Node2D" parent="."]
+scale = Vector2( 8, 8 )
+
+[node name="universe" type="Sprite" parent="Node"]
+position = Vector2( 52.9742, 30.9216 )
+scale = Vector2( 0.413861, 0.413861 )
+texture = ExtResource( 3 )
+
 [node name="universe" type="Sprite" parent="."]
+visible = false
 position = Vector2( 1024, 600 )
 scale = Vector2( 8, 8 )
 texture = ExtResource( 3 )
@@ -36,4 +45,10 @@ custom_constants/hseparation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_top = 58.0
+margin_right = 597.0
+margin_bottom = 492.0
+custom_constants/separation = 5
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

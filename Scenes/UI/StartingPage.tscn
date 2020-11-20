@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingPage.gd" type="Script" id=1]
 [ext_resource path="res://fonts/info font_large.tres" type="DynamicFont" id=2]
@@ -8,8 +8,13 @@
 [ext_resource path="res://art/object/dinosaur.png" type="Texture" id=7]
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=8]
 
+[sub_resource type="DynamicFont" id=4]
+size = 50
+use_mipmaps = true
+font_data = ExtResource( 8 )
+
 [sub_resource type="Theme" id=1]
-default_font = ExtResource( 2 )
+default_font = SubResource( 4 )
 Fonts/fonts/ = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -33,7 +38,8 @@ __meta__ = {
 scale = Vector2( 8, 8 )
 
 [node name="universe" type="Sprite" parent="Node"]
-position = Vector2( 128, 75 )
+position = Vector2( 52.9742, 30.9216 )
+scale = Vector2( 0.413861, 0.413861 )
 texture = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -62,37 +68,39 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 1071.0
-margin_bottom = 500.0
-rect_min_size = Vector2( 0, 500 )
-text = "Dinosaur planet"
+margin_top = -1.0
+margin_right = 600.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 0, 200 )
+text = "MOONSHOT SHOT"
 align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 visible = false
-margin_top = 503.0
-margin_right = 2048.0
-margin_bottom = 603.0
+margin_top = 204.0
+margin_right = 600.0
+margin_bottom = 345.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = SubResource( 2 )
 text = "A Different Planet Or The Same Planet"
 align = 1
 valign = 1
+autowrap = true
 
 [node name="StartGame" type="Button" parent="VBoxContainer"]
-margin_top = 504.0
-margin_right = 1071.0
-margin_bottom = 704.0
-rect_min_size = Vector2( 0, 200 )
+margin_top = 204.0
+margin_right = 600.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 0, 120 )
 custom_styles/normal = SubResource( 3 )
 text = "Start Game"
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
-margin_top = 708.0
-margin_right = 1071.0
-margin_bottom = 908.0
-rect_min_size = Vector2( 0, 200 )
+margin_top = 328.0
+margin_right = 600.0
+margin_bottom = 448.0
+rect_min_size = Vector2( 0, 120 )
 custom_styles/normal = SubResource( 3 )
 text = "Continue Level"
 [connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]

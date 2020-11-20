@@ -12,7 +12,7 @@ func init(_saved_data):
 	data = _saved_data
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label.text = "Stage %d %s"%\
+	$Label.text = "Stage %d    %s"%\
 	[data, LevelManager.get_one_level_info(data).name]
 	
 func _on_savedLevel_pressed():
