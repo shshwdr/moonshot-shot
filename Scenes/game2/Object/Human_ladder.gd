@@ -1,9 +1,11 @@
 extends Human
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var strong_max_health = 5
+
+func _ready():
+	max_health = strong_max_health
+	health = strong_max_health
 
 func stop():
 	.stop()

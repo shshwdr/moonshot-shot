@@ -35,6 +35,9 @@ var drunk_shoot_current = 0
 var face_to_normal_anim = {
 	"res://art/moon/moon_face_serious.png":"normal_blink",
 	"res://art/moon/moon_face_sleep.png":"normal_sleep",
+	"res://art/moon/moon-innocent.png":"normal_rotation",
+	"res://art/moon/moon-ohILoveItt.png":"normal_rotation",
+	"res://art/moon/moon-swollow.png":"normal_rotation",
 }
 
 onready var face_sprite = $face
@@ -157,8 +160,9 @@ func get_shot():
 	is_shotable = false
 	Utils.camera.start_shake(0.3,0.02,2)
 	faceAnimationPlayer.play("beHit")
-	faceResetTimer.wait_time = 0.2
+	faceResetTimer.wait_time = 0.4
 	faceResetTimer.start()
+	
 	
 	current_drunk_hit_count+=1
 	if drunk_level >= drunk_upgrade_hit_count.size():

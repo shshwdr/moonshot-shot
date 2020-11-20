@@ -33,13 +33,13 @@
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "I'm excited!! I'm the FLASH!",
-            "behavior":{"speed":2},
+            "behavior":{"speed":1.5},
         },
         {
             "speaker":"Moon",
             "pivot":[0,0],
             "content": "More meteors coming!!",
-            "behavior":{"ammo_speed":2},
+            "behavior":{"ammo_speed":1.5},
         },],
         [{
             "speaker":"Moon",

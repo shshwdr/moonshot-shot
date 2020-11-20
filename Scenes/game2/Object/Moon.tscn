@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/game2/Object/Moon.gd" type="Script" id=1]
 [ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
-[ext_resource path="res://art/moon/moon_face_sleep.png" type="Texture" id=3]
+[ext_resource path="res://art/moon/moon-swollow.png" type="Texture" id=3]
 [ext_resource path="res://art/moon/moon_bg.png" type="Texture" id=4]
 [ext_resource path="res://art/moon/moon_blush.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/game2/Object/Moon_drunk.shader" type="Shader" id=6]
@@ -20,7 +20,7 @@ shader_param/upsideDown = null
 shader_param/colorTense = null
 
 [sub_resource type="Animation" id=4]
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("face:frame")
 tracks/0/interp = 1
@@ -28,10 +28,46 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("blush:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00650968, 0.167881, 0.393121 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("bg:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.167881, 0.389496 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("face:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.167881, 0.393121 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -65,6 +101,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
+length = 1.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1.2, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 0 ]
+}
 
 [sub_resource type="Animation" id=8]
 length = 2.0
@@ -177,7 +227,7 @@ texture = ExtResource( 5 )
 position = Vector2( 0, 0.604493 )
 texture = ExtResource( 3 )
 hframes = 5
-frame = 2
+frame = 4
 
 [node name="faceAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/beHit = SubResource( 4 )
