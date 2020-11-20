@@ -38,7 +38,7 @@ tracks/1/path = NodePath("blush:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0.00650968, 0.167881, 0.393121 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
@@ -50,7 +50,7 @@ tracks/2/path = NodePath("bg:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.167881, 0.389496 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
@@ -62,7 +62,7 @@ tracks/3/path = NodePath("face:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.167881, 0.393121 ),
 "transitions": PoolRealArray( 1, 1, 1 ),

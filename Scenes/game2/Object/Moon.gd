@@ -78,7 +78,7 @@ func move():
 	var current_move_time = move_time / float(drunk_behavior_speed)
 	if moon_state == moon_state_enum.move_drunk:
 		current_drunk_move_dir = drunk_move_dir
-		current_move_time*=1.5
+		#current_move_time*=1.5
 	yield(Utils.move_position_by(self,move_dir+current_drunk_move_dir,current_move_time),"completed")
 	drunk_move_dir = -drunk_move_dir
 	pass
@@ -97,8 +97,9 @@ func shoot():
 		if moon_state == moon_state_enum.shoot_drunk:
 			meteo_instance.init(current_meteo_dir)
 			drunk_shoot_current+=1
-		
-		meteo_instance.position = Utils.index_to_position( target_index_position+current_meteo_dir)
+			meteo_instance.position = Utils.index_to_position( target_index_position+current_meteo_dir)
+		else:
+			meteo_instance.position = Utils.index_to_position( target_index_position+Vector2.DOWN)
 		if LevelManager.get_level_info().get("is_powerful",false):
 			meteo_instance.scale = Vector2(4,4)
 		Utils.maingame.bullets.add_child(meteo_instance)
@@ -136,7 +137,8 @@ func update_drunk_behavior():
 		moon_state = moon_state_enum.none
 		return
 	#random pick
-	var picked_drunk_behavior = current_drunk_behavior_info[0].behavior
+	var random_behavior_id = Utils.rng.randi()%current_drunk_behavior_info.size()
+	var picked_drunk_behavior = current_drunk_behavior_info[random_behavior_id].behavior
 	
 	for key in picked_drunk_behavior:
 		match key:
