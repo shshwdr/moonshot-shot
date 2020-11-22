@@ -2,21 +2,21 @@
         "first": {
             "speaker":"Generator",
             
-            "pivot":[0,0],
-            "content": "Oh the moon is awaked.. we can't beat it by just making a ladder now",
+            "pivot":[1,0],
+            "content": "Oh no the moon is awaked.. we can't beat it by just making a simple ladder now.",
             "next": "12",
             
         },
         "12": {
             "speaker":"Generator",
-            "pivot":[0,0],
-            "content": "Don't worry, I found some guys with shot.",
+            "pivot":[1,0],
+            "content": "Don't worry, I found some guys who can shoot.. with shots.",
             "next": "13"
         },
         "13": {
             "speaker":"Generator",
-            "pivot":[0,0],
-            "content": "Just press [color=red]ENTER[/color] when their shots are ready and shining.",
+            "pivot":[1,0],
+            "content": "Just press [color=red]ENTER[/color] when their shots are [color=red]ready and shining[/color].",
             "after_trigger":"end"
         },
     },

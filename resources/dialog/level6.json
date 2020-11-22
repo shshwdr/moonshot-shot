@@ -1,16 +1,22 @@
 {
         "first": {
             "speaker":"Generator",
-            
-            "pivot":[0,0],
-            "content": "Hired some new man",
+            "pivot":[1,0],
+            "content": "That stupid wolf ate the moon!",
             "next": "12",
             
         },
         "12": {
             "speaker":"Generator",
-            "pivot":[0,0],
-            "content": "You will like them",
+            "pivot":[1,0],
+            "content": "But its just the color of the moon, so the moon is still there just we can't see it.",
+            "next": "13",
+            
+        },
+        "13": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "Argh this is troublesome. But I think that's the last trick the Moon can play.",
             "next": "13",
             
             "after_trigger":"end"

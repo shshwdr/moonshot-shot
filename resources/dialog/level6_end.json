@@ -1,23 +1,43 @@
 {
         "first": {
             "speaker":"Moon",
-            
-            "pivot":[0,0],
-            "content": "I admitted I looked down on you.",
+            "pivot":[0,1],
+            "content": "Ok, Ok, you win!",
             "next": "12",
             
         },
         "12": {
             "speaker":"Moon",
-            "pivot":[0,0],
-            "content": "Well.. technically I'm looking DOWN on you all the time..",
+            "pivot":[0,1],
+            "content": "But just curious, why do you want to land on me so persistently?",
             "next": "13",
         },
         "13": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "Well.. I just want to advertise for my drink.",
+            "next": "14",
+        },
+        
+        "14": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "MoonShot Shot, A Shot For MoonShot!",
+            "next": "15",
+        },
+        
+        "15": {
             "speaker":"Moon",
-            "pivot":[0,0],
-            "content": "But that is not important..I'll be serious now!",
-            "next": "13",
+            "pivot":[0,1],
+            "content": "...",
+            "next": "16",
+        },
+        
+        "16": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "You should say that earlier. I like your shot and would be happy to advertise for you.",
+            "next": "16",
             "after_trigger":"end"
         },
     },

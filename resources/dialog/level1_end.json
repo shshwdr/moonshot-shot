@@ -2,28 +2,28 @@
         "first": {
             "speaker":"Moon",
             "trigger":"moon_shock",
-            "pivot":[0,0],
-            "content": "Hey! What are you doing?",
+            "pivot":[0,1],
+            "content": "[shake rate=50 level=10]Hey! What are you doing?[/shake]",
             "next": "12",
             
         },
         "12": {
             "speaker":"Moon",
-            "pivot":[0,0],
+            "pivot":[0,1],
             "content": "What? You want to launch a MOONSHOT??",
             "next": "13"
         },
         "13": {
             "speaker":"Moon",
-            "pivot":[0,0],
+            "pivot":[0,1],
             "content": "HAHAHAHA",
             "after_trigger":"throw_meteor",
             "next": "14"
         },
         "14": {
             "speaker":"Moon",
-            "pivot":[0,0],
-            "content": "Silly human, catch me if you can",
+            "pivot":[0,1],
+            "content": "Silly human, catch me if you can.",
             
             "after_trigger":"end"
         },

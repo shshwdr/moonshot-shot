@@ -2,15 +2,15 @@
         "first": {
             "speaker":"Generator",
             
-            "pivot":[0,0],
-            "content": "Hired some new man",
+            "pivot":[1,0],
+            "content": "Well the moon get tougher now, his tolerance to alcohol get higher.",
             "next": "12",
             
         },
         "12": {
             "speaker":"Generator",
-            "pivot":[0,0],
-            "content": "You will like them",
+            "pivot":[1,0],
+            "content": "But no need to worry, I hired some new man with REAL ladder. You will like them",
             "next": "13",
             
             "after_trigger":"end"

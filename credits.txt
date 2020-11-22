@@ -6,6 +6,8 @@ wolf sound:
 https://freesound.org/people/Robinhood76/sounds/66398/
 background musics:
 https://www.bensound.com/
-https://www.bensound.com/royalty-free-music/track/cute
 hex shield:
 https://pipoya.itch.io/pipoya-free-vfx-hex-shield
+art reference:
+character: Earthbound/Mother
+moon: Shoot the Moon

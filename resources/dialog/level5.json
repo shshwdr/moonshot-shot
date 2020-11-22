@@ -1,16 +1,27 @@
 {
         "first": {
             "speaker":"Generator",
-            
-            "pivot":[0,0],
-            "content": "Hired some new man",
+            "pivot":[1,0],
+            "content": "Oh thunder! I should have remember this!",
             "next": "12",
             
         },
         "12": {
             "speaker":"Generator",
-            "pivot":[0,0],
-            "content": "You will like them",
+            "pivot":[1,0],
+            "content": "Guess what, I do remember this and hired some witches to protect the people from the thunder!",
+            "next": "13",
+        },
+        "13": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "Why don't we just let witch fly to the moon directly?",
+            "next": "14",
+        },
+        "14": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "Those witches can't fly... I guess. And flying to the moon would not count as Moonshot since it is too easy.",
             "next": "13",
             
             "after_trigger":"end"

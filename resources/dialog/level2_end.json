@@ -2,15 +2,21 @@
         "first": {
             "speaker":"Moon",
             
-            "pivot":[0,0],
-            "content": "What is that [s]delicious[/s] suspicious drink you shot on me!",
+            "pivot":[0,1],
+            "content": "What is that delicious.. I mean suspicious drink you shot on me!",
             "next": "12",
             
         },
         "12": {
             "speaker":"Moon",
-            "pivot":[0,0],
+            "pivot":[0,1],
             "content": "Don't do that! I don't like it!",
+            "next": "13",
+        },
+        "13": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "And I won't be affected by it easily! I'M THE MOON!!",
             "next": "13",
             "after_trigger":"end"
         },

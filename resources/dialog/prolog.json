@@ -8,7 +8,15 @@
             "speaker":"Leader",
             "content": "Make a human ladder? Sounds doable!",
             "speaker_out":"left",
-            "after_trigger":"end"
+            "after_trigger":"end",
+            "next": "1",
+        },
+        "1": {
+            "speaker":"Leader",
+            "content": "Make a human ladder? Sounds doable!",
+            "speaker_out":"left",
+            "after_trigger":"end",
+            "pivot":[1,0],
         },
         
     },

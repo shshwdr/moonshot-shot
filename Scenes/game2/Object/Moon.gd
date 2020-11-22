@@ -6,6 +6,7 @@ onready var faceResetTimer = $FaceResetTimer
 onready var faceAnimationPlayer  = $faceAnimationPlayer
 onready var thunderTimer = $ThunderTimer
 onready var face_bg = $bg
+onready var sprite = $bg
 
 var drunk_behavior_info
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Generator.gd" type="Script" id=1]
-[ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
 [ext_resource path="res://art/object/spaceship.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -60,11 +59,6 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hitted = SubResource( 2 )
-
-[node name="coin_brown" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0.66497, -23.7578 )
-texture = ExtResource( 2 )
 
 [node name="hold_item_position" type="Position2D" parent="."]
 position = Vector2( -0.0208569, -14.3732 )

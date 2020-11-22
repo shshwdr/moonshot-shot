@@ -7,6 +7,7 @@ signal skip_dialog_signal
 onready var sfx = $sfx
 
 var speaker
+onready var dialog_arrow = $panel/dialog_arrow
 
 var dialog_wait_time =  2
 var dialog
@@ -14,23 +15,19 @@ var current_dialog
 var is_quest
 var one_dialog_finished
 var quest_time
-onready var label = $ColorRect/RichTextLabel
-onready var panel = $ColorRect
-onready var main_panel = $ColorRect/ColorRect
+onready var label = $RichTextLabel
+onready var panel = $panel
 onready var timer = $Timer
-onready var progress_bar = $ColorRect/ColorRect/ProgressBar
+var progress_bar
 var click_to_continue = false
 var current_time = 0
+var dialog_arrow_origin_position
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	panel.visible = false
-	if is_quest:
-		main_panel.color = Color("fff8c3")
-		progress_bar.visible = true
-	else:
-		main_panel.color = Color("d6ffc3")
+	dialog_arrow_origin_position = dialog_arrow.position
 	#label.bbcode_text = dialog["first"].content
 	pass
 	
@@ -50,13 +47,47 @@ func init(_position, _dialog,_quest_params,dialog_size):
 	
 func update_pivot():
 	
+	var center_offset = rect_size/2.0
 	var pivot = current_dialog.get("pivot",[0,-1])
-	var position_offset = Vector2(rect_size.x*pivot[0],rect_size.y*pivot[1])
+	#offset to move dialog based on pivot
+	var position_offset = Vector2(0.5*rect_size.x*pivot[0],0.5*rect_size.y*pivot[1])
+	#offset to move dialog to center
+	position_offset-=center_offset
+	#offset to move dialog out of speaker
+	if speaker:
+		var texture
+		if speaker.get("texture"):
+			texture = speaker.texture
+		elif speaker.get("sprite"):
+			texture = speaker.sprite.texture
+		if texture:
+			var speaker_size = texture.get_size()
+			position_offset += Vector2(0.5*speaker_size.x*pivot[0],0.5*speaker_size.y*pivot[1])
+	#offset to give position to arrow
+	var dialog_arrow_height = dialog_arrow.texture.get_size().y*5
+	position_offset += Vector2(dialog_arrow_height*pivot[0],dialog_arrow_height*pivot[1])
+	
+	
 	
 	var rp = parent_node.get(current_dialog['speaker']).get_global_position()
 	var origin_rect_position = rp
 	origin_rect_position+=position_offset
 	rect_position=origin_rect_position
+	
+	
+	#update arrow position and rotation
+	var test = [1,0]
+	print(test,pivot)
+	if pivot[0] == 1:
+		dialog_arrow.rotation_degrees = 90
+		dialog_arrow.position = dialog_arrow_origin_position+ Vector2(-0.5*rect_size.x,-0.5*rect_size.y)+ Vector2(0,-5)
+		pass
+	elif pivot[0] == 0 and pivot[1] == 1:
+		dialog_arrow.rotation_degrees = 180
+		dialog_arrow.position = dialog_arrow_origin_position+ Vector2(0,-1*rect_size.y) + Vector2(0,-15)
+	else:
+		dialog_arrow.rotation_degrees = 0
+		dialog_arrow.position = dialog_arrow_origin_position
 	
 func init_with_parent_node(_parent_node, _dialog,_is_quest, dialog_size = null):
 	dialog = _dialog
@@ -68,9 +99,7 @@ func init_with_parent_node(_parent_node, _dialog,_is_quest, dialog_size = null):
 	if current_dialog.has("speaker"):
 		var speaker_name = current_dialog['speaker']
 		speaker = parent_node.get(current_dialog['speaker'])
-		var g_position = speaker.get_global_position()
-		var rp = parent_node.get(current_dialog['speaker']).get_global_position()
-		rect_position = parent_node.get(current_dialog['speaker']).get_global_position()
+		var speaker_position = speaker.get_global_position()
 	click_to_continue = true
 	
 func start_dialog():

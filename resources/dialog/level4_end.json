@@ -1,22 +1,21 @@
 {
         "first": {
             "speaker":"Moon",
-            
-            "pivot":[0,0],
-            "content": "I admitted I looked down on you.",
+            "pivot":[0,1],
+            "content": "Arghhhhh! How dare you silly human try to reach me again and again?!",
             "next": "12",
             
         },
         "12": {
             "speaker":"Moon",
-            "pivot":[0,0],
-            "content": "Well.. technically I'm looking DOWN on you all the time..",
+            "pivot":[0,1],
+            "content": "I.. I.. Hmm. Wait, it is July now isn't it?",
             "next": "13",
         },
         "13": {
             "speaker":"Moon",
-            "pivot":[0,0],
-            "content": "But that is not important..I'll be serious now!",
+            "pivot":[0,1],
+            "content": "Have you heard of.. Thunder Moon?",
             "next": "13",
             "after_trigger":"end"
         },

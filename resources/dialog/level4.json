@@ -2,15 +2,15 @@
         "first": {
             "speaker":"Generator",
             
-            "pivot":[0,0],
-            "content": "Hired some new man",
+            "pivot":[1,0],
+            "content": "Moon's attack is BIGGER now!",
             "next": "12",
             
         },
         "12": {
             "speaker":"Generator",
-            "pivot":[0,0],
-            "content": "You will like them",
+            "pivot":[1,0],
+            "content": "I hired some stronger man to protect others.",
             "next": "13",
             
             "after_trigger":"end"

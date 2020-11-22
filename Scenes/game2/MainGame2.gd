@@ -5,6 +5,8 @@ var moon_scene = preload("res://Scenes/game2/Object/Moon.tscn")
 var generator_scene = preload("res://Scenes/game2/Object/Generator.tscn")
 var platformer_scene = preload("res://Scenes/game2/Object/platformer.tscn")
 
+var level_name_flyaway_time = 0
+
 var Moon
 var Generator
 onready var human = $human
@@ -207,7 +209,9 @@ func show_prolog():
 	dialog_instance.start_dialog()
 
 func show_level_start_dialog():
-	show_level_name()
+	yield(show_level_name(),"completed")
+	
+	#yield(get_tree().create_timer(1), "timeout")
 	var file_path = '%s/%s%d.json' % [dialog_folder, "level",LevelManager.current_level]
 	var prolog = Utils.load_json(file_path)
 	dialog_instance = DialogManager.select_dialog_multiple(self,prolog)
@@ -226,13 +230,29 @@ func show_level_end_dialog():
 	dialog_instance.start_dialog()
 
 func show_level_name():
-	level_name.text = LevelManager.get_level_info().name
-	yield(get_tree().create_timer(1), "timeout")
-	level_name.text = ""
+	var text  = LevelManager.get_level_info().name
+	level_name.bbcode_text = "\n\n\n\n[center][wave]"+text
+	yield(get_tree().create_timer(2.5), "timeout")
+	
+	var tween = Tween.new()
+
+	add_child(tween)
+	tween.interpolate_property(
+				self, 
+				"level_name_flyaway_time", 
+				0,800, 2,
+				Tween.TRANS_QUAD)
+	tween.start()
+	yield(tween,"tween_completed")
+	level_name_flyaway_time = 0
+	level_name.bbcode_text = ""
 	GameSaver.save_globally()
 	pass
 
 func _process(delta):
+	if level_name.bbcode_text.length()>0 and level_name_flyaway_time>0:
+		var text  = LevelManager.get_level_info().name
+		level_name.bbcode_text = "\n\n\n\n" + "[center][tornado radius="+String(level_name_flyaway_time)+" freq=2]"+text
 	if not Utils.is_main_game_started:
 		return
 	if can_generate_player:
