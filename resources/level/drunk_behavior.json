@@ -9,7 +9,7 @@
                 "speaker":"Moon",
                 "pivot":[0,0],
                 "content": "[shake]What is this?",
-                "behavior":{"speed":0.8,},
+                "behavior":{"speed":0.8,"get_sleep":false},
             }
         ],
             [
@@ -50,14 +50,14 @@
         {
             "speaker":"Moon",
             "pivot":[0,0],
-            "content": "[rainbow]WHeRe aM i? HeLLo LiTTLe aNTS i LoVe You~~",
-            "behavior":{"move_drunk":0.5,"speed":0.6,"ammo_speed":1},
+            "content": "[matrix clean=2.0 dirty=0.2 span=1]where am i? hello little ants i love you~~",
+            "behavior":{"move_drunk":false,"speed":0.6,"ammo_speed":1},
         },
         {
             "speaker":"Moon",
             "pivot":[0,0],
-            "content": "I'll destroy all of you! [shake rate=30 level=10]Sun![/shake] Don't run, fight with me!!",
-            "behavior":{"shoot_randomly":0.5,"speed":1,"ammo_speed":1},
+            "content": "I'll destroy all of you! [shake rate=40 level=10]Sun![/shake] Don't run, fight with me!!",
+            "behavior":{"shoot_randomly":false,"speed":1,"ammo_speed":1},
         },],
     ],
     },

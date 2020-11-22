@@ -11,6 +11,8 @@ onready var moon_chat = $dialog/Node2D/moon_chat
 onready var moon_chat_timer = $dialog/Node2D/moon_chat_timer
 onready var dialog = $dialog
 
+var moon_chat_wait_time = 6
+
 var drunk_behavior_info
 
 var meteo_scene = preload("res://Scenes/game2/Object/Meteo.tscn")
@@ -19,7 +21,7 @@ var target_index_position
 var move_dir = Vector2.RIGHT
 var current_drunk_hit_count = 0
 var drunk_upgrade_hit_count = [1,1,1]
-var sober_time = [0,30,10,7]
+var sober_time = [0,30,10,10]
 var current_sober_time = 0
 var drunk_level = 0
 var is_shotable = true
@@ -135,7 +137,7 @@ func update_moon_chat():
 	if picked_drunk_content:
 		dialog.visible = true
 		moon_chat.bbcode_text = picked_drunk_content
-		moon_chat_timer.wait_time = 1
+		moon_chat_timer.wait_time = moon_chat_wait_time
 		moon_chat_timer.start()
 	
 func update_drunk_behavior():
@@ -159,13 +161,22 @@ func update_drunk_behavior():
 			"speed":
 				drunk_behavior_speed = picked_drunk_behavior[key]
 			"get_sleep":
-				moon_state = moon_state_enum.sleep
+				if picked_drunk_behavior[key]:
+					moon_state = moon_state_enum.sleep
+				else:
+					moon_state = moon_state_enum.none
 			"ammo_speed":
 				drunk_behavior_ammo_speed = picked_drunk_behavior[key]
 			"move_drunk":
-				moon_state = moon_state_enum.move_drunk
+				if picked_drunk_behavior[key]:
+					moon_state = moon_state_enum.move_drunk
+				else:
+					moon_state = moon_state_enum.none
 			"shoot_randomly":
-				moon_state = moon_state_enum.shoot_drunk
+				if picked_drunk_behavior[key]:
+					moon_state = moon_state_enum.shoot_drunk
+				else:
+					moon_state = moon_state_enum.none
 				drunk_shoot_current = 0
 	
 	pass
@@ -276,6 +287,7 @@ func _process(delta):
 			update_drunk_behavior()
 			
 			update_blush()
+			update_normal_face()
 
 func moon_sober_up_visually(ratio):
 	$bg.material.set_shader_param("changeColorRatio",ratio)

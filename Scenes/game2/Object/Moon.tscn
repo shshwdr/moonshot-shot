@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Moon.gd" type="Script" id=1]
 [ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
@@ -8,7 +8,10 @@
 [ext_resource path="res://Scenes/game2/Object/Moon_drunk.shader" type="Shader" id=6]
 [ext_resource path="res://art/UI/dialog_arrow.png" type="Texture" id=7]
 [ext_resource path="res://art/UI/dialog_body.png" type="Texture" id=8]
+[ext_resource path="res://effects/ghost.gd" type="Script" id=9]
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://effects/matrix.gd" type="Script" id=11]
+[ext_resource path="res://effects/pulse.gd" type="Script" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.2628
@@ -175,6 +178,15 @@ tracks/3/keys = {
 use_mipmaps = true
 font_data = ExtResource( 10 )
 
+[sub_resource type="RichTextEffect" id=11]
+script = ExtResource( 9 )
+
+[sub_resource type="RichTextEffect" id=12]
+script = ExtResource( 11 )
+
+[sub_resource type="RichTextEffect" id=13]
+script = ExtResource( 12 )
+
 [node name="Moon" type="Area2D" groups=[
 "player",
 ]]
@@ -247,12 +259,11 @@ anims/normal_sleep = SubResource( 8 )
 wait_time = 15.0
 
 [node name="dialog" type="Node2D" parent="."]
-visible = false
 position = Vector2( 10.3943, 0.165333 )
 
 [node name="dialog_body" type="Sprite" parent="dialog"]
 position = Vector2( 1.38818, -30.8911 )
-scale = Vector2( 2, 1 )
+scale = Vector2( 2.2, 1 )
 texture = ExtResource( 8 )
 
 [node name="dialog_arrow" type="Sprite" parent="dialog"]
@@ -263,15 +274,16 @@ texture = ExtResource( 7 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="moon_chat" type="RichTextLabel" parent="dialog/Node2D"]
-margin_left = -97.0
-margin_top = -84.0
-margin_right = 103.0
-margin_bottom = -42.0
+margin_left = -112.0
+margin_top = -86.0
+margin_right = 116.0
+margin_bottom = -39.0
 custom_fonts/normal_font = SubResource( 10 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
-bbcode_text = "[s]test [s]"
-text = "test "
+bbcode_text = "[matrix clean=2.0 dirty=0.3 span=1]where am i? hello little ants i love you~~"
+text = "where am i? hello little ants i love you~~"
+custom_effects = [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
