@@ -230,9 +230,12 @@ func show_level_end_dialog():
 	dialog_instance.start_dialog()
 
 func show_level_name():
+	
+	var level_name_exist_time = 0.1 if DebugSetting.skip_dialog else 2.5
+	
 	var text  = LevelManager.get_level_info().name
 	level_name.bbcode_text = "\n\n\n\n[center][wave]"+text
-	yield(get_tree().create_timer(2.5), "timeout")
+	yield(get_tree().create_timer(level_name_exist_time), "timeout")
 	
 	var tween = Tween.new()
 
@@ -240,7 +243,7 @@ func show_level_name():
 	tween.interpolate_property(
 				self, 
 				"level_name_flyaway_time", 
-				0,800, 2,
+				0,800, level_name_exist_time,
 				Tween.TRANS_QUAD)
 	tween.start()
 	yield(tween,"tween_completed")

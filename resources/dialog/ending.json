@@ -1,0 +1,43 @@
+{
+        "first": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "MoonShot Shot",
+            "next": "12",
+            
+        },
+        "12": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "A Shot For MoonShot",
+            "next": "13",
+        },
+        "13": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "Even Moon would love it after trying.",
+            "next": "14",
+        },
+        
+        "14": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "..But remember dont drink too much.",
+            "next": "15",
+        },
+        
+        "15": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "Thanks for watching.",
+            "next": "16",
+        },
+        
+        "16": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "And playing.",
+            "next": "16",
+            "after_trigger":"end"
+        },
+    },

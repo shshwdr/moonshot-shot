@@ -34,11 +34,8 @@ script = ExtResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PoolVector2Array( 0, 0, 10, 0 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 300, 250 )
+position = Vector2( 300, 240 )
 current = true
 script = ExtResource( 3 )
 
@@ -99,21 +96,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Camera2D/Node2D/Control"]
-margin_right = 52.0
-margin_bottom = 28.0
-custom_fonts/font = ExtResource( 7 )
-text = "back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="level_name" type="RichTextLabel" parent="Camera2D/Node2D/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Camera2D/Node2D/Control"]
+margin_left = -1.68372
+margin_top = 12.3471
+margin_right = 50.3163
+margin_bottom = 40.3471
+custom_fonts/font = ExtResource( 7 )
+text = "back"
 __meta__ = {
 "_edit_use_anchors_": false
 }

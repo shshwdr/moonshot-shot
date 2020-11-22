@@ -7,6 +7,9 @@ onready var faceAnimationPlayer  = $faceAnimationPlayer
 onready var thunderTimer = $ThunderTimer
 onready var face_bg = $bg
 onready var sprite = $bg
+onready var moon_chat = $dialog/Node2D/moon_chat
+onready var moon_chat_timer = $dialog/Node2D/moon_chat_timer
+onready var dialog = $dialog
 
 var drunk_behavior_info
 
@@ -20,6 +23,7 @@ var sober_time = [0,30,10,7]
 var current_sober_time = 0
 var drunk_level = 0
 var is_shotable = true
+var picked_drunk_content
 
 enum moon_state_enum{none,sleep, move_drunk, shoot_drunk}
 
@@ -127,7 +131,15 @@ func throw_meteors():
 		yield(timer, "timeout")
 	yield(get_tree(), 'idle_frame')
 	
+func update_moon_chat():
+	if picked_drunk_content:
+		dialog.visible = true
+		moon_chat.bbcode_text = picked_drunk_content
+		moon_chat_timer.wait_time = 1
+		moon_chat_timer.start()
+	
 func update_drunk_behavior():
+	picked_drunk_content = null
 	var level_drunk_behavior_info =  drunk_behavior_info[min(drunk_behavior_info.size()-1,LevelManager.current_level)]
 	var current_drunk_behavior_info = level_drunk_behavior_info.get_drunk[drunk_level]
 	print(drunk_level, " ",current_drunk_behavior_info)
@@ -139,6 +151,7 @@ func update_drunk_behavior():
 		return
 	#random pick
 	var random_behavior_id = Utils.rng.randi()%current_drunk_behavior_info.size()
+	picked_drunk_content = current_drunk_behavior_info[random_behavior_id].content
 	var picked_drunk_behavior = current_drunk_behavior_info[random_behavior_id].behavior
 	
 	for key in picked_drunk_behavior:
@@ -175,6 +188,7 @@ func get_shot():
 		current_drunk_hit_count = 0
 		drunk_level+=1
 		update_drunk_behavior()
+		update_moon_chat()
 		current_sober_time = 0
 		update_blush()
 	yield(get_tree().create_timer(0.6), "timeout")
@@ -293,3 +307,7 @@ func _on_Moon_area_entered(area):
 func _on_ThunderTimer_timeout():
 	if LevelManager.get_level_info().get("has_thunder",false):
 		generate_thunder()
+
+
+func _on_moon_chat_timer_timeout():
+	dialog.visible = false
