@@ -59,8 +59,9 @@ func _ready():
 	pass
 
 func in_game_screen():
-	
-	return Utils.in_game_screen(current_index_position)
+	if current_index_position:
+		return Utils.in_game_screen(current_index_position)
+	return false
 
 func will_free():
 	is_freed = true

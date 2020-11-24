@@ -131,7 +131,7 @@ func generate_thunder():
 	
 func throw_meteors():
 	var human_count = LevelManager.get_level_info().target_height - 1
-	human_count = 1
+	human_count = 2
 	for i in range(human_count*3):
 		
 		var meteo_instance = meteo_scene.instance()
@@ -142,7 +142,8 @@ func throw_meteors():
 		yield(timer, "timeout")
 	yield(get_tree(), 'idle_frame')
 	
-	
+func hide_moon_chat():
+	dialog.visible = false
 	
 func update_moon_chat():
 	if picked_drunk_content:
@@ -290,6 +291,9 @@ func _input(event):
 
 
 func _process(delta):
+	if not Utils.is_main_game_started:
+		hide_moon_chat()
+		return
 	if drunk_level>0:
 		current_sober_time+=delta
 		moon_sober_up_visually(current_sober_time/float(sober_time[drunk_level]))

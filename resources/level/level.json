@@ -36,7 +36,7 @@
     },
     {
         "name":"Thunder under Thunder Moon",
-        "human_type":[2,1,1,1,1],
+        "human_type":[1,1,1,1,2],
         "target_height":9,
         "moon_type":"res://art/moon/moon-swollow.png",
         "moon_behavior":"normal",
@@ -45,8 +45,8 @@
     },
     {
         "name":"You are not Helping Hati!",
-        "human_type":[2,2,1,1,1],
-        "target_height":9,
+        "human_type":[1,2,1,1,2],
+        "target_height":10,
         "moon_type":"res://art/moon/moon_face_serious.png",
         "moon_behavior":"normal",
         "is_powerful":true,

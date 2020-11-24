@@ -9,7 +9,7 @@
         "12": {
             "speaker":"Moon",
             "pivot":[0,1],
-            "content": "I.. I.. Hmm. Wait, it is July now isn't it?",
+            "content": "What can I do now.. Wait, it is July now isn't it?",
             "next": "13",
         },
         "13": {

@@ -1,7 +1,11 @@
 extends Human
 
+
+var strong_max_health = 5
 var has_shield = false
 onready var shield = $shield
+
+
 
 func can_block_thunder():
 	return has_shield
@@ -17,6 +21,8 @@ func block_thunder():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	max_health = strong_max_health
+	health = strong_max_health
 	shield.visible = false
 	pass # Replace with function body.
 
