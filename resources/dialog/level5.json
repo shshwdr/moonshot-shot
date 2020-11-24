@@ -10,6 +10,12 @@
             "speaker":"Generator",
             "pivot":[1,0],
             "content": "Guess what, I do remember this and hired some witches to protect the people from the thunder!",
+            "next": "12_1",
+        },
+        "12_1": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "The witch has magic that would protect everyone below her from thunder.. once.",
             "next": "13",
         },
         "13": {

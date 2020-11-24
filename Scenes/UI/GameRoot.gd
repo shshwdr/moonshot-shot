@@ -23,3 +23,4 @@ func on_game_end():
 	Utils.is_main_game_started = false
 	MusicManager.play_music("start")
 	reload_scene(starting_scene)
+	Utils.reset_offset()

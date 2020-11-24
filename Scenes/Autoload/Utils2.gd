@@ -52,6 +52,17 @@ func main_game_start():
 	is_main_game_started = true
 func main_game_stop():
 	is_main_game_started = false
+	
+func reset_offset():
+	y_offset = 0
+	height_offset = 3 
+	screen_top_left = Vector2(0,y_offset)
+#used to check if item is inside of game screen
+	game_screen_top_left = Vector2(width_offset,height_offset) 
+	game_screen_top_right = Vector2(width_offset+width_index,height_offset) 
+#used to decide moon position
+	game_screen_top_center = Vector2(width_offset +width_index/2 ,height_offset)
+
 
 func update_offset(diff):
 	y_offset -= diff
