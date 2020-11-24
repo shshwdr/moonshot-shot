@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/game2/MainGame2.gd" type="Script" id=1]
 [ext_resource path="res://art/map/universe.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/game2/Camera.gd" type="Script" id=3]
-[ext_resource path="res://art/object/dinosaur.png" type="Texture" id=4]
+[ext_resource path="res://art/object/human.png" type="Texture" id=4]
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://fonts/info font.tres" type="DynamicFont" id=7]
 
@@ -21,6 +21,11 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 40
+use_mipmaps = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
 use_mipmaps = true
 font_data = ExtResource( 6 )
 
@@ -58,7 +63,7 @@ texture = ExtResource( 2 )
 
 [node name="flash_sprite" type="Sprite" parent="Camera2D"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, 0.147285 )
+position = Vector2( 0.667419, 0.147278 )
 scale = Vector2( 1, 823.295 )
 texture = SubResource( 2 )
 
@@ -73,9 +78,9 @@ z_index = 100
 
 [node name="Control" type="Control" parent="Camera2D/Node2D"]
 margin_left = -300.0
-margin_top = -250.0
+margin_top = -240.0
 margin_right = 300.0
-margin_bottom = 250.0
+margin_bottom = 240.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -106,19 +111,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="dialog_button" type="Button" parent="Camera2D/Node2D/Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Button" type="Button" parent="Camera2D/Node2D/Control"]
-margin_left = -1.68372
-margin_top = 12.3471
-margin_right = 50.3163
-margin_bottom = 40.3471
+margin_right = 52.0
+margin_bottom = 28.0
 custom_fonts/font = ExtResource( 7 )
 text = "back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="hint" type="RichTextLabel" parent="Camera2D/Node2D/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -37.0
+margin_bottom = -3.05176e-05
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]press [color=red]space[/color] to stop moving"
+text = "press space to stop moving"
+
+[node name="Tween" type="Tween" parent="Camera2D"]
+
 [node name="Leader" type="Sprite" parent="."]
 position = Vector2( 259.437, 410.578 )
 texture = ExtResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="Camera2D/Node2D/Control/dialog_button" to="." method="_on_dialog_button_pressed"]
 [connection signal="pressed" from="Camera2D/Node2D/Control/Button" to="." method="_on_Button_pressed"]

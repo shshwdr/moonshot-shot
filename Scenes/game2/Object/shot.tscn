@@ -1,26 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/shot.gd" type="Script" id=1]
-[ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
 [ext_resource path="res://art/shot.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.84671, 9.11361 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "hitted"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( -0.00192404, 0.109665, 0.19047, 0.275124, 0.303021, 0.433527, 0.554095, 0.64452, 0.767293, 0.906176, 0.998076 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="Shot" type="Area2D" groups=[
 "player",
@@ -38,27 +22,7 @@ shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 0, -8 )
-enabled = true
-cast_to = Vector2( 0, 5 )
-collide_with_areas = true
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hitted = SubResource( 2 )
-
-[node name="coin_brown" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0.66497, -23.7578 )
-texture = ExtResource( 2 )
-
-[node name="hold_item_position" type="Position2D" parent="."]
-position = Vector2( -0.0208569, -14.3732 )
-
-[node name="hold_item_position_next" type="Position2D" parent="."]
-position = Vector2( 0.0039463, -16.8039 )
 [connection signal="area_entered" from="." to="." method="_on_Shot_area_entered"]

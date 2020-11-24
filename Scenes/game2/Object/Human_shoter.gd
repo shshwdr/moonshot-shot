@@ -2,11 +2,14 @@ extends Human
 
 onready var shot_sprite = $shotSprite
 onready var anim = $shotSprite/AnimationPlayer
-var shoter_health = 2
+var shoter_health = 20
 var shot_scene = preload("res://Scenes/game2/Object/shot.tscn")
 
-var make_shot_time = 0.1
+var make_shot_time = 2
 var current_make_time = 0
+
+var failed_shoot = false
+var is_ready_shoot = false
 
 func _ready():
 	._ready()
@@ -17,6 +20,7 @@ func _process(delta):
 	._process(delta)
 	
 	if is_shot_ready():
+		is_ready_shoot = true;
 		shot_sprite.rotation_degrees = 0
 		anim.play("ready")
 		return
@@ -24,9 +28,11 @@ func _process(delta):
 		if anim.current_animation != "loading":
 			anim.play("loading")
 		current_make_time+=delta
+		is_ready_shoot = false
 
 func is_shot_ready():
-	return current_make_time >= make_shot_time
+	var temp_make_shot_time = 0.1 if DebugSetting.skip_make_shot_time else make_shot_time
+	return current_make_time >= temp_make_shot_time
 	
 
 
@@ -35,7 +41,8 @@ func shot():
 	current_make_time = 0
 	var shot_instance = shot_scene.instance()
 	shot_instance.position = Utils.index_to_position(index_position())
-	get_parent().add_child(shot_instance)
+	get_parent().call_deferred("add_child",shot_instance)
+	is_ready_shoot = false
 		
 func get_input():
 	.get_input()
@@ -43,14 +50,18 @@ func get_input():
 		if not in_game_screen():
 			return
 		if is_stoping:
-			if Input.is_action_pressed(Utils.interact_key_2):
+			if Input.is_action_just_pressed(Utils.interact_key_2):
 				if is_shot_ready():
-					print("interact key 2 pressed")
+					#print("interact key 2 pressed")
+					failed_shoot = false
 					shot()
 				else:
 					#play shot waste anim
 					current_make_time = 0
 					anim.play("loading")
+					failed_shoot = true
+					yield(get_tree().create_timer(make_shot_time), "timeout")
+					failed_shoot = false
 				
 	
 	

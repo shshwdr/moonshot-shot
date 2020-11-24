@@ -3,6 +3,7 @@
             "speaker":"Moon",
             "pivot":[0,1],
             "content": "Ok, Ok, you win!",
+            "after_trigger":"show_moon_face",
             "next": "12",
             
         },

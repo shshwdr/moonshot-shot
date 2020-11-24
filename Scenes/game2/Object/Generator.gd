@@ -30,12 +30,6 @@ var interact_input = "interact"
 func index_position():
 	return Utils.position_to_index(position)
 
-#func move(move_dir):
-#	if Utils.in_large_screen(index_position()+move_dir):
-#		yield(Utils.move_position_by(self,move_dir),"completed")
-##	timer.start()
-##	yield(timer, "timeout")
-#	pass
 
 func _process(delta):
 	pass
@@ -57,7 +51,7 @@ func pop_waiting_human():
 
 func move_all_down():
 	for human in waiting_human_instance:
-		Utils.move_position_by(human,Vector2.DOWN)
+		Utils.move_position_by(human,human.tween,Vector2.DOWN)
 		
 func clean_current_human():
 	waiting_human_instance.clear()
@@ -68,6 +62,8 @@ func _on_GenerateTimer_timeout():
 		var human_type_id = Utils.random_distribution_array(level_human_type)
 		var human_instance = human_type[human_type_id].instance()
 		human_instance.position = position
-		Utils.maingame.human.add_child(human_instance)
+		Utils.maingame.human.call_deferred("add_child",human_instance)
+		#Utils.maingame.human.add_child(human_instance)
+		yield(get_tree(), 'idle_frame')
 		waiting_human_instance.push_back(human_instance)
 		move_all_down()

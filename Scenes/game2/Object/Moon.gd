@@ -11,7 +11,7 @@ onready var moon_chat = $dialog/Node2D/moon_chat
 onready var moon_chat_timer = $dialog/Node2D/moon_chat_timer
 onready var dialog = $dialog
 
-var moon_chat_wait_time = 6
+var moon_chat_wait_time = 7
 
 var drunk_behavior_info
 
@@ -64,6 +64,14 @@ var blush_textures = [
 func update_blush():
 	$blush.texture = blush_textures[min(drunk_level,blush_textures.size()-1)]
 
+func show_face(should_show):
+	face_bg.visible = should_show
+
+func change_normal_face_to_normal():
+	var moon_face_texture = "res://art/moon/moon_face_serious.png"
+	face_sprite.texture = load(moon_face_texture)
+	faceAnimationPlayer.play(face_to_normal_anim[moon_face_texture])
+
 func update_normal_face():
 	var moon_face_texture = LevelManager.get_level_info().moon_type
 	if moon_state == moon_state_enum.sleep:
@@ -86,7 +94,7 @@ func move():
 	if moon_state == moon_state_enum.move_drunk:
 		current_drunk_move_dir = drunk_move_dir
 		#current_move_time*=1.5
-	yield(Utils.move_position_by(self,move_dir+current_drunk_move_dir,current_move_time),"completed")
+	yield(Utils.move_position_by(self,tween,move_dir+current_drunk_move_dir,current_move_time),"completed")
 	drunk_move_dir = -drunk_move_dir
 	pass
 
@@ -109,7 +117,8 @@ func shoot():
 			meteo_instance.position = Utils.index_to_position( target_index_position+Vector2.DOWN)
 		if LevelManager.get_level_info().get("is_powerful",false):
 			meteo_instance.scale = Vector2(4,4)
-		Utils.maingame.bullets.add_child(meteo_instance)
+		Utils.maingame.bullets.call_deferred("add_child",meteo_instance)
+		#Utils.maingame.bullets.add_child(meteo_instance)
 		timer.start()
 		yield(timer, "timeout")
 	pass
@@ -133,6 +142,8 @@ func throw_meteors():
 		yield(timer, "timeout")
 	yield(get_tree(), 'idle_frame')
 	
+	
+	
 func update_moon_chat():
 	if picked_drunk_content:
 		dialog.visible = true
@@ -144,7 +155,7 @@ func update_drunk_behavior():
 	picked_drunk_content = null
 	var level_drunk_behavior_info =  drunk_behavior_info[min(drunk_behavior_info.size()-1,LevelManager.current_level)]
 	var current_drunk_behavior_info = level_drunk_behavior_info.get_drunk[drunk_level]
-	print(drunk_level, " ",current_drunk_behavior_info)
+	#(drunk_level, " ",current_drunk_behavior_info)
 	if current_drunk_behavior_info.size()==0:
 		#reset states
 		drunk_behavior_speed = 1
@@ -270,7 +281,12 @@ func _input(event):
 	if DebugSetting.can_jump_level and  event is InputEventKey and event.pressed:
 		if event.scancode == KEY_0:
 			finish_level()
-
+		if event.scancode == KEY_9:
+			DebugSetting.moon_dont_attack = not DebugSetting.moon_dont_attack
+		if event.scancode == KEY_8:
+			print("memory usage ",OS.get_static_memory_usage())
+			print("dynamic memory ",OS.get_dynamic_memory_usage())
+		
 
 
 func _process(delta):
@@ -297,7 +313,7 @@ func finish_level():
 	#moon stop and move up
 	moon_state = moon_state_enum.none
 	update_normal_face()
-	yield(Utils.move_position_by(self,Vector2.UP*Utils.moon_jump_height,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
+	yield(Utils.move_position_by(self,tween, Vector2.UP*Utils.moon_jump_height,0.4,Tween.TRANS_BACK, Tween.EASE_OUT),"completed")
 	LevelManager.level_up()
 	
 func reset_moon():

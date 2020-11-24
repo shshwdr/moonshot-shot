@@ -6,6 +6,8 @@ var parent_node
 signal skip_dialog_signal
 onready var sfx = $sfx
 
+var is_freed = false
+
 var speaker
 onready var dialog_arrow = $panel/dialog_arrow
 
@@ -77,7 +79,7 @@ func update_pivot():
 	
 	#update arrow position and rotation
 	var test = [1,0]
-	print(test,pivot)
+	#print(test,pivot)
 	if pivot[0] == 1:
 		dialog_arrow.rotation_degrees = 90
 		dialog_arrow.position = dialog_arrow_origin_position+ Vector2(-0.5*rect_size.x,-0.5*rect_size.y)+ Vector2(0,-5)
@@ -124,6 +126,9 @@ func show_one_dialog():
 	
 	yield(check_speaker_out(),"completed")
 	yield(check_after_trigger(),"completed")
+	if is_freed:
+		queue_free()
+		return
 	yield(next(),"completed")
 
 func next():
@@ -275,7 +280,7 @@ func show_one_dialog_with_type_writing():
 #	match step['type']:
 #		'text': # Simple text.
 			#not_question()
-	print("current_dialog0",current_dialog)
+	#print("current_dialog0",current_dialog)
 	if current_dialog.has("divert"):
 		match current_dialog["condition"]:
 			"boolean":
@@ -343,6 +348,9 @@ func show_one_dialog_with_type_writing():
 	#	elif enable_continue_indicator: # If typewriter effect is disabled check if the ContinueIndicator should be displayed
 	#		continue_indicator.show()
 	#		animations.play('Continue_Indicator')
+
+func will_free():
+	is_freed = true
 
 func check_trigger_common(trigger_type):
 	if current_dialog.has(trigger_type):

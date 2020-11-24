@@ -11,7 +11,7 @@ var SAVE_NAME_TEMPLATE_GLOBAL: String = "save_global.tres"
 
 func _ready():
 	load_globally()
-	Events.connect("save_globally" ,self, "save_globally")
+	#Events.connect("save_globally" ,self, "save_globally")
 
 func save_globally():
 	# Passes a SaveGame resource to all nodes to save data from
@@ -28,7 +28,7 @@ func save_globally():
 	var save_path = SAVE_FOLDER.plus_file(SAVE_NAME_TEMPLATE_GLOBAL)
 	var error: int = ResourceSaver.save(save_path, save_game)
 	if error != OK:
-		print('There was an issue writing the save %s to %s' % [SAVE_NAME_TEMPLATE_GLOBAL, save_path])
+		printerr('There was an issue writing the save %s to %s' % [SAVE_NAME_TEMPLATE_GLOBAL, save_path])
 
 
 func load_globally():

@@ -3,6 +3,7 @@
             "speaker":"Moon",
             "pivot":[0,1],
             "content": "I've drunk enough today.",
+            "after_trigger":"change_normal_face",
             "next": "12",
             
         },  
@@ -16,6 +17,7 @@
             "speaker":"Moon",
             "pivot":[0,1],
             "content": "This would not happen now, I'm sober now and I'll admit my [fade]loss and..",
+            "after_trigger":"hide_moon_face",
             "next": "14",
         },
         "14": {

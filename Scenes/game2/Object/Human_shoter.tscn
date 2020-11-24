@@ -69,7 +69,7 @@ material = SubResource( 2 )
 texture = ExtResource( 4 )
 hframes = 1
 
-[node name="shotSprite" type="Sprite" parent="." index="10"]
+[node name="shotSprite" type="Sprite" parent="." index="3"]
 position = Vector2( -6.088, -2.971 )
 texture = ExtResource( 3 )
 

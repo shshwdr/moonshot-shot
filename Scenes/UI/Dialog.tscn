@@ -60,4 +60,12 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[node name="Button" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

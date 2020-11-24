@@ -4,9 +4,10 @@ extends Area2D
 class_name Human
 
 onready var sprite = $Sprite
-onready var timer = $Timer
 
 var start_go = false
+var is_blocked = false
+var index = null
 
 var move_dir = Vector2.RIGHT
 
@@ -16,6 +17,9 @@ var stopped = false
 var max_health = 3
 var health = max_health
 var current_index_position
+var is_freed = false
+
+onready var tween = $Tween
 	
 func damage(d):
 	health -=d
@@ -35,9 +39,7 @@ func can_block_thunder():
 	return false
 
 func move_up():
-#	timer.start()
-#	yield(timer, "timeout")
-	yield(Utils.move_position_by(self,Vector2.UP),"completed")
+	yield(Utils.move_position_by(self,tween,Vector2.UP),"completed")
 	pass
 
 func ready_to_start():
@@ -51,21 +53,24 @@ func init(_move_dir):
 	start_go = true
 
 func _ready():
-	timer.wait_time = Utils.wait_time
 #	while Utils.maingame.has_occupied(index_position()):
 #		yield(move_up(),"completed")
 	is_moving = false
-#	sprite.frame = 1
-#	sprite.self_modulate = Color(0.5,0.5,0.5,1)
-#	Utils.maingame.occupy(index_position(),self)
 	pass
 
 func in_game_screen():
 	
-	var index = index_position()
-	return Utils.in_game_screen(index)
+	return Utils.in_game_screen(current_index_position)
+
+func will_free():
+	is_freed = true
+	sprite.visible = false
 
 func _process(delta):
+	if is_freed and not is_moving:
+		queue_free()
+		return
+	is_blocked = false
 	if not start_go:
 		return
 	if not Utils.is_main_game_started:
@@ -122,7 +127,7 @@ func _process(delta):
 				is_moving = true
 				Utils.maingame.change_occupy(index,next_position,self)
 				current_index_position = next_position
-				yield(Utils.move_position_by(self,dir),"completed")
+				yield(Utils.move_position_by(self,tween,dir),"completed")
 				is_moving = false
 				moved = true
 				break
@@ -130,6 +135,9 @@ func _process(delta):
 			if in_game_screen():
 				#no way to move, stop
 				stop()
+			else:
+				is_blocked = true
+				#is_blocked
 			
 func stop():
 	#print("stop")
@@ -139,12 +147,14 @@ func stop():
 		
 func get_input():
 	if Utils.is_main_game_started:
-		if not in_game_screen():
-			return
 		if not is_stoping:
-			if Input.is_action_pressed(Utils.interact_key):
+			if Input.is_action_just_pressed(Utils.interact_key):
+				
+				if not in_game_screen():
+					return
 				#print("interact key pressed")
 				#move stop to when finish moving
 				stop()
+				#in_game_screen()
 func _physics_process(delta):
 	get_input()

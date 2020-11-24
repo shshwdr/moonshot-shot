@@ -9,7 +9,7 @@ func _ready():
 
 func stop():
 	.stop()
-	print("stop ",current_index_position)
+	#("stop ",current_index_position)
 	Utils.maingame.add_passthrough(current_index_position+Vector2.UP)
 
 func die():

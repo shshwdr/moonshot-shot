@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Moon.gd" type="Script" id=1]
-[ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
 [ext_resource path="res://art/moon/moon-swollow.png" type="Texture" id=3]
 [ext_resource path="res://art/moon/moon_bg.png" type="Texture" id=4]
 [ext_resource path="res://art/moon/moon_blush.png" type="Texture" id=5]
@@ -174,17 +173,17 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
 }
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=9]
 use_mipmaps = true
 font_data = ExtResource( 10 )
 
-[sub_resource type="RichTextEffect" id=11]
+[sub_resource type="RichTextEffect" id=10]
 script = ExtResource( 9 )
 
-[sub_resource type="RichTextEffect" id=12]
+[sub_resource type="RichTextEffect" id=11]
 script = ExtResource( 11 )
 
-[sub_resource type="RichTextEffect" id=13]
+[sub_resource type="RichTextEffect" id=12]
 script = ExtResource( 12 )
 
 [node name="Moon" type="Area2D" groups=[
@@ -201,29 +200,12 @@ shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 0, -8 )
-enabled = true
-cast_to = Vector2( -16, 0 )
-collide_with_areas = true
-
-[node name="RayCastInternal" type="RayCast2D" parent="."]
-position = Vector2( 0, -8 )
-enabled = true
-cast_to = Vector2( -4, 0 )
-collide_with_areas = true
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hitted = SubResource( 2 )
-
-[node name="coin_brown" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0.66497, -23.7578 )
-texture = ExtResource( 2 )
 
 [node name="hold_item_position" type="Position2D" parent="."]
 position = Vector2( -0.0208569, -14.3732 )
@@ -259,6 +241,7 @@ anims/normal_sleep = SubResource( 8 )
 wait_time = 15.0
 
 [node name="dialog" type="Node2D" parent="."]
+visible = false
 position = Vector2( 10.3943, 0.165333 )
 
 [node name="dialog_body" type="Sprite" parent="dialog"]
@@ -278,12 +261,12 @@ margin_left = -112.0
 margin_top = -86.0
 margin_right = 116.0
 margin_bottom = -39.0
-custom_fonts/normal_font = SubResource( 10 )
+custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "[matrix clean=2.0 dirty=0.3 span=1]where am i? hello little ants i love you~~"
 text = "where am i? hello little ants i love you~~"
-custom_effects = [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+custom_effects = [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
 __meta__ = {
 "_edit_use_anchors_": false
 }

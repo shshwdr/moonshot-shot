@@ -118,12 +118,16 @@ func position_to_index(position:Vector2):
 	res = Vector2(round(res.x),round(res.y))
 	return res
 	
-func move_position_by(character,index_position,move_time = wait_time, tween_trans = Tween.TRANS_LINEAR, tween_ease = Tween.EASE_IN):
+func move_position_by(character,tween,index_position,move_time = wait_time, tween_trans = Tween.TRANS_LINEAR, tween_ease = Tween.EASE_IN):
 	var current_position  = character.position
 	var target_position =  position_move_by(character.position,index_position)
-	var tween = Tween.new()
-
-	add_child(tween)
+	var create_tween = false
+#	if not tween:
+#		create_tween = true
+#		tween = Tween.new()
+	#add_child(tween)
+	if not tween:
+		return
 	tween.interpolate_property(
 				character, 
 				"position", 
@@ -131,9 +135,8 @@ func move_position_by(character,index_position,move_time = wait_time, tween_tran
 				tween_trans, tween_ease)
 	tween.start()
 	yield(tween,"tween_completed")
-	#print("tween end")
-	tween.queue_free()
-	#character.position = position_move_by(character.position,index_position)
+#	if create_tween:
+#		tween.free_queue()
 
 func position_move_to(character,index_position):
 	character.position = index_to_position(index_position)

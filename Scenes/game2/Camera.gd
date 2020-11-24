@@ -11,13 +11,14 @@ onready var timer_shake_length = $timer_shake_length
 onready var timer_wait_times = $timer_wait_times
 onready var tween_shake = $tween_camera_shake
 onready var flash_image = $flash_sprite
+onready var tween = $Tween
 
 var reset_speed = 0
 var strength = 0
 var doing_shake = false
 
 func move():
-	yield(Utils.move_position_by(self,move_dir,0.3),"completed")
+	yield(Utils.move_position_by(self,tween,move_dir,0.3),"completed")
 	pass
 
 func reset_camera():

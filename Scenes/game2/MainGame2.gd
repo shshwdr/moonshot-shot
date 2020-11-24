@@ -4,8 +4,9 @@ extends Node2D
 var moon_scene = preload("res://Scenes/game2/Object/Moon.tscn")
 var generator_scene = preload("res://Scenes/game2/Object/Generator.tscn")
 var platformer_scene = preload("res://Scenes/game2/Object/platformer.tscn")
-
+onready var hint_label = $Camera2D/Node2D/Control/hint
 var level_name_flyaway_time = 0
+var current_human
 
 var Moon
 var Generator
@@ -85,14 +86,15 @@ func change_occupy(old_index_position,new_index_position,human):
 		return
 	
 	if not index_to_human_map.has(old_index_position) :
-		printerr("in change occupy, human does not exist in %s"%String(old_index_position))
-		#return
+		#printerr("in change occupy, human does not exist in %s"%String(old_index_position))
+		pass
 	if index_to_human_map.has(new_index_position) :
 		printerr("human do exist in %s"%String(new_index_position))
 		return
 	#var human = index_to_human_map.get(old_index_position)
 	index_to_human_map.erase(old_index_position)
 	index_to_human_map[new_index_position] = human
+	human.index = new_index_position
 	#print("changed occupy ",index_to_human_map, old_index_position, new_index_position)
 	
 
@@ -101,22 +103,15 @@ func remove_occupy(index_position):
 		printerr("in remove, human does not exist in %s"%String(index_position))
 	var human = index_to_human_map.get(index_position)
 	if human:
-		human.queue_free()
+		human.will_free()
 	else:
 		printerr("why no human here??",index_to_human_map, index_position ) 
 	index_to_human_map.erase(index_position)
 	
-	#if there are human above, move them down
-#	var index_above = index_position + Vector2.UP
-#	while Utils.in_screen(index_above) and Utils.maingame.has_occupied(index_above):
-#		var above_human = index_to_human_map[index_above]
-#		Utils.maingame.change_occupy(index_above,index_position)
-#		Utils.move_position_by(above_human,Vector2.DOWN)
-#		index_position = index_above
-#		index_above = index_above+Vector2.UP
+
 
 func add_passthrough(index_position):
-	print("add passthrough ",index_position)
+	#print("add passthrough ",index_position)
 	index_to_passthrough_map[index_position] = true
 	
 func remove_passthrough(index_position):
@@ -124,7 +119,6 @@ func remove_passthrough(index_position):
 
 func can_passthrough(index_position):
 	#print("can_passthrough ",index_position)
-	print("can_passthrough ",index_to_passthrough_map,index_position)
 	return index_to_passthrough_map.has(index_position) 
 
 func has_occupied(index_position):
@@ -138,9 +132,6 @@ func get_above_human_if_existed(human):
 		return index_to_human_map[above_index]
 	return human
 
-func occupy(index, human_instance):
-	index_to_human_map[index] = human_instance
-	#human_to_index_map[human_instance] = index
 
 func on_touched_tile(index):
 	#print(index)
@@ -193,6 +184,7 @@ func _ready():
 		Utils.update_game_level()
 		init_generator_and_platformer()
 		show_level_start_dialog()
+		Leader.visible = false
 	
 
 	
@@ -205,6 +197,7 @@ func show_prolog():
 	dialog_instance = DialogManager.select_dialog_multiple(self,prolog)
 	yield(get_tree(), 'idle_frame')
 	add_child(dialog_instance)
+	Leader.visible = true
 	dialog_state = -1
 	dialog_instance.start_dialog()
 
@@ -231,8 +224,8 @@ func show_level_end_dialog():
 
 func show_level_name():
 	
-	var level_name_exist_time = 0.1 if DebugSetting.skip_dialog else 2.5
-	
+	var level_name_exist_time = 0.1 if DebugSetting.skip_dialog else 2
+	var level_name_fly_away_time = 0.1 if DebugSetting.skip_dialog else 1.5
 	var text  = LevelManager.get_level_info().name
 	level_name.bbcode_text = "\n\n\n\n[center][wave]"+text
 	yield(get_tree().create_timer(level_name_exist_time), "timeout")
@@ -243,16 +236,51 @@ func show_level_name():
 	tween.interpolate_property(
 				self, 
 				"level_name_flyaway_time", 
-				0,800, level_name_exist_time,
+				0,800, level_name_fly_away_time,
 				Tween.TRANS_QUAD)
 	tween.start()
 	yield(tween,"tween_completed")
+	tween.queue_free()
 	level_name_flyaway_time = 0
 	level_name.bbcode_text = ""
 	GameSaver.save_globally()
 	pass
 
+func update_hint():
+	#find all shoter
+	var has_ready_shoter = false
+	var all_failed_shoot = true
+	var has_shoter = false
+	for i in index_to_human_map:
+		var human = index_to_human_map[i]
+		if human and human.is_stoping and human.get("make_shot_time"):
+			has_shoter = true
+			if human.is_ready_shoot:
+				has_ready_shoter = true
+			if not human.failed_shoot:
+				all_failed_shoot = false
+			else:
+				all_failed_shoot = all_failed_shoot
+	all_failed_shoot = all_failed_shoot and has_shoter
+	#if human get blocked, show block hint
+	if current_human and current_human.is_blocked:
+		hint_label.bbcode_text = "[center][color=yellow]left click[/color] on human to kick off him"
+	#if used shot when none is ready, show wait ready hint
+	elif all_failed_shoot:
+		hint_label.bbcode_text = "[center][color=red]wait[/color] until shot is ready(stop rotating)"
+	#if shot is ready, show shot ready hint
+	elif has_ready_shoter:
+		hint_label.bbcode_text = "[center]press [color=yellow]ENTER or F[/color] to shoot shots"
+	#if there is lightning, show magic hint
+	#if none, show space hint
+	else:
+		if LevelManager.current_level ==1 and Utils.is_main_game_started:
+			hint_label.bbcode_text = "[center]press [color=red]space[/color] to stop moving"
+		else:
+			hint_label.bbcode_text = ""
+
 func _process(delta):
+	update_hint()
 	if level_name.bbcode_text.length()>0 and level_name_flyaway_time>0:
 		var text  = LevelManager.get_level_info().name
 		level_name.bbcode_text = "\n\n\n\n" + "[center][tornado radius="+String(level_name_flyaway_time)+" freq=2]"+text
@@ -264,6 +292,7 @@ func _process(delta):
 		if not human_instance:
 			return
 		human_instance.init(move_dir)
+		current_human = human_instance
 #		print(Utils.game_bottom_left)
 #		if move_dir == Vector2.RIGHT:
 #			human_instance.position = Utils.index_to_position(Utils.game_bottom_left) 
@@ -277,7 +306,7 @@ func init_platformer():
 	for i in range(3):
 		var platformer_instance = platformer_scene.instance()
 		add_child(platformer_instance)
-		platformer_instance.position = Utils.index_to_position(Utils.game_screen_bottom_left+Vector2(i*4,0))
+		platformer_instance.position = Utils.index_to_position(Utils.game_screen_bottom_left+Vector2(i*4,0) - Vector2(0.5,0))
 
 func init_generator_and_platformer():
 	Moon.update_normal_face()
@@ -291,7 +320,7 @@ func _on_Timer_timeout():
 	can_input = true
 	
 func end():
-	dialog_instance.queue_free()
+	dialog_instance.will_free()
 	#finish dialog
 	if dialog_state == -1:
 		#prolog
@@ -336,6 +365,12 @@ func trigger(trigger_name):
 			Moon.play_face_anim()
 		"throw_meteor":
 			yield(Moon.throw_meteors(),"completed")
+		"show_moon_face":
+			Moon.show_face(true)
+		"hide_moon_face":
+			Moon.show_face(false)	
+		"change_normal_face":
+			Moon.change_normal_face_to_normal()
 		"end":
 			end()
 	yield(get_tree(), 'idle_frame')
@@ -344,3 +379,8 @@ func trigger(trigger_name):
 func _on_Button_pressed():
 	Events.emit_signal("game_end")
 	pass # Replace with function body.
+
+
+func _on_dialog_button_pressed():
+	if dialog_instance:
+		dialog_instance.skip_dialog()

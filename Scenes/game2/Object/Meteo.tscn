@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Meteo.gd" type="Script" id=1]
-[ext_resource path="res://art/object/coin_brown.png" type="Texture" id=2]
 [ext_resource path="res://art/object/meteor.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -22,7 +21,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Moon" type="Area2D" groups=[
+[node name="meteor" type="Area2D" groups=[
 "player",
 ]]
 scale = Vector2( 2, 2 )
@@ -57,11 +56,6 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hitted = SubResource( 2 )
-
-[node name="coin_brown" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0.66497, -23.7578 )
-texture = ExtResource( 2 )
 
 [node name="hold_item_position" type="Position2D" parent="."]
 position = Vector2( -0.0208569, -14.3732 )

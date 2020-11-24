@@ -37,18 +37,6 @@ shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 0, -8 )
-enabled = true
-cast_to = Vector2( -16, 0 )
-collide_with_areas = true
-
-[node name="RayCastInternal" type="RayCast2D" parent="."]
-position = Vector2( 0, -8 )
-enabled = true
-cast_to = Vector2( -4, 0 )
-collide_with_areas = true
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -59,11 +47,5 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hitted = SubResource( 2 )
-
-[node name="hold_item_position" type="Position2D" parent="."]
-position = Vector2( -0.0208569, -14.3732 )
-
-[node name="hold_item_position_next" type="Position2D" parent="."]
-position = Vector2( 0.0039463, -16.8039 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="GenerateTimer" to="." method="_on_GenerateTimer_timeout"]
