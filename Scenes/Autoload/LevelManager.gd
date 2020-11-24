@@ -9,6 +9,9 @@ var level_jump_height = 20
 var unlocked_level = 0
 
 var LEVEL_SAVE_KEY = "levels"
+var FINISH_SAVE_KEY = "finished"
+
+var finished_game = false
 
 
 func is_prolog():
@@ -104,10 +107,14 @@ func next_level():
 func save(saved_game: Resource):
 	unlocked_level = max(unlocked_level,current_level)
 	saved_game.data[LEVEL_SAVE_KEY] = unlocked_level
+	if finished_game:
+		saved_game.data[FINISH_SAVE_KEY] = true
 	
 func load(saved_game: Resource):
 	if not saved_game.data.has(LEVEL_SAVE_KEY):
 		unlocked_level = 0
 	else:
 		unlocked_level = saved_game.data[LEVEL_SAVE_KEY]
+	if saved_game.data.has(FINISH_SAVE_KEY):
+		finished_game = true
 

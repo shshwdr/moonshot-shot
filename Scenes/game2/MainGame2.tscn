@@ -63,7 +63,7 @@ texture = ExtResource( 2 )
 
 [node name="flash_sprite" type="Sprite" parent="Camera2D"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0.667419, 0.147278 )
+position = Vector2( 1.33484, 0.814697 )
 scale = Vector2( 1, 823.295 )
 texture = SubResource( 2 )
 
@@ -145,6 +145,10 @@ text = "press space to stop moving"
 position = Vector2( 259.437, 410.578 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
+
+[node name="platformer" type="Node2D" parent="."]
+
+[node name="advertisement" type="Node2D" parent="."]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="Camera2D/Node2D/Control/dialog_button" to="." method="_on_dialog_button_pressed"]
 [connection signal="pressed" from="Camera2D/Node2D/Control/Button" to="." method="_on_Button_pressed"]

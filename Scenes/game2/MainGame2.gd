@@ -8,6 +8,8 @@ onready var hint_label = $Camera2D/Node2D/Control/hint
 var level_name_flyaway_time = 0
 var current_human
 
+var advertisement = preload("res://Scenes/UI/advertisement.tscn")
+var advertisement_instance
 var Moon
 var Generator
 onready var human = $human
@@ -247,6 +249,8 @@ func show_level_name():
 	pass
 
 func update_hint():
+	if not Utils.is_main_game_started:
+		hint_label.bbcode_text = ""
 	#find all shoter
 	var has_ready_shoter = false
 	var all_failed_shoot = true
@@ -305,7 +309,7 @@ func _process(delta):
 func init_platformer():
 	for i in range(3):
 		var platformer_instance = platformer_scene.instance()
-		add_child(platformer_instance)
+		$platformer.add_child(platformer_instance)
 		platformer_instance.position = Utils.index_to_position(Utils.game_screen_bottom_left+Vector2(i*4,0) - Vector2(0.5,0))
 
 func init_generator_and_platformer():
@@ -373,6 +377,22 @@ func trigger(trigger_name):
 			Moon.change_normal_face_to_normal()
 		"end":
 			end()
+		"end_game":
+			LevelManager.finished_game = true
+			GameSaver.save_globally()
+			Events.emit_signal("game_end")
+		"show_advertisement_withmoon":
+			var advertisement_instance = advertisement.instance()
+			advertisement_instance.show_moon()
+			$advertisement.add_child(advertisement_instance)
+		"show_advertisement":
+			Utils.clear_all_children(human)
+			Utils.clear_all_children($platformer)
+			advertisement_instance = advertisement.instance()
+			$advertisement.add_child(advertisement_instance)
+		"hide_advertisement":
+			advertisement_instance.queue_free()
+			
 	yield(get_tree(), 'idle_frame')
 
 

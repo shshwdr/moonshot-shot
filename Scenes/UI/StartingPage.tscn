@@ -1,11 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingPage.gd" type="Script" id=1]
 [ext_resource path="res://fonts/info font_large.tres" type="DynamicFont" id=2]
-[ext_resource path="res://art/map/universe.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/UI/advertisement.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI/universe.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/menu_button.tres" type="DynamicFont" id=5]
-[ext_resource path="res://art/UI/moon_thumbup.png" type="Texture" id=6]
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
@@ -50,20 +48,7 @@ __meta__ = {
 [node name="Node" type="Node2D" parent="."]
 scale = Vector2( 8, 8 )
 
-[node name="universe" type="Sprite" parent="Node"]
-position = Vector2( 52.9742, 30.9216 )
-scale = Vector2( 0.413861, 0.413861 )
-texture = ExtResource( 3 )
-
-[node name="advertisement" parent="Node" instance=ExtResource( 4 )]
-position = Vector2( 42.92, 29.0105 )
-scale = Vector2( 0.5, 0.5 )
-
-[node name="moon_thumbup" type="Sprite" parent="Node"]
-visible = false
-position = Vector2( 17.4461, 21.5244 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 6 )
+[node name="universe" parent="Node" instance=ExtResource( 3 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 8, 8 )
@@ -129,3 +114,5 @@ __meta__ = {
 }
 [connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+
+[editable path="Node/universe"]

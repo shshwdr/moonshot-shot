@@ -1,9 +1,11 @@
 extends Control
 
 var level_selection_scene = preload("res://Scenes/UI/LevelSelection.tscn")
-
+onready var advertise = $Node/universe
 func _ready():
 	MusicManager.play_music("start")
+	if LevelManager.finished_game:
+		advertise.show_moon()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

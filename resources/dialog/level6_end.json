@@ -18,6 +18,7 @@
             "pivot":[1,0],
             "content": "Well.. I just want to advertise for my drink.",
             "next": "14",
+            "after_trigger":"show_advertisement"
         },
         
         "14": {
@@ -38,7 +39,48 @@
             "speaker":"Moon",
             "pivot":[0,1],
             "content": "You should say that earlier. I like your shot and would be happy to advertise for you.",
+            "next": "17",
+        },
+
+        "17": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "MoonShot Shot",
+            "next": "18",
+            
+        },
+        "18": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "A Shot For MoonShot",
+            "next": "19",
+        },
+        "19": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "Even Moon would love it after trying.",
+            "next": "20",
+        },
+        
+        "20": {
+            "speaker":"Generator",
+            "pivot":[1,0],
+            "content": "..But remember don't drink too much.",
+            "next": "21",
+        },
+        
+        "21": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "Thanks for watching.",
+            "next": "22",
+        },
+        
+        "22": {
+            "speaker":"Moon",
+            "pivot":[0,1],
+            "content": "And playing.",
             "next": "16",
-            "after_trigger":"end"
+            "after_trigger":"end_game"
         },
     },
