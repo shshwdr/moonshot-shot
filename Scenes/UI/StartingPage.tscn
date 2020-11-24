@@ -3,6 +3,7 @@
 [ext_resource path="res://Scenes/UI/StartingPage.gd" type="Script" id=1]
 [ext_resource path="res://fonts/info font_large.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/UI/universe.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UI/StartingPageButtonHover.tres" type="StyleBox" id=4]
 [ext_resource path="res://fonts/menu_button.tres" type="DynamicFont" id=5]
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=8]
 
@@ -26,9 +27,6 @@ font_data = ExtResource( 8 )
 size = 50
 use_mipmaps = true
 font_data = ExtResource( 8 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.6, 0.6, 0.6, 0.356863 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -93,7 +91,8 @@ margin_top = 204.0
 margin_right = 600.0
 margin_bottom = 324.0
 rect_min_size = Vector2( 0, 120 )
-custom_styles/hover = SubResource( 6 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -105,6 +104,7 @@ margin_right = 600.0
 margin_bottom = 448.0
 rect_min_size = Vector2( 0, 120 )
 custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )

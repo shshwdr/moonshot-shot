@@ -103,6 +103,8 @@ func in_bound(index:Vector2, width,height):
 	return index.x>=0 and index.x<width and index.y>=0 and index.y<height	
 	
 func in_screen(index:Vector2):
+	if not index:
+		return false
 	return in_bound_with_start_position(index, screen_top_left, width_total,height_total)
 
 func in_game_screen(index:Vector2):

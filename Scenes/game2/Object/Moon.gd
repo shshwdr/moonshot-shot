@@ -35,6 +35,7 @@ var drunk_behavior_speed = 1
 var drunk_behavior_ammo_speed = 1
 var drunk_shoot_dirs = [Vector2.DOWN,Vector2.RIGHT,Vector2.UP,Vector2.LEFT]
 var drunk_shoot_current = 0
+var drunk_move_dir =Vector2.DOWN
 
 #var level_to_face = [
 #]
@@ -86,16 +87,15 @@ func update_normal_face():
 func index_position():
 	return Utils.position_to_index(position)
 
-var drunk_move_dir =Vector2.DOWN
 
 func move():
 	var current_drunk_move_dir  = Vector2.ZERO
 	var current_move_time = move_time / float(drunk_behavior_speed)
-	if moon_state == moon_state_enum.move_drunk:
+	if moon_state == moon_state_enum.move_drunk or drunk_move_dir == Vector2.UP:
 		current_drunk_move_dir = drunk_move_dir
+		drunk_move_dir = -drunk_move_dir
 		#current_move_time*=1.5
 	yield(Utils.move_position_by(self,tween,move_dir+current_drunk_move_dir,current_move_time),"completed")
-	drunk_move_dir = -drunk_move_dir
 	pass
 
 
@@ -249,7 +249,7 @@ func moon_behavior():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Utils.moon = self
-	
+	current_sober_time = 0
 	var level_folder = "res://resources/level"
 	var file_path = '%s/%s.json' % [level_folder, "drunk_behavior"]
 	drunk_behavior_info = Utils.load_json(file_path)

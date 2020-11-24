@@ -36,6 +36,7 @@ func move():
 
 	
 func _ready():
+	$AnimationPlayer.play("playing")
 	pass
 #	while true:
 #		yield(move(),"completed")

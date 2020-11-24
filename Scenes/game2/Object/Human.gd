@@ -3,6 +3,7 @@ extends Area2D
 
 class_name Human
 
+var past_time = 0
 onready var sprite = $Sprite
 
 var start_go = false
@@ -68,6 +69,7 @@ func will_free():
 	sprite.visible = false
 
 func _process(delta):
+	past_time+=delta
 	if is_freed and not is_moving:
 		queue_free()
 		return
@@ -77,9 +79,10 @@ func _process(delta):
 	if not Utils.is_main_game_started:
 		return 
 	if not is_moving and not is_stoping:
-		
-		var index = index_position()
-		
+		#print("moving time ",past_time)
+		var index = current_index_position#index_position()
+		if not index:
+			index = index_position()
 		var possible_dirs = []
 		#if out of screen, destroy
 		if not Utils.in_screen(index):
@@ -128,7 +131,10 @@ func _process(delta):
 				is_moving = true
 				Utils.maingame.change_occupy(index,next_position,self)
 				current_index_position = next_position
+				var test_position = next_position
+				#print("before yield ",test_position," ",next_position," ",past_time)
 				yield(Utils.move_position_by(self,tween,dir),"completed")
+				#print("after yield ",test_position," ",next_position," ",past_time)
 				is_moving = false
 				moved = true
 				break
