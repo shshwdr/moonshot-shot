@@ -143,6 +143,7 @@ text = "press space to stop moving"
 
 [node name="Leader" type="Sprite" parent="."]
 position = Vector2( 259.437, 410.578 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="Camera2D/Node2D/Control/dialog_button" to="." method="_on_dialog_button_pressed"]

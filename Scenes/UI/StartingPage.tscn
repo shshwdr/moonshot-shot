@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingPage.gd" type="Script" id=1]
 [ext_resource path="res://fonts/info font_large.tres" type="DynamicFont" id=2]
 [ext_resource path="res://art/map/universe.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/UI/advertisement.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fonts/menu_button.tres" type="DynamicFont" id=5]
+[ext_resource path="res://art/UI/moon_thumbup.png" type="Texture" id=6]
 [ext_resource path="res://fonts/Welbut__.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
@@ -14,13 +17,26 @@ font_data = ExtResource( 8 )
 default_font = SubResource( 1 )
 Fonts/fonts/ = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 55
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+font_data = ExtResource( 8 )
+
 [sub_resource type="DynamicFont" id=3]
 size = 50
 use_mipmaps = true
 font_data = ExtResource( 8 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0.356863 )
+
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0.356863 )
 
 [node name="StartingPage" type="Control"]
 anchor_right = 1.0
@@ -39,6 +55,16 @@ position = Vector2( 52.9742, 30.9216 )
 scale = Vector2( 0.413861, 0.413861 )
 texture = ExtResource( 3 )
 
+[node name="advertisement" parent="Node" instance=ExtResource( 4 )]
+position = Vector2( 42.92, 29.0105 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="moon_thumbup" type="Sprite" parent="Node"]
+visible = false
+position = Vector2( 17.4461, 21.5244 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 6 )
+
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 8, 8 )
 cell_size = Vector2( 16, 16 )
@@ -49,6 +75,8 @@ tile_data = PoolIntArray( 458760, 0, 0, 524296, 0, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -56,6 +84,8 @@ __meta__ = {
 margin_right = 600.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 0, 200 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
 text = "MOONSHOT SHOT"
 align = 1
 valign = 1
@@ -67,6 +97,7 @@ margin_right = 600.0
 margin_bottom = 345.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "shoot shots to get the moon drunk"
 align = 1
 valign = 1
@@ -77,7 +108,10 @@ margin_top = 204.0
 margin_right = 600.0
 margin_bottom = 324.0
 rect_min_size = Vector2( 0, 120 )
+custom_styles/hover = SubResource( 6 )
 custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Start Game"
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
@@ -85,7 +119,13 @@ margin_top = 328.0
 margin_right = 600.0
 margin_bottom = 448.0
 rect_min_size = Vector2( 0, 120 )
+custom_styles/hover = SubResource( 7 )
 custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Continue Level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
