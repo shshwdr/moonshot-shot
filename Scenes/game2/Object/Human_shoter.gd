@@ -2,7 +2,7 @@ extends Human
 
 onready var shot_sprite = $shotSprite
 onready var anim = $shotSprite/AnimationPlayer
-var shoter_health = 20
+var shoter_health = 2
 var shot_scene = preload("res://Scenes/game2/Object/shot.tscn")
 
 var make_shot_time = 2

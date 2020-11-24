@@ -9,7 +9,9 @@ var music_dict = {
 }
 
 var sfx_dict = {
-	"typing": preload("res://sound/fx/425161__chazzravenelle__smartphone-texting-sound-and-vibrate-high-quality.ogg")
+	"typing": preload("res://sound/fx/425161__chazzravenelle__smartphone-texting-sound-and-vibrate-high-quality.ogg"),
+	"ouch":preload("res://sound/fx/ouch.wav"),
+	"throw":preload("res://sound/fx/throw4.wav"),
 }
 
 # Called when the node enters the scene tree for the first time.

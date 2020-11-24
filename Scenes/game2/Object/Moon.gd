@@ -202,6 +202,7 @@ func get_shot():
 	faceResetTimer.wait_time = 0.4
 	faceResetTimer.start()
 	
+	$AudioStreamPlayer2D.play()
 	
 	current_drunk_hit_count+=1
 	if drunk_level >= drunk_upgrade_hit_count.size():

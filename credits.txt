@@ -1,13 +1,18 @@
 texing sound:
 https://freesound.org/people/ChazzRavenelle/sounds/425161/
-truck sound:
-https://freesound.org/people/trouby/sounds/362978/
+bottle throw sound:
+https://freesound.org/people/urupin/sounds/351754/
+moon ouch sound:
+https://freesound.org/people/onerasmpz/sounds/371807/
 wolf sound:
 https://freesound.org/people/Robinhood76/sounds/66398/
+meteo sound:
+https://freesound.org/people/Timbre/sounds/131263/
 background musics:
 https://www.bensound.com/
 hex shield:
 https://pipoya.itch.io/pipoya-free-vfx-hex-shield
+
 art reference:
 character: Earthbound/Mother
 moon: Shoot the Moon

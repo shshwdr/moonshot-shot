@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Moon.gd" type="Script" id=1]
+[ext_resource path="res://sound/fx/ouch.wav" type="AudioStream" id=2]
 [ext_resource path="res://art/moon/moon-swollow.png" type="Texture" id=3]
 [ext_resource path="res://art/moon/moon_bg.png" type="Texture" id=4]
 [ext_resource path="res://art/moon/moon_blush.png" type="Texture" id=5]
@@ -274,6 +275,10 @@ __meta__ = {
 [node name="moon_chat_timer" type="Timer" parent="dialog/Node2D"]
 wait_time = 4.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = 12.0
 [connection signal="area_entered" from="." to="." method="_on_Moon_area_entered"]
 [connection signal="timeout" from="FaceResetTimer" to="." method="_on_FaceResetTimer_timeout"]
 [connection signal="timeout" from="ThunderTimer" to="." method="_on_ThunderTimer_timeout"]

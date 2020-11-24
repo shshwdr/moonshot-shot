@@ -373,6 +373,7 @@ func trigger(trigger_name):
 			Moon.show_face(true)
 		"hide_moon_face":
 			Moon.show_face(false)	
+			$AudioStreamPlayer2D.play()
 		"change_normal_face":
 			Moon.change_normal_face_to_normal()
 		"end":
@@ -392,6 +393,7 @@ func trigger(trigger_name):
 			$advertisement.add_child(advertisement_instance)
 		"hide_advertisement":
 			advertisement_instance.queue_free()
+		
 			
 	yield(get_tree(), 'idle_frame')
 

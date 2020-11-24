@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/game2/Object/Meteo.gd" type="Script" id=1]
+[ext_resource path="res://sound/fx/meteor.wav" type="AudioStream" id=2]
 [ext_resource path="res://art/object/meteor.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -62,4 +63,9 @@ position = Vector2( -0.0208569, -14.3732 )
 
 [node name="hold_item_position_next" type="Position2D" parent="."]
 position = Vector2( 0.0039463, -16.8039 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -12.0
+autoplay = true
 [connection signal="area_entered" from="." to="." method="_on_Moon_area_entered"]
