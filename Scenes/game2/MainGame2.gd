@@ -160,7 +160,7 @@ func _input(event):
 				dialog_instance.skip_dialog()
 		#if event.scancode != KEY_ENTER:
 			#Do what you gotta do.
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and  event.is_pressed():
 		#print("Mouse Click/Unclick at: ", event.position)
 		kick_highest(Utils.position_to_index(event.position))
 	if not can_input:
@@ -268,13 +268,13 @@ func update_hint():
 	all_failed_shoot = all_failed_shoot and has_shoter
 	#if human get blocked, show block hint
 	if current_human and current_human.is_blocked:
-		hint_label.bbcode_text = "[center][color=yellow]left click[/color] on human to kick off him"
+		hint_label.bbcode_text = "[center][color=yellow]right click[/color] on human to kick off him"
 	#if used shot when none is ready, show wait ready hint
 	elif all_failed_shoot:
 		hint_label.bbcode_text = "[center][color=red]wait[/color] until shot is ready(stop rotating)"
 	#if shot is ready, show shot ready hint
 	elif has_ready_shoter:
-		hint_label.bbcode_text = "[center]press [color=yellow]ENTER or F[/color] to shoot shots"
+		hint_label.bbcode_text = "[center][color=yellow]Left Click[/color] to shoot shots"
 	#if there is lightning, show magic hint
 	#if none, show space hint
 	else:

@@ -16,7 +16,7 @@
         "13": {
             "speaker":"Generator",
             "pivot":[1,0],
-            "content": "Just press [color=red]ENTER or F[/color] when their shots are ready and shining.",
+            "content": "Just [color=red]Left Click[/color] when their shots are ready and shining.",
             "after_trigger":"end"
         },
         "14": {
